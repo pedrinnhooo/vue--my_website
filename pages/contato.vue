@@ -1,16 +1,12 @@
     <template>
         <div class="apple-contact">
             <!-- Hero Section -->
-            <section class="contact-hero section-padding">
-                <div class="hero-background">
-                    <div class="floating-elements">
-                        <div class="floating-element" v-for="i in 6" :key="i" :style="getFloatingStyle(i)"></div>
-                    </div>
-                </div>
+            <section class="contact-hero page-hero">
                 <div class="container-apple">
                     <div class="hero-content text-center scroll-animate">
+                        <p class="kicker" style="justify-content: center;">Contact</p>
                         <h1 class="text-large-title gradient-text mb-lg">{{ t('contact.hero.title') }}</h1>
-                        <p class="text-title-3 mb-xl"
+                        <p class="text-title-3"
                             style="color: var(--apple-text-secondary); max-width: 600px; margin: 0 auto;">
                             {{ t('contact.hero.subtitle') }}
                         </p>
@@ -457,48 +453,7 @@ const getFloatingStyle = (index) => {
 }
 
 .contact-hero {
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    overflow: hidden;
-    background: transparent;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-}
-
-.floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-}
-
-.floating-element {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, 
-        var(--accent-orange), 
-        var(--warm-orange), 
-        rgba(255, 255, 255, 0.1));
-    border-radius: 50%;
-    opacity: 0.08;
-    animation: float 12s ease-in-out infinite, holographicSpin 25s linear infinite;
-    filter: blur(40px);
-    box-shadow: 
-        0 0 40px rgba(255, 107, 53, 0.2),
-        0 0 80px rgba(255, 140, 66, 0.1);
 }
 
 @keyframes float {
@@ -650,7 +605,7 @@ select.form-input {
 
 /* Seta azul quando em foco - sem transição */
 select.form-input:focus {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007AFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c084fc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
 /* Foco para inputs normais e textarea */
@@ -659,7 +614,7 @@ input.form-input:focus,
     outline: none;
     border-color: var(--apple-blue);
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18);
 }
 
 /* Foco específico para selects */
@@ -667,7 +622,7 @@ select.form-input:focus {
     outline: none;
     border-color: var(--apple-blue);
     background-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18);
 }
 
 .form-input::placeholder,
@@ -760,9 +715,7 @@ select.form-input option:checked {
 }
 
 .btn-apple-primary {
-    background: linear-gradient(135deg, 
-        var(--accent-orange) 0%, 
-        var(--warm-orange) 100%);
+    background: linear-gradient(135deg, #7c3aed 0%, #22d3ee 140%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -770,8 +723,8 @@ select.form-input option:checked {
 .btn-apple-primary:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 
-        0 20px 40px rgba(255, 107, 53, 0.4),
-        0 0 60px rgba(255, 140, 66, 0.3),
+        0 20px 40px rgba(168, 85, 247, 0.4),
+        0 0 60px rgba(103, 232, 249, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -784,11 +737,11 @@ select.form-input option:checked {
 
 .btn-apple-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 107, 53, 0.4);
+    border-color: rgba(168, 85, 247, 0.45);
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 
+    box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(255, 107, 53, 0.2);
+        0 0 40px rgba(168, 85, 247, 0.22);
 }
 
 .btn-apple:disabled {
@@ -924,7 +877,7 @@ select.form-input option:checked {
 .form-input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.08) inset !important;
     border-color: var(--apple-blue) !important;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1), 0 0 0 30px rgba(255, 255, 255, 0.08) inset !important;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18), 0 0 0 30px rgba(255, 255, 255, 0.08) inset !important;
 }
 
 /* Para Firefox */
@@ -937,7 +890,7 @@ select.form-input option:checked {
 .form-input:-moz-autofill:focus {
     background-color: rgba(255, 255, 255, 0.08) !important;
     border-color: var(--apple-blue) !important;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18) !important;
 }
 
 /* Responsive Design */

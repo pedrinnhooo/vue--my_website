@@ -144,11 +144,11 @@ onUnmounted(() => {
 }
 
 .apple-header.scrolled {
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom-color: rgba(255, 107, 53, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background: rgba(7, 4, 15, 0.78);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-bottom-color: rgba(168, 85, 247, 0.28);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 
@@ -206,15 +206,10 @@ onUnmounted(() => {
     left: 50%;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, 
-        var(--accent-orange), 
-        var(--warm-orange), 
-        rgba(255, 255, 255, 0.8));
+    background: linear-gradient(90deg, #67e8f9, #c084fc, #e879f9);
     transform: translateX(-50%);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 0 10px rgba(255, 107, 53, 0.6),
-        0 0 20px rgba(255, 140, 66, 0.4);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
 }
 
 .nav-link::after {
@@ -226,15 +221,15 @@ onUnmounted(() => {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 107, 53, 0.1), 
+        rgba(168, 85, 247, 0.16), 
         transparent);
     transition: left 0.5s;
 }
 
 .nav-link:hover {
     color: var(--apple-text-primary);
-    background: rgba(255, 107, 53, 0.05);
-    border: 1px solid rgba(255, 107, 53, 0.2);
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.25);
     transform: translateY(-1px);
 }
 
@@ -248,9 +243,9 @@ onUnmounted(() => {
 
 .nav-link.active {
     color: var(--apple-text-primary);
-    background: rgba(255, 107, 53, 0.1);
-    border: 1px solid rgba(255, 107, 53, 0.3);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+    background: rgba(168, 85, 247, 0.16);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.25);
 }
 
 .nav-link.active::before {
@@ -259,17 +254,8 @@ onUnmounted(() => {
 }
 
 @keyframes hologramPulse {
-    0%, 100% {
-        box-shadow: 
-            0 0 10px rgba(255, 107, 53, 0.6),
-            0 0 20px rgba(255, 140, 66, 0.4);
-    }
-    50% {
-        box-shadow: 
-            0 0 15px rgba(255, 107, 53, 0.8),
-            0 0 30px rgba(255, 140, 66, 0.6),
-            0 0 40px rgba(255, 165, 102, 0.3);
-    }
+    0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.55); }
+    50% { box-shadow: 0 0 18px rgba(103, 232, 249, 0.45); }
 }
 
 /* Botão hambúrguer (aparece só quando menu está fechado) */
@@ -355,7 +341,7 @@ onUnmounted(() => {
 
 .mobile-close-btn:hover {
     transform: scale(1.1) rotate(90deg);
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45);
 }
 
 .mobile-close-btn:active {
@@ -385,7 +371,7 @@ onUnmounted(() => {
     right: 0;
     bottom: 0;
     background: radial-gradient(ellipse at center,
-        rgba(255, 107, 53, 0.05) 0%,
+        rgba(168, 85, 247, 0.12) 0%,
         transparent 70%);
     pointer-events: none;
 }
@@ -438,16 +424,16 @@ onUnmounted(() => {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 107, 53, 0.1), 
+        rgba(168, 85, 247, 0.16), 
         transparent);
     transition: left 0.5s;
 }
 
 .mobile-nav-link:hover {
-    background: rgba(255, 107, 53, 0.1);
-    border-color: rgba(255, 107, 53, 0.3);
+    background: rgba(168, 85, 247, 0.14);
+    border-color: rgba(168, 85, 247, 0.4);
     transform: translateX(-4px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.22);
 }
 
 .mobile-nav-link:active {
@@ -517,19 +503,17 @@ onUnmounted(() => {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 107, 53, 0.1), 
+        rgba(168, 85, 247, 0.16), 
         transparent);
     transition: left 0.5s;
 }
 
 .mobile-language-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 107, 53, 0.3);
+    border-color: rgba(168, 85, 247, 0.4);
     color: var(--apple-text-primary);
     transform: translateY(-2px);
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        0 0 15px rgba(255, 107, 53, 0.1);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
 }
 
 .mobile-language-btn:hover::before {

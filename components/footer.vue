@@ -132,7 +132,7 @@ const currentYear = computed(() => new Date().getFullYear())
 <style scoped>
 .apple-footer {
     background: transparent;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
+    border-top: 1px solid rgba(168, 85, 247, 0.22);
     padding: var(--spacing-3xl) 0 var(--spacing-xl);
     margin-top: auto;
     position: relative;
@@ -209,7 +209,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .nav-link:hover {
-    color: var(--accent-orange);
+    color: var(--neon-cyan);
 }
 
 .footer-bottom {
@@ -252,11 +252,11 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .social-link:hover {
-    background: var(--accent-orange);
-    border-color: var(--accent-orange);
+    background: linear-gradient(135deg, #7c3aed, #22d3ee);
+    border-color: transparent;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 6px 18px rgba(168, 85, 247, 0.4);
 }
 
 /* Responsive Design */

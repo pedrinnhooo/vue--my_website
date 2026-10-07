@@ -38,7 +38,7 @@ export const useProjects = () => {
       thumbnail: '/images/h2club-thumb.png',
       technologies: 'Flutter, BigQuery, JWT, Docker, PHP',
       categories: ['Mobile'],
-      category: 'Mobile',
+      category: 'IGaming',
       appleLink: 'https://apps.apple.com/br/app/h2-club/id6466628886',
       googleLink: 'https://play.google.com/store/apps/details?id=com.h2.app&hl=pt_BR&pli=1'
     },
@@ -48,7 +48,7 @@ export const useProjects = () => {
       thumbnail: '/images/bluec-thumb.avif',
       technologies: 'Flutter, Docker, Google Pay, Apple Pay, Firebase',
       categories: ['Mobile', 'Fintech'],
-      category: 'Mobile',
+      category: 'Fintech',
       appleLink: null,
       googleLink: 'https://play.google.com/store/apps/details?id=br.com.csu.baas&hl=pt_BR'
     },
@@ -58,7 +58,7 @@ export const useProjects = () => {
       thumbnail: '/images/afinz-thumb.png',
       technologies: 'Flutter, Firebase, Vue.js, UI/UX, JWT',
       categories: ['Mobile', 'Fintech'],
-      category: 'Mobile',
+      category: 'Fintech',
       appleLink: 'https://apps.apple.com/br/app/afinz/id1416167782',
       googleLink: 'https://play.google.com/store/apps/details?id=br.com.sorocred.sorocredapp&hl=en_US'
     },
@@ -68,7 +68,7 @@ export const useProjects = () => {
       thumbnail: '/images/komus-thumb.jpeg',
       technologies: 'Flutter, Vue.js, Node.js, TypeScript, UI/UX',
       categories: ['Mobile', 'Web'],
-      category: 'Mobile',
+      category: 'Insurance',
       appleLink: null,
       googleLink: null
     },
@@ -78,7 +78,7 @@ export const useProjects = () => {
       thumbnail: '/images/heineken-thumb.jpg',
       technologies: 'Flutter, .NET, Docker, UI/UX',
       categories: ['Web', 'Enterprise'],
-      category: 'Web',
+      category: 'Loyalty',
       appleLink: null,
       googleLink: null
     },
@@ -88,7 +88,7 @@ export const useProjects = () => {
       thumbnail: '/images/prudential-thumb.jpeg',
       technologies: 'Flutter Web, Firebase, Docker, XLSX',
       categories: ['Web', 'Enterprise'],
-      category: 'Web',
+      category: 'Backoffice',
       appleLink: null,
       googleLink: null
     },
@@ -98,7 +98,7 @@ export const useProjects = () => {
       thumbnail: '/images/neopdv-thumb.jpg',
       technologies: 'Flutter, Vue.js, Node.js, HTML/CSS, UI/UX',
       categories: ['Web', 'Mobile'],
-      category: 'Web',
+      category: 'PDV',
       appleLink: null,
       googleLink: null
     }

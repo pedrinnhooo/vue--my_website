@@ -1,16 +1,12 @@
 <template>
     <div class="apple-projects">
         <!-- Hero Section -->
-        <section class="projects-hero section-padding">
-            <div class="hero-background">
-                <div class="floating-elements">
-                    <div class="floating-element" v-for="i in 6" :key="i" :style="getFloatingStyle(i)"></div>
-                </div>
-            </div>
+        <section class="projects-hero page-hero">
             <div class="container-apple">
                 <div class="hero-content text-center scroll-animate">
+                    <p class="kicker" style="justify-content: center;">Work</p>
                     <h1 class="text-large-title gradient-text mb-lg">{{ t('projects.hero.title') }}</h1>
-                    <p class="text-title-3 mb-xl"
+                    <p class="text-title-3"
                         style="color: var(--apple-text-secondary); max-width: 600px; margin: 0 auto;">
                         {{ t('projects.hero.subtitle') }}
                     </p>
@@ -143,48 +139,7 @@ const getFloatingStyle = (index) => {
 }
 
 .projects-hero {
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    overflow: hidden;
-    background: transparent;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-}
-
-.floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-}
-
-.floating-element {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, 
-        var(--accent-orange), 
-        var(--warm-orange), 
-        rgba(255, 255, 255, 0.1));
-    border-radius: 50%;
-    opacity: 0.08;
-    animation: float 12s ease-in-out infinite, holographicSpin 25s linear infinite;
-    filter: blur(40px);
-    box-shadow: 
-        0 0 40px rgba(255, 107, 53, 0.2),
-        0 0 80px rgba(255, 140, 66, 0.1);
 }
 
 @keyframes float {
@@ -257,8 +212,8 @@ const getFloatingStyle = (index) => {
     transform: translateY(-8px);
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(255, 107, 53, 0.15),
-        0 0 0 1px rgba(255, 107, 53, 0.3);
+        0 0 40px rgba(168, 85, 247, 0.2),
+        0 0 0 1px rgba(168, 85, 247, 0.35);
 }
 
 .project-image {
@@ -343,11 +298,11 @@ const getFloatingStyle = (index) => {
 
 .project-category {
     padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(0, 122, 255, 0.1);
-    border: 1px solid rgba(0, 122, 255, 0.3);
+    background: rgba(103, 232, 249, 0.1);
+    border: 1px solid rgba(103, 232, 249, 0.3);
     border-radius: var(--radius-sm);
     font-size: 0.75rem;
-    color: var(--apple-blue);
+    color: var(--neon-cyan);
     font-weight: 500;
     white-space: nowrap;
 }
@@ -434,11 +389,11 @@ const getFloatingStyle = (index) => {
 
 .modal-category {
     padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(0, 122, 255, 0.1);
-    border: 1px solid rgba(0, 122, 255, 0.3);
+    background: rgba(103, 232, 249, 0.1);
+    border: 1px solid rgba(103, 232, 249, 0.3);
     border-radius: var(--radius-sm);
     font-size: 0.75rem;
-    color: var(--apple-blue);
+    color: var(--neon-cyan);
     font-weight: 500;
     display: inline-block;
 }

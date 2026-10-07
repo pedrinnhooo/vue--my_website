@@ -2,7 +2,7 @@
   <Analytics />
   <SpeedInsights />
 
-  <div class="apple-app">
+  <div class="site-shell">
     <Header />
 
     <main class="main-content">
@@ -24,18 +24,19 @@ import Footer from '~/components/footer.vue'
 </script>
 
 <style>
-.apple-app {
+.site-shell {
   min-height: 100vh;
   width: 100%;
   background: transparent;
   color: var(--apple-text-primary);
   font-family: var(--font-system);
   position: relative;
-  zoom: 0.9;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
-  /* Removed padding-top to allow header to be truly transparent over content */
+  flex: 1;
 }
 
 /* Page Transitions */
@@ -64,22 +65,21 @@ import Footer from '~/components/footer.vue'
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--apple-dark-5);
+  background: linear-gradient(180deg, #a855f7, #67e8f9);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--apple-dark-6);
+  background: #c084fc;
 }
 
-/* Selection */
 ::selection {
-  background: var(--accent-orange);
+  background: rgba(168, 85, 247, 0.55);
   color: white;
 }
 
 ::-moz-selection {
-  background: var(--accent-orange);
+  background: rgba(168, 85, 247, 0.55);
   color: white;
 }
 </style>

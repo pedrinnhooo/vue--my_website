@@ -84,17 +84,17 @@ onUnmounted(() => {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 107, 53, 0.2), 
+        rgba(168, 85, 247, 0.22), 
         transparent);
     transition: left 0.5s;
 }
 
 .language-btn:hover {
     color: var(--apple-text-primary);
-    background: rgba(255, 107, 53, 0.1);
-    border-color: rgba(255, 107, 53, 0.2);
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.28);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.22);
 }
 
 .language-btn:hover::before {
@@ -103,9 +103,9 @@ onUnmounted(() => {
 
 .language-btn.active {
     color: var(--apple-text-primary);
-    background: rgba(255, 107, 53, 0.2);
-    border-color: rgba(255, 107, 53, 0.3);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    background: rgba(168, 85, 247, 0.18);
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.28);
 }
 
 .language-dropdown {
@@ -116,11 +116,11 @@ onUnmounted(() => {
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 107, 53, 0.3);
+    border: 1px solid rgba(168, 85, 247, 0.35);
     border-radius: var(--radius-lg);
-    box-shadow: 
+    box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.4),
-        0 0 20px rgba(255, 107, 53, 0.2),
+        0 0 20px rgba(168, 85, 247, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     overflow: hidden;
     z-index: 10001;
@@ -135,8 +135,8 @@ onUnmounted(() => {
     height: 1px;
     background: linear-gradient(90deg, 
         transparent, 
-        var(--accent-orange), 
-        var(--warm-orange), 
+        #67e8f9,
+        #c084fc, 
         transparent);
 }
 
@@ -156,14 +156,14 @@ onUnmounted(() => {
 }
 
 .language-option:hover {
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(168, 85, 247, 0.12);
     color: var(--apple-text-primary);
 }
 
 .language-option.active {
-    background: rgba(255, 107, 53, 0.2);
+    background: rgba(168, 85, 247, 0.2);
     color: var(--apple-text-primary);
-    border-left: 3px solid var(--accent-orange);
+    border-left: 3px solid #c084fc;
 }
 
 .flag-emoji {

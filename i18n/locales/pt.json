@@ -234,7 +234,24 @@
         "education": {
             "title": "Formação",
             "course": "Sistemas de Análise e Desenvolvimento",
-            "schoolPeriod": "FIAP (2021 - 2023)"
+            "schoolPeriod": "FIAP (2021 - 2023)",
+            "items": {
+                "fiap": {
+                    "school": "FIAP",
+                    "course": "Análise e Desenvolvimento de Sistemas",
+                    "period": "2021 — 2023"
+                },
+                "mindset": {
+                    "school": "Instituto Mindset",
+                    "course": "Formação complementar",
+                    "period": "Desenvolvimento pessoal"
+                },
+                "imcpta": {
+                    "school": "IMC PTA",
+                    "course": "Formação complementar",
+                    "period": "Capacitação técnica"
+                }
+            }
         },
         "summary": {
             "title": "Resumo Profissional",

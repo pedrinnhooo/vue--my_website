@@ -489,7 +489,7 @@ onUnmounted(() => {
 
     position: fixed !important;
 
-    top: 18px !important;
+    top: 10px !important;
 
     left: 0 !important;
     right: 0 !important;

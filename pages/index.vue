@@ -103,35 +103,83 @@
             </div>
         </section>
 
-        <section class="services-section section-padding">
-            <div class="container-apple">
-                <div class="services-content">
-                    <div class="services-text scroll-animate">
-                        <h2 class="text-title-1 mb-lg">
-                            {{ t('home.services.title') }} <span class="gradient-text">{{
-                                t('home.services.titleHighlight') }}</span>{{ t('home.services.titleEnd') }}
-                        </h2>
-                        <p class="text-body mb-xl" style="color: var(--apple-text-secondary);">
-                            {{ t('home.services.description') }}
-                        </p>
+<section class="services-section section-padding">
+    <div class="container-apple">
 
-                        <div class="services-list">
-                            <div v-for="service in services" :key="service.key" class="service-item scroll-animate">
-                                <div class="service-icon">
-                                    <i :class="service.icon"></i>
-                                </div>
-                                <div class="service-content">
-                                    <h4 class="text-callout mb-sm">{{ service.title }}</h4>
-                                    <p class="text-subhead" style="color: var(--apple-text-secondary);">
-                                        {{ service.description }}
-                                    </p>
-                                </div>
-                            </div>
+        <div class="services-layout">
+
+            <!-- Lado esquerdo -->
+            <div class="services-intro scroll-animate">
+
+                <div class="services-badge">
+                    <span class="services-badge-dot"></span>
+                    Services
+                </div>
+
+                <h2 class="text-title-1 services-title">
+                    {{ t('home.services.title') }}
+                    <span class="gradient-text">
+                        {{ t('home.services.titleHighlight') }}
+                    </span>
+                    {{ t('home.services.titleEnd') }}
+                </h2>
+
+                <p class="text-body services-description">
+                    {{ t('home.services.description') }}
+                </p>
+
+                <div class="services-decoration">
+                    <div class="decoration-line"></div>
+                    <span>01 — 05</span>
+                </div>
+
+            </div>
+
+            <!-- Lado direito -->
+            <div class="services-grid">
+
+                <div
+                    v-for="(service, index) in services"
+                    :key="service.key"
+                    class="service-card scroll-animate"
+                    :style="{ animationDelay: `${index * 0.08}s` }"
+                >
+
+                    <div class="service-card-top">
+                        <span class="service-number">
+                            {{ String(index + 1).padStart(2, '0') }}
+                        </span>
+
+                        <div class="service-arrow">
+                            <i class="bi bi-arrow-up-right"></i>
                         </div>
                     </div>
+
+                    <div class="service-icon">
+                        <i :class="service.icon"></i>
+                    </div>
+
+                    <div class="service-card-content">
+                        <h3 class="text-callout">
+                            {{ service.title }}
+                        </h3>
+
+                        <p class="text-subhead">
+                            {{ service.description }}
+                        </p>
+                    </div>
+
+                    <div class="service-card-line"></div>
+
                 </div>
+
             </div>
-        </section>
+
+        </div>
+
+    </div>
+</section>
+
 
         <section class="cta-section section-padding">
             <div class="container-apple">
@@ -223,7 +271,8 @@ const servicesData = [
     { key: 'web', icon: 'bi bi-laptop' },
     { key: 'architecture', icon: 'bi bi-diagram-3' },
     { key: 'backend', icon: 'bi bi-server' },
-    { key: 'design', icon: 'bi bi-palette' }
+    { key: 'design', icon: 'bi bi-palette' },
+    { key: 'devops', icon: 'bi bi-cloud-arrow-up' }
 ]
 
 const services = computed(() => {
@@ -531,28 +580,444 @@ onUnmounted(() => {
     border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
-.services-list {
+
+/* =========================================
+   SERVICES
+========================================= */
+
+.services-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.services-section::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: -250px;
+    top: 20%;
+    border-radius: 50%;
+    background: rgba(124, 58, 237, 0.12);
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.services-layout {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 80px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.services-intro {
+    position: sticky;
+    top: 120px;
+}
+
+.services-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 24px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(103, 232, 249, 0.06);
+    border: 1px solid rgba(103, 232, 249, 0.2);
+
+    color: var(--neon-cyan);
+
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.services-badge-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+    box-shadow:
+        0 0 8px #34d399,
+        0 0 16px rgba(52, 211, 153, 0.5);
+}
+
+.services-title {
+    max-width: 600px;
+    line-height: 1.05;
+}
+
+.services-description {
+    max-width: 500px;
+
+    margin-top: 28px;
+
+    color: var(--apple-text-secondary);
+    line-height: 1.7;
+}
+
+.services-decoration {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-top: 48px;
+
+    color: rgba(255, 255, 255, 0.35);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+.decoration-line {
+    width: 80px;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        var(--neon-purple),
+        transparent
+    );
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.services-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================
+   SERVICE CARD
+========================================= */
+
+.service-card {
+    position: relative;
+
+    min-height: 260px;
+
+    padding: 26px;
+
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(24px);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        background 0.4s ease,
+        box-shadow 0.4s ease;
 }
 
-.service-item {
+
+/* brilho interno */
+
+.service-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -90px;
+    right: -90px;
+
+    border-radius: 50%;
+
+    background: rgba(168, 85, 247, 0.18);
+
+    filter: blur(40px);
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+}
+
+
+/* hover */
+
+.service-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(168, 85, 247, 0.38);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(168, 85, 247, 0.09),
+            rgba(255, 255, 255, 0.025)
+        );
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25),
+        0 0 40px rgba(168, 85, 247, 0.08);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.service-card-top {
+    position: relative;
+    z-index: 2;
+
     display: flex;
-    gap: var(--spacing-md);
-    align-items: flex-start;
-    padding: var(--spacing-lg);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    transition: all 0.35s ease;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
 }
 
-.service-item:hover {
-    transform: translateX(8px);
-    border-color: rgba(168, 85, 247, 0.4);
+.service-number {
+    color: rgba(255, 255, 255, 0.3);
+
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
 }
+
+.service-arrow {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease,
+        background 0.3s ease;
+}
+
+.service-card:hover .service-arrow {
+    transform: translate(3px, -3px);
+
+    color: white;
+
+    background: rgba(168, 85, 247, 0.25);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.service-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 56px;
+    height: 56px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.9),
+            rgba(34, 211, 238, 0.7)
+        );
+
+    color: white;
+
+    font-size: 1.35rem;
+
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, 0.2);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.08) rotate(-3deg);
+
+    box-shadow:
+        0 12px 35px rgba(124, 58, 237, 0.35);
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.service-card-content {
+    position: relative;
+    z-index: 2;
+
+    margin-top: auto;
+}
+
+.service-card-content h3 {
+    margin-bottom: 9px;
+
+    color: white;
+}
+
+.service-card-content p {
+    margin: 0;
+
+    color: var(--apple-text-secondary);
+
+    line-height: 1.55;
+}
+
+
+/* =========================================
+   BOTTOM LINE
+========================================= */
+
+.service-card-line {
+    position: absolute;
+
+    left: 26px;
+    right: 26px;
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(168, 85, 247, 0.6),
+            transparent
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-card-line {
+    transform: scaleX(1);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1024px) {
+
+    .services-layout {
+        grid-template-columns: 1fr;
+
+        gap: 48px;
+    }
+
+    .services-intro {
+        position: relative;
+        top: auto;
+    }
+
+    .services-title {
+        max-width: 700px;
+    }
+
+    .services-description {
+        max-width: 650px;
+    }
+
+}
+
+
+@media (max-width: 640px) {
+
+    .services-layout {
+        gap: 36px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        min-height: 230px;
+
+        padding: 22px;
+
+        border-radius: 20px;
+    }
+
+    .service-card-top {
+        margin-bottom: 24px;
+    }
+
+    .service-icon {
+        width: 50px;
+        height: 50px;
+
+        margin-bottom: 18px;
+    }
+
+    .services-decoration {
+        margin-top: 32px;
+    }
+
+}
+
 
 .service-icon {
     width: 52px;

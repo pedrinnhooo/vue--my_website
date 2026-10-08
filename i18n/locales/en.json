@@ -147,6 +147,10 @@
                 "design": {
                     "title": "UI/UX Design",
                     "description": "Figma and Marvel App with a strong focus on user experience"
+                },
+                "devops": {
+                    "title": "DevOps & Cloud",
+                    "description": "CI/CD, Docker, cloud infrastructure and deployment automation for reliable and scalable applications"
                 }
             }
         },

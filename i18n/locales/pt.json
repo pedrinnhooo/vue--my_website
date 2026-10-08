@@ -147,6 +147,10 @@
                 "design": {
                     "title": "UI/UX Design",
                     "description": "Figma e Marvel App, com foco total na experiência do usuário"
+                },
+                "devops": {
+                    "title": "DevOps & Cloud",
+                    "description": "CI/CD, Docker, infraestrutura em nuvem e automação de deploy para aplicações confiáveis e escaláveis"
                 }
             }
         },
@@ -481,6 +485,28 @@
                         "Kanban",
                         "GitLab",
                         "Docker"
+                    ]
+                },
+                "devops": {
+                    "title": "DevOps & Cloud",
+                    "tags": [
+                        "Docker",
+                        "CI/CD",
+                        "GitLab CI",
+                        "Cloud",
+                        "Deployment",
+                        "Automation"
+                    ]
+                },
+                "quality": {
+                    "title": "Qualidade & Testes",
+                    "tags": [
+                        "Unit Testing",
+                        "Integration Testing",
+                        "Widget Testing",
+                        "Code Review",
+                        "Linting",
+                        "Debugging"
                     ]
                 }
             }

@@ -515,6 +515,7 @@ const jobs = computed(() => {
 ========================= */
 
 const skillCategories = [
+
   {
     key: 'mobile',
     icon: 'bi bi-phone',
@@ -528,6 +529,7 @@ const skillCategories = [
       'Flutter Modular'
     ]
   },
+
   {
     key: 'web',
     icon: 'bi bi-laptop',
@@ -541,6 +543,7 @@ const skillCategories = [
       'Bootstrap'
     ]
   },
+
   {
     key: 'backend',
     icon: 'bi bi-server',
@@ -554,6 +557,7 @@ const skillCategories = [
       'Node.js'
     ]
   },
+
   {
     key: 'architecture',
     icon: 'bi bi-diagram-3',
@@ -565,6 +569,7 @@ const skillCategories = [
       'Design Patterns'
     ]
   },
+
   {
     key: 'design',
     icon: 'bi bi-palette',
@@ -576,6 +581,7 @@ const skillCategories = [
       'Prototyping'
     ]
   },
+
   {
     key: 'methods',
     icon: 'bi bi-gear',
@@ -583,10 +589,24 @@ const skillCategories = [
     tags: [
       'Scrum',
       'Kanban',
-      'GitLab',
-      'Docker'
+      'Agile',
+      'Code Review'
     ]
-  }
+  },
+
+  {
+    key: 'devops',
+    icon: 'bi bi-cloud-arrow-up',
+    title: 'DevOps & Cloud',
+    tags: [
+      'Docker',
+      'CI/CD',
+      'GitLab CI',
+      'Cloud',
+      'Deployment',
+      'Automation'
+    ]
+  },
 ]
 </script>
 

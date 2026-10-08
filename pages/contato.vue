@@ -84,7 +84,7 @@
 
                         <!-- Contact Form -->
                         <div class="contact-form-container scroll-animate">
-                            <div class="glass-card">
+                            <div class="glass-card glass-only-style">
                                 <h3 class="text-title-2 mb-lg">{{ t('contact.form.title') }}</h3>
                                 <form @submit.prevent="submitForm" class="contact-form">
                                     <div class="form-group">
@@ -226,7 +226,7 @@
             <!-- Success Modal -->
             <transition name="modal">
                 <div v-if="showSuccessModal" class="modal-overlay" @click="closeSuccessModal">
-                    <div class="modal-content glass-card text-center" @click.stop>
+                    <div class="modal-content glass-card glass-only-style text-center" @click.stop>
                         <div class="success-icon">
                             <i class="bi bi-check-circle"></i>
                         </div>

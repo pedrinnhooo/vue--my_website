@@ -56,44 +56,269 @@
             </div>
         </section>
 
-        <!-- Project Modal -->
-        <transition name="modal">
-            <div v-if="selectedProject" class="modal-overlay" @click="closeProjectModal">
-                <div class="modal-content glass-card" @click.stop>
-                    <button class="modal-close" @click="closeProjectModal">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                    <div class="modal-header">
-                        <img :src="selectedProject.thumbnail" :alt="selectedProject.name" class="modal-image">
-                        <div class="modal-info">
-                            <h3 class="text-title-2 mb-sm">{{ selectedProject.name }}</h3>
-                            <span class="modal-category">{{ selectedProject.category }}</span>
-                            <p class="text-body mt-md" style="color: var(--apple-text-secondary);">
-                                {{ selectedProject.longDescription }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <h4 class="text-headline mb-md">{{ t('projects.modal.techTitle') }}</h4>
-                        <div class="modal-tech">
-                            <span v-for="tech in selectedProject.technologies.split(', ')" :key="tech" class="tech-tag">
-                                {{ tech }}
-                            </span>
-                        </div>
-                        <div class="modal-links mt-lg" v-if="selectedProject.appleLink || selectedProject.googleLink">
-                            <a v-if="selectedProject.appleLink" :href="selectedProject.appleLink" target="_blank"
-                                class="btn-apple btn-apple-secondary">
-                                <i class="bi bi-apple"></i> {{ t('projects.modal.appStore') }}
-                            </a>
-                            <a v-if="selectedProject.googleLink" :href="selectedProject.googleLink" target="_blank"
-                                class="btn-apple btn-apple-secondary">
-                                <i class="bi bi-google-play"></i> {{ t('projects.modal.googlePlay') }}
-                            </a>
-                        </div>
-                    </div>
+<!-- Project Modal -->
+<transition name="modal">
+    <div
+        v-if="selectedProject"
+        class="modal-overlay"
+        @click="closeProjectModal"
+    >
+
+        <div
+            class="project-modal glass-card"
+            @click.stop
+        >
+
+            <!-- Close -->
+            <button
+                class="modal-close"
+                @click="closeProjectModal"
+                aria-label="Close project"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+
+            <!-- HERO -->
+            <section class="project-modal-hero">
+
+                <!-- App Icon -->
+                <div class="project-app-icon-wrapper">
+
+                    <img
+                        :src="selectedProject.thumbnail"
+                        :alt="selectedProject.name"
+                        class="project-app-icon"
+                    >
+
                 </div>
-            </div>
-        </transition>
+
+
+                <!-- Project Info -->
+                <div class="project-modal-info">
+
+                    <span class="project-modal-eyebrow">
+                        {{ selectedProject.category }}
+                    </span>
+
+                    <h3 class="project-modal-title">
+                        {{ selectedProject.name }}
+                    </h3>
+
+                    <p class="project-modal-description">
+                        {{ selectedProject.longDescription }}
+                    </p>
+
+
+                    <!-- Store Buttons -->
+                    <div
+                        v-if="selectedProject.appleLink || selectedProject.googleLink"
+                        class="project-store-links"
+                    >
+
+                        <a
+                            v-if="selectedProject.appleLink"
+                            :href="selectedProject.appleLink"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="store-button"
+                        >
+                            <i class="bi bi-apple"></i>
+
+                            <span>
+                                {{ t('projects.modal.appStore') }}
+                            </span>
+
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+
+
+                        <a
+                            v-if="selectedProject.googleLink"
+                            :href="selectedProject.googleLink"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="store-button"
+                        >
+                            <i class="bi bi-google-play"></i>
+
+                            <span>
+                                {{ t('projects.modal.googlePlay') }}
+                            </span>
+
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SCREENSHOTS -->
+            <section
+                v-if="selectedProject.screenshots?.length"
+                class="project-screenshots"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-kicker">
+                            APP EXPERIENCE
+                        </span>
+
+                        <h4>
+                            {{ t('projects.modal.screenshotsTitle') || 'Application' }}
+                        </h4>
+                    </div>
+
+                    <span class="screenshot-counter">
+                        {{ activeScreenshot + 1 }}
+                        /
+                        {{ selectedProject.screenshots.length }}
+                    </span>
+
+                </div>
+
+
+                <!-- Main Screenshot -->
+                <div class="screenshot-viewer">
+
+                    <button
+                        v-if="selectedProject.screenshots.length > 1"
+                        class="screenshot-arrow screenshot-arrow-left"
+                        @click="previousScreenshot"
+                        aria-label="Previous screenshot"
+                    >
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+
+                    <div class="iphone-frame">
+
+                        <div class="iphone-dynamic-island"></div>
+
+                        <img
+                            :src="currentScreenshot.image || currentScreenshot"
+                            :alt="currentScreenshot.title || selectedProject.name"
+                            class="iphone-screen"
+                        >
+
+                        </div>
+
+
+                    <button
+                        v-if="selectedProject.screenshots.length > 1"
+                        class="screenshot-arrow screenshot-arrow-right"
+                        @click="nextScreenshot"
+                        aria-label="Next screenshot"
+                    >
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- Screenshot Thumbnails -->
+                <div class="screenshot-thumbnails">
+
+                    <button
+                        v-for="(screenshot, index) in selectedProject.screenshots"
+                        :key="index"
+                        class="screenshot-thumbnail"
+                        :class="{
+                            active: activeScreenshot === index
+                        }"
+                        @click="activeScreenshot = index"
+                    >
+
+                        <img
+                            :src="screenshot.image || screenshot"
+                            :alt="screenshot.title || `Screenshot ${index + 1}`"
+                        >
+
+                    </button>
+
+                </div>
+
+
+                <!-- Screenshot Description -->
+                <transition name="fade">
+                    <div
+                        v-if="currentScreenshot.title"
+                        class="screenshot-caption"
+                    >
+                        <span>
+                            {{ currentScreenshot.title }}
+                        </span>
+                    </div>
+                </transition>
+
+            </section>
+
+
+            <!-- TECHNOLOGIES -->
+            <section class="project-technologies">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-kicker">
+                            STACK
+                        </span>
+
+                        <h4>
+                            {{ t('projects.modal.techTitle') }}
+                        </h4>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-tech">
+
+                    <span
+                        v-for="tech in selectedProject.technologies.split(', ')"
+                        :key="tech"
+                        class="tech-tag"
+                    >
+                        {{ tech }}
+                    </span>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+</transition>
+
+
+<transition name="modal">
+  <div
+    v-if="selectedScreenshot"
+    class="image-lightbox"
+    @click="selectedScreenshot = null"
+  >
+
+    <button
+      class="lightbox-close"
+      @click="selectedScreenshot = null"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <img
+      :src="selectedScreenshot"
+      alt="Screenshot do projeto"
+      @click.stop
+    />
+
+  </div>
+</transition>
     </div>
 </template>
 
@@ -116,9 +341,9 @@ const openProjectModal = (project) => {
 }
 
 const closeProjectModal = () => {
-    selectedProject.value = null
-    document.body.style.overflow = ''
-}
+    selectedProject.value = null;
+    activeScreenshot.value = 0;
+};
 
 const getFloatingStyle = (index) => {
     const positions = [
@@ -131,6 +356,37 @@ const getFloatingStyle = (index) => {
     ]
     return positions[index - 1] || {}
 }
+
+
+const activeScreenshot = ref(0);
+
+const currentScreenshot = computed(() => {
+    if (!selectedProject.value?.screenshots?.length) {
+        return {};
+    }
+
+    return selectedProject.value.screenshots[activeScreenshot.value];
+});
+
+const nextScreenshot = () => {
+    if (!selectedProject.value?.screenshots?.length) return;
+
+    activeScreenshot.value =
+        (activeScreenshot.value + 1) %
+        selectedProject.value.screenshots.length;
+};
+
+
+const previousScreenshot = () => {
+    if (!selectedProject.value?.screenshots?.length) return;
+
+    activeScreenshot.value =
+        (activeScreenshot.value - 1 +
+            selectedProject.value.screenshots.length) %
+        selectedProject.value.screenshots.length;
+};
+
+const selectedScreenshot = ref(null)
 </script>
 
 <style scoped>

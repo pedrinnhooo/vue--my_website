@@ -104,9 +104,9 @@
         }
     },
     "home": {
-        "typewriter": "Digital Solutions Developer",
+        "typewriter": "Software Engineer | Mobile, Backend & Cloud",
         "hero": {
-            "subtitle": "Mobile Software Engineer specialized in Flutter, Dart, Firebase and modern web development",
+            "subtitle": "Software Engineer experienced in developing mobile applications, backend systems, APIs, and data-driven solutions. Specialized in Flutter and Dart, with expertise in software architecture, service integration, databases, and the development of scalable solutions.",
             "buttons": {
                 "viewProjects": "View Projects",
                 "talkToMe": "Contact Me"
@@ -221,6 +221,7 @@
             "subtitle": "A collection of the main projects I’ve developed over my career, from banking apps to complex enterprise solutions."
         },
         "modal": {
+            "screenshotsTitle": "Screenshots",
             "techTitle": "Technologies Used",
             "appStore": "App Store",
             "googlePlay": "Google Play"
@@ -258,113 +259,169 @@
             "content": "Mobile Software Engineer - Flutter | Dart | Firebase | Front-end Developer | UI/UX Designer. I have 6 years of experience, especially with Flutter and a strong focus on UI/UX. I love crafting modern, functional and engaging interfaces, ensuring performance and quality in every project."
         },
         "experience": {
-            "title": "Professional Experience",
+            "title": "Experiência Profissional",
             "items": {
                 "h2": {
                     "company": "H2 Groupe",
-                    "period": "July 2024 – Present (1 year 3 months)",
-                    "bullets": [
-                        "Led the development of the LGPD (General Data Protection Law) compliance project, which included a Responsible Gaming website, cookie policy, and a privacy request form with facial and document recognition — all built from the ground up.",
-                        "Developed the official Grupo H2 Events Website, ensuring a modern, responsive, and user-friendly experience.",
-                        "Built the Responsible Gaming Website, aligning with LGPD compliance and promoting safe gaming practices",
-                        "Created the Seu Bet +18 Website and the H2 Bet +18 Website, focusing on age-restricted access and regulatory requirements.",
-                        "Developed the Unique Poker Tour Website, showcasing tournament details, branding, and registration flows.",
-                        "Responsible for the H2 Club mobile app, providing users with real-time access to club schedules, tournament tracking, and personal account information.",
-                        "Designed and implemented the app’s entire JWT-based authentication and security structure, ensuring secure access and data protection.",
-                        "The app serves H2 Club locations in São Paulo, Curitiba, and Campinas, delivering an integrated and personalized experience for club members.",
-                        "Implemented push notifications in the H2 app using Flutter, with segmented delivery based on BigQuery data, all managed through FCM tokens."
+                    "roles": [
+                        {
+                            "title": "Principal Mobile Flutter Engineer",
+                            "period": "November 2025 – Present",
+                            "bullets": [
+                                "Define the technical vision and architecture of mobile applications, ensuring high performance, security, scalability, and maintainability.",
+                                "Lead strategic initiatives across the Flutter ecosystem, serving as a technical reference for multiple teams and driving architectural decisions, coding standards, and engineering best practices.",
+                                "Lead complex integrations and collaborate closely with product, UX, and backend teams to deliver high-quality mobile experiences.",
+                                "Mentor developers through technical guidance, advanced code reviews, and knowledge sharing, contributing to team growth and engineering excellence."
+                            ]
+                        },
+                        {
+                            "title": "Sr. Mobile Flutter Engineer | Sr. Front-end Software Engineer",
+                            "period": "July 2024 – November 2025",
+                            "bullets": [
+                                "Led the development of Grupo H2's LGPD compliance initiative, including the Responsible Gaming website, cookie policy, and privacy request workflow with facial and document recognition.",
+                                "Developed multiple web platforms for Grupo H2, including the official Events website, Responsible Gaming website, Seu Bet +18, H2 Bet +18, and Unique Poker Tour.",
+                                "Led the development of the H2 Club mobile application, providing members with real-time club schedules, tournament tracking, and personal account information.",
+                                "Designed and implemented the application's JWT-based authentication and security architecture, ensuring secure access and data protection.",
+                                "Implemented segmented push notifications using Flutter, Firebase Cloud Messaging (FCM), and BigQuery data.",
+                                "Developed solutions serving H2 Club locations in São Paulo, Curitiba, and Campinas, providing an integrated experience for club members."
+                            ]
+                        }
                     ],
                     "tags": [
-                        "GitLab",
-                        "PHP",
                         "Flutter",
+                        "Dart",
                         "Firebase",
+                        "FCM",
+                        "BigQuery",
+                        "JWT",
                         "Nuxt.js",
                         "Vue.js",
-                        "Docker"
+                        "PHP",
+                        "Docker",
+                        "GitLab"
                     ]
                 },
                 "foursys": {
                     "company": "Foursys",
-                    "period": "May 2023 – July 2024 (1 year 3 months)",
-                    "bullets": [
-                        "Banpara, BNB, and Losango – White Label Credit Card App",
-                        "Developed a white label credit card application for expense tracking, invoice management, purchase analytics, and limit adjustments, using Clean Architecture.",
-                        "Delivered tailored solutions for each bank, including credit limit control, invoice visualization, and spending categorization.",
-                        "BlueC – Digital Wallet Integration",
-                        "Implemented digital wallet features supporting Apple Pay, Google Pay, and Samsung Pay.",
-                        "Led the full integration of payment methods, focusing on performance, security, and seamless user experience.",
-                        "Heineken – HeiClub Loyalty Program",
-                        "Contributed to the HeiClub project, Heineken’s loyalty platform, developing features for point redemption and digital payments.",
-                        "Collaborated on backend solutions using .NET, ensuring scalability, maintainability, and integration with Heineken’s core systems.",
-                        "Prudential – Internal Back-Office System",
-                        "Developed an internal back-office system focused on user management.",
-                        "Features included exporting user data in XLSX and CSV formats and importing spreadsheets to auto-fill the user database.",
-                        "Built a user-friendly drag-and-drop interface using Flutter Web, enhancing usability and efficiency for administrative tasks."
+                    "roles": [
+                        {
+                            "title": "Sr. Mobile Flutter Engineer",
+                            "period": "May 2023 – July 2024",
+                            "bullets": [
+                                "Developed white-label credit card applications for Banpará, BNB, and Losango, focusing on expense tracking, invoice management, purchase analytics, and credit limit management.",
+                                "Implemented tailored banking experiences for different financial institutions while maintaining a scalable and reusable architecture.",
+                                "Applied Clean Architecture to build maintainable and scalable mobile applications.",
+                                "Implemented digital wallet integrations supporting Apple Pay, Google Pay, and Samsung Pay, focusing on security, performance, and user experience.",
+                                "Contributed to Heineken's HeiClub loyalty platform, developing features for points redemption and digital payments.",
+                                "Collaborated on backend solutions using .NET, ensuring scalability, maintainability, and integration with core business systems.",
+                                "Developed an internal Prudential back-office platform for user management, including XLSX/CSV data import and export workflows.",
+                                "Built a Flutter Web drag-and-drop interface to improve the usability and efficiency of administrative workflows."
+                            ]
+                        }
                     ],
                     "tags": [
-                        ".NET",
                         "Flutter",
+                        "Dart",
+                        ".NET",
                         "Firebase",
+                        "Clean Architecture",
+                        "Apple Pay",
+                        "Google Pay",
+                        "Samsung Pay",
+                        "Flutter Web",
                         "Docker",
                         "GitLab"
                     ]
                 },
                 "ey": {
                     "company": "Ernst & Young (EY)",
-                    "period": "Aug 2021 – Oct 2022 (1 year 3 months)",
-                    "bullets": [
-                        "Afinz and Bank of Brazil – Mobile Banking Applications",
-                        "Developed a digital banking app for AFINZ Bank, including full implementation of screens with a strong focus on UI/UX and product design to ensure an intuitive user experience.",
-                        "Created a credit card management app for Banco do Brasil, providing users with features to control and monitor their cards efficiently."
+                    "roles": [
+                        {
+                            "title": "Mid-level Mobile Flutter Engineer | Mid-level Front-end Software Engineer",
+                            "period": "August 2021 – October 2022",
+                            "bullets": [
+                                "Developed a digital banking application for AFINZ, implementing mobile screens with a strong focus on UI/UX, product design, and intuitive user experiences.",
+                                "Developed a credit card management application for Banco do Brasil, enabling customers to efficiently control and monitor their cards.",
+                                "Collaborated on mobile banking solutions using Flutter, contributing to scalable and user-focused financial applications."
+                            ]
+                        }
                     ],
                     "tags": [
                         "Flutter",
+                        "Dart",
+                        "Firebase",
                         "UI/UX",
-                        "Firebase"
+                        "Product Design",
+                        "Mobile Banking"
                     ]
                 },
                 "komus": {
                     "company": "Komus",
-                    "period": "Aug 2020 – Apr 2021 (9 months)",
-                    "bullets": [
-                        "Komus - Mobile Development",
-                        "Develop mobile applications using Flutter, with focus on performance, scalability, and clean architecture.",
-                        "Created the Komus Mobile App, a cell phone insurance application with features for contract management, claims, and plan tracking.",
-                        "Komus - Web Development",
-                        "Build responsive and scalable websites using Nuxt.js, Vue.js, Node.js, HTML, CSS, JavaScript, and TypeScript.",
-                        "Developed the Komus Insurance Website, offering users detailed information about mobile protection plans, quote requests, and customer support tools."
+                    "roles": [
+                        {
+                            "title": "Mid-level Mobile Flutter Engineer | Mid-level Front-end Software Engineer",
+                            "period": "August 2020 – April 2021",
+                            "bullets": [
+                                "Developed mobile applications using Flutter, focusing on performance, scalability, and clean architecture.",
+                                "Developed the Komus Mobile App, a mobile insurance platform for contract management, claims, and plan tracking.",
+                                "Built responsive and scalable web applications using Nuxt.js, Vue.js, Node.js, HTML, CSS, JavaScript, and TypeScript.",
+                                "Developed the Komus Insurance website, providing information about mobile protection plans, quote requests, and customer support features."
+                            ]
+                        }
                     ],
                     "tags": [
                         "Flutter",
+                        "Dart",
                         "Vue.js",
+                        "Nuxt.js",
                         "Node.js",
-                        "TypeScript"
+                        "TypeScript",
+                        "JavaScript",
+                        "HTML",
+                        "CSS"
                     ]
                 },
                 "neopdv": {
                     "company": "neoPDV",
-                    "period": "May 2019 – Aug 2020 (1 year 2 months)",
-                    "bullets": [
-                        "neoPDV - Mobile Development",
-                        "Developed a mobile sales application with integrated POS (checkout), allowing sellers to make transactions both at fixed cashier stations and throughout the store.",
-                        "Enabled a more dynamic and customer-focused sales approach by allowing mobility within the store environment.",
-                        "Designed the entire UI/UX of the app, ensuring consistency, usability, and a seamless user experience from checkout to customer interaction.",
-                        "neoPDV - Web Development",
-                        "Developed a web-based sales control dashboard for sellers and managers, focused on performance tracking and decision-making.",
-                        "Implemented interactive charts, metrics, and reports to visualize sales performance and operational data.",
-                        "Built entirely with HTML, CSS, and JavaScript, ensuring accessibility and responsiveness across devices."
+                    "roles": [
+                        {
+                            "title": "Jr. Mobile Flutter Engineer | Jr. Front-end Software Engineer",
+                            "period": "July 2019 – August 2020",
+                            "bullets": [
+                                "Developed a mobile sales application with an integrated POS system, enabling sales associates to complete transactions both at fixed checkout stations and throughout the store.",
+                                "Enabled a more dynamic and customer-focused sales experience by bringing the checkout process directly to the sales floor.",
+                                "Designed the application's UI/UX, focusing on consistency, usability, and a seamless experience from product interaction to checkout.",
+                                "Developed a web-based sales management dashboard for sellers and managers, supporting performance tracking and operational decision-making.",
+                                "Implemented interactive charts, metrics, and reports for visualizing sales performance and operational data.",
+                                "Built responsive web interfaces using HTML, CSS, and JavaScript."
+                            ]
+                        },
+                        {
+                            "title": "Helpdesk",
+                            "period": "May 2019 – July 2019",
+                            "bullets": [
+                                "Provided technical support to customers by phone, troubleshooting and resolving technical issues related to point-of-sale terminals.",
+                                "Investigated customer-reported issues and assisted in resolving operational and technical problems in POS environments."
+                            ]
+                        }
                     ],
                     "tags": [
                         "Flutter",
+                        "Dart",
+                        "HTML",
+                        "CSS",
+                        "JavaScript",
                         "UI/UX",
+                        "POS",
                         "Dashboard"
                     ]
                 }
             }
         },
         "skills": {
-            "title": "Technical Skills",
+            "kicker": "Tech Stack",
+            "title": "Habilidades Técnicas",
+            "description": "Tecnologias e ferramentas que utilizo para construir produtos digitais, aplicações mobile e soluções backend.",
             "categories": {
                 "mobile": {
                     "title": "Mobile",
@@ -400,7 +457,7 @@
                     ]
                 },
                 "architecture": {
-                    "title": "Architecture",
+                    "title": "Arquitetura",
                     "tags": [
                         "Clean Architecture",
                         "Microfrontend",
@@ -418,7 +475,7 @@
                     ]
                 },
                 "methods": {
-                    "title": "Methodologies",
+                    "title": "Metodologias",
                     "tags": [
                         "Scrum",
                         "Kanban",

@@ -11,16 +11,26 @@ export const useProjects = () => {
       thumbnail: '/images/bnb-thumb.jpg',
       technologies: 'Flutter, Firebase, Clean Architecture, GitLab',
       category: 'Fintech',
-      appleLink: 'https://apps.apple.com/br/app/bnb-cartões/id1435796374',
-      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.bnb&hl=pt'
+      appleLink: 'https://apps.apple.com/br/app/bnb-cartões/id6701303533',
+      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.bnb&hl=pt',
+
+      screenshots: [
+        "/images/projects/bnb/bnb-1.png", 
+        "/images/projects/bnb/bnb-2.png",         
+        "/images/projects/bnb/bnb-3.png",
+        "/images/projects/bnb/bnb-4.png",
+        "/images/projects/bnb/bnb-5.png"
+      ]
     },
+
+    
     {
       id: 2,
       key: 'banpara',
       thumbnail: '/images/banpara-thumb.jpg',
       technologies: 'Flutter, .NET, Firebase, Docker, Nuxt.js',
       category: 'Fintech',
-      appleLink: 'https://apps.apple.com/br/app/banpará-cartões/id1526688256',
+      appleLink: 'https://apps.apple.com/br/app/banpar%C3%A1-cart%C3%A3o/id6737286836',
       googleLink: 'https://play.google.com/store/apps/details?id=com.csu.banpara&hl=pt'
     },
     {

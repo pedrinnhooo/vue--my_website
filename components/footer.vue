@@ -43,23 +43,6 @@
                             </li>
                         </ul>
                     </div>
-
-                    <div class="nav-column">
-                        <h4 class="nav-title">{{ t('footer.columns.contact.title') }}</h4>
-                        <ul class="nav-list">
-                            <li>
-                                <a href="mailto:pedro.ruffo.dev@gmail.com" class="nav-link">
-                                    {{ t('footer.columns.contact.email') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tel:+5511912117442" class="nav-link">
-                                    {{ t('footer.columns.contact.phone') }}
-                                </a>
-                            </li>
-                            <li><span class="nav-link">{{ t('footer.columns.contact.location') }}</span></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 

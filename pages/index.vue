@@ -33,7 +33,7 @@
                     </div>
                     <div class="portrait-chip">
                         <span class="chip-dot"></span>
-                        São Paulo · available
+                        São Paulo, SP, Brasil · available
                     </div>
                 </div>
             </div>

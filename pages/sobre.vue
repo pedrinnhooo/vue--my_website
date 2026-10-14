@@ -429,7 +429,7 @@
 import { computed } from 'vue'
 import { useScrollAnimation } from '~/composables/useAnimations'
 
-import mePhoto from '~/assets/img/me.jpeg'
+import mePhoto from '~/assets/img/me.png'
 import logoH2 from '~/assets/img/h2.jpeg'
 import logoFoursys from '~/assets/img/4.jpeg'
 import logoEy from '~/assets/img/ey.jpeg'

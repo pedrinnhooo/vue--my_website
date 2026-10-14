@@ -241,7 +241,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useScrollAnimation, useTypewriter, useCountUp } from '~/composables/useAnimations'
-import mePhoto from '~/assets/img/me.jpeg'
+import mePhoto from '~/assets/img/me.png'
 
 useScrollAnimation()
 

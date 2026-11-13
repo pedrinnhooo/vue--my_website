@@ -190,12 +190,12 @@ const services = computed(() =>
   }))
 )
 
-const { featuredProjects } = useProjects()
+const { featuredProjects, getProjectById } = useProjects()
 const selectedProject = ref(null)
 const projectViewLabel = computed(() => (locale.value === 'pt' ? 'Ver' : 'View'))
 
 const openProjectModal = (project) => {
-  selectedProject.value = project
+  selectedProject.value = getProjectById(project.id) || project
 }
 
 const closeProjectModal = () => {

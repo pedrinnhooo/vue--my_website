@@ -169,15 +169,16 @@
         },
         "projectsData": {
             "bnb": {
-                "name": "Bnb - Banco do Nordeste",
-                "subtitle": "Cards, invoices and limits",
+                "name": "BNB Cartões",
+                "subtitle": "Banco do Nordeste Cards",
                 "shortDescription": "Banco do Nordeste card app, allowing invoice control, limits management and much more.",
                 "longDescription": "App developed for Banco do Nordeste, focused on credit card management. Features include invoice control, real-time expense tracking, limit setting, etc. The app was built with Flutter using clean architecture, ensuring scalability and easy maintenance."
             },
             "banpara": {
-                "name": "Banpara - Banco do Pará",
-                "shortDescription": "Credit card solution and expense control for Banpara clients, with multiple features.",
-                "longDescription": "Banpara credit card app, developed with Flutter. Features include invoice management, real-time purchase notifications, limit adjustment and digital wallet integration (Apple Pay, Google Pay)."
+                "name": "Banpará Cartão",
+                "subtitle": "Finance",
+                "shortDescription": "Credit card solution and expense control for Banpará clients, with multiple features.",
+                "longDescription": "Banpará credit card app, developed with Flutter. Features include invoice management, real-time purchase notifications, limit adjustment and digital wallet integration (Apple Pay, Google Pay)."
             },
             "losango": {
                 "name": "Losango → Bradesco Seguros",
@@ -186,7 +187,8 @@
                 "longDescription": "Built the Losango app for card management, expense tracking and flexible installments, on a white-label architecture. At the time, Losango was acquired and the operation moved into Bradesco Seguros — the product followed that brand and business transition."
             },
             "h2club": {
-                "name": "H2 Club - Groupe H2",
+                "name": "H2 Sports Bar e Poker",
+                "subtitle": "H2 Club · tournaments and rewards",
                 "shortDescription": "App for tournament management, schedule and H2 club information, with push notifications.",
                 "longDescription": "App for H2 Club members, displaying tournament calendar, results, reservations and segmented push notification integration. Implements facial/document recognition for registration and LGPD compliance."
             },
@@ -196,7 +198,8 @@
                 "longDescription": "Digital wallet integration (Apple Pay, Google Pay, Samsung Pay) into BlueC app, facilitating contactless payments and real-time transaction management."
             },
             "afinz": {
-                "name": "Afinz - Banco Afinz",
+                "name": "Afinz",
+                "subtitle": "Card and digital banking",
                 "shortDescription": "Afinz Bank with digital banking features, card control and intuitive interface.",
                 "longDescription": "Creation of the Afinz Bank app, focused on complete digital banking features: account opening, credit cards, bill payments and service top-ups. Strong emphasis on UI/UX."
             },
@@ -254,6 +257,7 @@
             },
             "categories": {
                 "finance": "Finance",
+                "sports": "Sports",
                 "lifestyle": "Lifestyle",
                 "productivity": "Productivity",
                 "business": "Business"

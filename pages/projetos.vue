@@ -49,12 +49,12 @@ const { t, locale } = useI18n()
 useScrollAnimation()
 
 const selectedProject = ref(null)
-const { projects } = useProjects()
+const { projects, getProjectById } = useProjects()
 
 const viewLabel = computed(() => (locale.value === 'pt' ? 'Ver' : 'View'))
 
 const openProjectModal = (project) => {
-  selectedProject.value = project
+  selectedProject.value = getProjectById(project.id) || project
 }
 
 const closeProjectModal = () => {

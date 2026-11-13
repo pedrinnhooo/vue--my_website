@@ -1,6 +1,7 @@
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 
 /**
+ * Fonte única de projetos para Home + /projetos + ProjectStoreDrawer.
  * Escala adicionando um item em `baseProjects` + traduções em
  * `home.projectsData.<key>` (name, shortDescription, longDescription, subtitle?).
  *
@@ -8,10 +9,7 @@ import { computed, ref, watch } from 'vue'
  *   thumb.* (card), icon.* (store), 1..4 (previews).
  * Prudential (backoffice) fica sem screenshots de propósito.
  */
-export const useProjects = () => {
-  const { t, locale } = useI18n()
-
-  const baseProjects = [
+const baseProjects = [
     {
       id: 1,
       key: 'bnb',
@@ -21,19 +19,20 @@ export const useProjects = () => {
       coverColor: '#C8102E',
       technologies: ['Flutter', 'Firebase', 'Clean Architecture', 'GitLab'],
       category: 'Fintech',
-      appleLink: 'https://apps.apple.com/br/app/bnb-cartões/id6701303533',
-      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.bnb&hl=pt',
+      appleLink: 'https://apps.apple.com/br/app/bnb-cart%C3%B5es/id6701303533',
+      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.bnbcartoes&hl=pt_BR',
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.7,
-        ratingCount: '1.2K',
+        // App Store BR · lookup id6701303533
+        rating: 3.6,
+        ratingCount: '14',
         ageRating: '4+',
-        chartRank: 42,
+        chartRank: null,
         chartCategoryKey: 'finance',
-        developer: 'CSU',
-        languages: 'PT + 2',
-        size: '78 MB',
+        developer: 'Banco do Nordeste',
+        languages: 'EN',
+        size: '101,3 MB',
         platformKey: 'iphone'
       },
       screenshots: [
@@ -53,18 +52,19 @@ export const useProjects = () => {
       technologies: ['Flutter', '.NET', 'Firebase', 'Docker', 'Nuxt.js'],
       category: 'Fintech',
       appleLink: 'https://apps.apple.com/br/app/banpar%C3%A1-cart%C3%A3o/id6737286836',
-      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.banpara&hl=pt',
+      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.banparacartoes&hl=pt_BR',
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.6,
-        ratingCount: '890',
+        // App Store BR · lookup id6737286836
+        rating: 3.7,
+        ratingCount: '84',
         ageRating: '4+',
-        chartRank: 68,
+        chartRank: null,
         chartCategoryKey: 'finance',
-        developer: 'CSU',
-        languages: 'PT',
-        size: '82 MB',
+        developer: 'Banpará',
+        languages: 'EN',
+        size: '89,2 MB',
         platformKey: 'iphone'
       },
       screenshots: [
@@ -84,19 +84,20 @@ export const useProjects = () => {
       coverColor: '#CC092F',
       technologies: ['Flutter', 'Vue.js', 'Clean Architecture', 'BigQuery'],
       category: 'Fintech',
-      appleLink: 'https://apps.apple.com/br/app/losango/id1456294810?l=en-GB',
-      googleLink: 'https://play.google.com/store/apps/details?id=com.csu.losango&hl=pt_BR',
+      // Listing antigo removido das lojas; app white-label CSU (histórico)
+      appleLink: null,
+      googleLink: null,
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.5,
-        ratingCount: '3.4K',
+        rating: null,
+        ratingCount: null,
         ageRating: '4+',
-        chartRank: 55,
+        chartRank: null,
         chartCategoryKey: 'finance',
         developer: 'CSU',
-        languages: 'PT + 1',
-        size: '95 MB',
+        languages: 'PT',
+        size: null,
         platformKey: 'iphone'
       },
       screenshots: [
@@ -120,14 +121,14 @@ export const useProjects = () => {
       websiteLink: 'https://clube.heineken.com.br',
       featured: false,
       store: {
-        rating: 4.5,
-        ratingCount: '120',
+        rating: null,
+        ratingCount: null,
         ageRating: '18+',
         chartRank: null,
         chartCategoryKey: 'lifestyle',
         developer: 'Heineken',
         languages: 'PT',
-        size: '71 MB',
+        size: null,
         platformKey: 'web'
       },
       screenshots: [
@@ -151,14 +152,14 @@ export const useProjects = () => {
       websiteLink: null,
       featured: false,
       store: {
-        rating: 4.9,
-        ratingCount: '—',
+        rating: null,
+        ratingCount: null,
         ageRating: '4+',
         chartRank: null,
         chartCategoryKey: 'productivity',
         developer: 'Prudential',
         languages: 'PT + EN',
-        size: '—',
+        size: null,
         platformKey: 'web'
       },
       screenshots: []
@@ -173,18 +174,19 @@ export const useProjects = () => {
       technologies: ['Flutter', 'Firebase', 'Vue.js', 'UI/UX', 'JWT'],
       category: 'Fintech',
       appleLink: 'https://apps.apple.com/br/app/afinz/id1416167782',
-      googleLink: 'https://play.google.com/store/apps/details?id=br.com.sorocred.sorocredapp&hl=en_US',
+      googleLink: 'https://play.google.com/store/apps/details?id=br.com.sorocred.sorocredapp&hl=pt_BR',
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.6,
-        ratingCount: '5.8K',
+        // App Store BR · lookup id1416167782
+        rating: 3.2,
+        ratingCount: '8,2 mil',
         ageRating: '4+',
-        chartRank: 37,
+        chartRank: null,
         chartCategoryKey: 'finance',
         developer: 'Afinz',
-        languages: 'PT + 1',
-        size: '88 MB',
+        languages: 'EN',
+        size: '109 MB',
         platformKey: 'iphone'
       },
       screenshots: [
@@ -204,18 +206,19 @@ export const useProjects = () => {
       technologies: ['Flutter', 'BigQuery', 'JWT', 'Docker', 'PHP'],
       category: 'IGaming',
       appleLink: 'https://apps.apple.com/br/app/h2-club/id6466628886',
-      googleLink: 'https://play.google.com/store/apps/details?id=com.h2.app&hl=pt_BR&pli=1',
+      googleLink: 'https://play.google.com/store/apps/details?id=com.h2.app&hl=pt_BR',
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.8,
-        ratingCount: '2.1K',
-        ageRating: '18+',
-        chartRank: 12,
-        chartCategoryKey: 'lifestyle',
-        developer: 'Groupe H2',
-        languages: 'PT + 3',
-        size: '112 MB',
+        // App Store BR · lookup id6466628886 · chart Sports #79
+        rating: 3.0,
+        ratingCount: '20',
+        ageRating: '17+',
+        chartRank: 79,
+        chartCategoryKey: 'sports',
+        developer: 'H2 Grupo',
+        languages: 'PT',
+        size: '65,8 MB',
         platformKey: 'iphone'
       },
       screenshots: [
@@ -234,19 +237,20 @@ export const useProjects = () => {
       coverColor: '#2563EB',
       technologies: ['Flutter', 'Docker', 'Google Pay', 'Apple Pay', 'Firebase'],
       category: 'Fintech',
+      // App white-label / listing público indisponível
       appleLink: null,
-      googleLink: 'https://play.google.com/store/apps/details?id=br.com.csu.baas&hl=pt_BR',
+      googleLink: null,
       websiteLink: null,
       featured: true,
       store: {
-        rating: 4.4,
-        ratingCount: '640',
+        rating: null,
+        ratingCount: null,
         ageRating: '4+',
-        chartRank: 91,
+        chartRank: null,
         chartCategoryKey: 'finance',
-        developer: 'CSU',
+        developer: 'CSU · Blue C',
         languages: 'PT',
-        size: '64 MB',
+        size: null,
         platformKey: 'android'
       },
       screenshots: [
@@ -270,14 +274,14 @@ export const useProjects = () => {
       websiteLink: null,
       featured: false,
       store: {
-        rating: 4.3,
-        ratingCount: '210',
+        rating: null,
+        ratingCount: null,
         ageRating: '4+',
         chartRank: null,
         chartCategoryKey: 'lifestyle',
         developer: 'Pitzi',
         languages: 'PT',
-        size: '54 MB',
+        size: null,
         platformKey: 'iphone'
       },
       screenshots: [
@@ -301,14 +305,14 @@ export const useProjects = () => {
       websiteLink: null,
       featured: false,
       store: {
-        rating: 4.7,
-        ratingCount: '340',
+        rating: null,
+        ratingCount: null,
         ageRating: '4+',
         chartRank: null,
         chartCategoryKey: 'business',
         developer: 'NeoPDV',
         languages: 'PT',
-        size: '61 MB',
+        size: null,
         platformKey: 'iphone'
       },
       screenshots: [
@@ -318,17 +322,21 @@ export const useProjects = () => {
         '/images/projects/neopdv/4.webp'
       ]
     }
-  ]
+]
 
-  const projectsData = ref([])
+export const useProjects = () => {
+  const { t, locale } = useI18n()
+
+  // Shared across Home + Projetos so the drawer always sees the same store data
+  const projectsData = useState('portfolio-projects', () => [])
 
   const translateOptional = (path) => {
     const value = t(path)
     return value === path ? null : value
   }
 
-  const updateProjects = () => {
-    projectsData.value = baseProjects.map((project) => {
+  const buildProjects = () =>
+    baseProjects.map((project) => {
       const dataPath = `home.projectsData.${project.key}`
       const store = project.store || {}
       const chartCategoryKey = store.chartCategoryKey
@@ -355,18 +363,30 @@ export const useProjects = () => {
         }
       }
     })
+
+  const syncProjects = () => {
+    projectsData.value = buildProjects()
   }
 
-  watch(locale, updateProjects, { immediate: true })
+  watch(locale, syncProjects, { immediate: true })
 
   const projects = computed(() => projectsData.value)
   const featuredProjects = computed(() =>
     projects.value.filter((p) => p.featured).slice(0, 6)
   )
 
+  const getProjectById = (id) =>
+    projects.value.find((project) => project.id === id) || null
+
+  const getProjectByKey = (key) =>
+    projects.value.find((project) => project.key === key) || null
+
   return {
     projects,
     featuredProjects,
-    baseProjects
+    baseProjects,
+    getProjectById,
+    getProjectByKey,
+    syncProjects
   }
 }

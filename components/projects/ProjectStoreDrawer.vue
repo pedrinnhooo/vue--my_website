@@ -296,7 +296,7 @@ const statItems = computed(() => {
 
   const items = []
 
-  if (store.rating != null) {
+  if (store.rating != null && store.rating !== '') {
     items.push({
       type: 'rating',
       value: store.rating,

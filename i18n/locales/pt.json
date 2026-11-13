@@ -169,15 +169,16 @@
         },
         "projectsData": {
             "bnb": {
-                "name": "Bnb - Banco do Nordeste",
-                "subtitle": "Cartões, faturas e limites",
+                "name": "BNB Cartões",
+                "subtitle": "Banco do Nordeste Cartões",
                 "shortDescription": "Aplicativo de cartões do Banco do Nordeste, permitindo controle de faturas, limites e muito mais.",
                 "longDescription": "Aplicativo desenvolvido para o Banco do Nordeste, focado em gerenciamento de cartões de crédito. Implementações incluem controle de faturas, acompanhamento de gastos em tempo real, definição de limites, etc. O app foi desenvolvido em Flutter com arquitetura limpa, garantindo escalabilidade e fácil manutenção."
             },
             "banpara": {
-                "name": "Banpara - Banco do Pará",
-                "shortDescription": "Solução de cartão de crédito e controle de gastos para clientes Banpara, com múltiplas funcionalidades.",
-                "longDescription": "Aplicativo de cartão de crédito Banpara, desenvolvido com Flutter. Funcionalidades incluem gerenciamento de fatura, notificação de compras em tempo real, ajuste de limite e integração com carteiras digitais (Apple Pay, Google Pay)."
+                "name": "Banpará Cartão",
+                "subtitle": "Finanças",
+                "shortDescription": "Solução de cartão de crédito e controle de gastos para clientes Banpará, com múltiplas funcionalidades.",
+                "longDescription": "Aplicativo de cartão de crédito Banpará, desenvolvido com Flutter. Funcionalidades incluem gerenciamento de fatura, notificação de compras em tempo real, ajuste de limite e integração com carteiras digitais (Apple Pay, Google Pay)."
             },
             "losango": {
                 "name": "Losango → Bradesco Seguros",
@@ -186,7 +187,8 @@
                 "longDescription": "Desenvolvimento do app Losango para gerenciamento de cartão, controle de gastos e parcelamentos flexíveis, com arquitetura white-label. Na época, a Losango foi comprada e a operação migrou para o Bradesco Seguros — o produto acompanhou a transição de marca e negócio."
             },
             "h2club": {
-                "name": "H2 Club - Groupe H2",
+                "name": "H2 Sports Bar e Poker",
+                "subtitle": "H2 Club · torneios e rewards",
                 "shortDescription": "App para gerenciamento de torneios, agenda e informações do clube H2, com push notifications.",
                 "longDescription": "Aplicativo para membros do H2 Club, exibindo calendário de torneios, resultados, reservas e integração de notificações push segmentadas. Implementa reconhecimento facial/documental para cadastro e compliance com LGPD."
             },
@@ -196,7 +198,8 @@
                 "longDescription": "Integração de carteiras digitais (Apple Pay, Google Pay, Samsung Pay) ao app BlueC, facilitando pagamentos sem contato e gerenciamento de transações em tempo real."
             },
             "afinz": {
-                "name": "Afinz - Banco Afinz",
+                "name": "Afinz",
+                "subtitle": "Cartão e banco digital",
                 "shortDescription": "Banco Afinz com recursos de banco digital, controle de cartão e interface intuitiva.",
                 "longDescription": "Criação do aplicativo para o Banco Afinz, focado em funcionalidades de um banco digital completo: abertura de conta, cartões de crédito, pagamentos de boletos e recarga de serviços. Forte ênfase em UI/UX."
             },
@@ -254,6 +257,7 @@
             },
             "categories": {
                 "finance": "Finanças",
+                "sports": "Esportes",
                 "lifestyle": "Estilo de Vida",
                 "productivity": "Produtividade",
                 "business": "Negócios"

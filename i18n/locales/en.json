@@ -70,7 +70,8 @@
             },
             "feedback": {
                 "sendFail": "Failed to send",
-                "sendError": "Error sending message. Please try again."
+                "sendError": "Error sending message. Please try again.",
+                "rateLimited": "Too many messages from this IP. Please wait and try again."
             }
         },
         "social": {

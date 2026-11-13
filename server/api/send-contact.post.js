@@ -3,11 +3,15 @@ import axios from 'axios'
 
 const BRAND = {
   name: process.env.SITE_BRAND_NAME || 'Portfolio',
-  primary: '#5102c4',
-  dark: '#111827',
-  muted: '#6B7280',
-  border: '#E5E7EB',
-  bg: '#F7F9FC'
+  void: '#05030b',
+  surface: '#10081a',
+  card: '#140c22',
+  ink: '#f7f2ff',
+  mute: '#b8adc8',
+  soft: '#7d728f',
+  line: 'rgba(192,132,252,0.22)',
+  accent: '#c084fc',
+  accentDeep: '#7c3aed'
 }
 
 function requireEnv(key) {
@@ -30,54 +34,102 @@ function escapeHtml(str = '') {
     .replace(/'/g, '&#39;')
 }
 
-function buildEmailHtml({ name, email, phone, subject, message, brand = BRAND }) {
+function buildEmailHtml({
+  name,
+  email,
+  phone,
+  subject,
+  message,
+  ip,
+  brand = BRAND
+}) {
   const safeMsg = escapeHtml(message).replace(/\n/g, '<br>')
   const safeName = escapeHtml(name)
   const safeEmail = escapeHtml(email)
   const safePhone = escapeHtml(phone || '')
   const safeSubject = escapeHtml(subject || 'Contato')
+  const safeIp = escapeHtml(ip || '—')
   const now = new Date().toLocaleString('pt-BR')
   const year = new Date().getFullYear()
+  const brandName = escapeHtml(brand.name)
+
+  const row = (label, value) => `
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid ${brand.line};font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${brand.soft};width:110px;vertical-align:top;">
+        ${label}
+      </td>
+      <td style="padding:10px 0;border-bottom:1px solid ${brand.line};font-family:Arial,Helvetica,sans-serif;font-size:15px;color:${brand.ink};vertical-align:top;">
+        ${value}
+      </td>
+    </tr>`
 
   return `<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(brand.name)} • Nova mensagem</title>
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
+  <title>${brandName} • Nova mensagem</title>
 </head>
-<body style="margin:0;padding:0;background:${brand.bg};">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:${brand.bg};">
+<body style="margin:0;padding:0;background:${brand.void};">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:${brand.void};">
     <tr>
-      <td align="center" style="padding:24px;">
-        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:100%;background:#fff;border-radius:12px;overflow:hidden;">
+      <td align="center" style="padding:28px 16px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:100%;background:${brand.card};border:1px solid ${brand.line};border-radius:22px;overflow:hidden;">
           <tr>
-            <td style="background:${brand.primary};padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#fff;font-size:20px;font-weight:700;">
-              ${escapeHtml(brand.name)}
-            </td>
+            <td style="padding:0;background:linear-gradient(135deg,${brand.accentDeep} 0%,#9333ea 48%,${brand.accent} 100%);height:4px;font-size:0;line-height:0;">&nbsp;</td>
           </tr>
           <tr>
-            <td style="padding:28px 32px 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${brand.dark};">
-              <h1 style="margin:0 0 4px;font-size:22px;">Nova mensagem do site</h1>
-              <p style="margin:0;color:${brand.muted};font-size:14px;">Assunto: <strong style="color:${brand.dark};">${safeSubject}</strong></p>
+            <td style="padding:28px 28px 8px;font-family:Arial,Helvetica,sans-serif;">
+              <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:${brand.accent};">Contact · Inbox</p>
+              <h1 style="margin:0;font-size:26px;line-height:1.2;letter-spacing:-0.03em;color:${brand.ink};font-weight:700;">
+                ${brandName}
+              </h1>
+              <p style="margin:10px 0 0;font-size:15px;color:${brand.mute};">
+                Nova mensagem do site · <span style="color:${brand.ink};">${safeSubject}</span>
+              </p>
             </td>
           </tr>
+
           <tr>
-            <td style="padding:16px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:14px;color:${brand.dark};">
-              <p style="margin:6px 0;"><strong>Nome:</strong> ${safeName}</p>
-              <p style="margin:6px 0;"><strong>E-mail:</strong> ${safeEmail}</p>
-              ${safePhone ? `<p style="margin:6px 0;"><strong>Telefone:</strong> ${safePhone}</p>` : ''}
+            <td style="padding:18px 28px 8px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                style="background:${brand.surface};border:1px solid ${brand.line};border-radius:16px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      ${row('Nome', safeName)}
+                      ${row('E-mail', `<a href="mailto:${safeEmail}" style="color:${brand.accent};text-decoration:none;">${safeEmail}</a>`)}
+                      ${safePhone ? row('Telefone', `<a href="tel:${safePhone}" style="color:${brand.accent};text-decoration:none;">${safePhone}</a>`) : ''}
+                      ${row('Assunto', safeSubject)}
+                      ${row('IP', `<span style="font-family:Consolas,Monaco,monospace;font-size:13px;color:${brand.mute};">${safeIp}</span>`)}
+                    </table>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+
           <tr>
-            <td style="padding:8px 32px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;color:${brand.dark};">
-              <h3 style="margin:0 0 8px;font-size:16px;">Mensagem</h3>
-              <div style="border-left:4px solid ${brand.primary};padding:12px 16px;">${safeMsg}</div>
+            <td style="padding:16px 28px 8px;font-family:Arial,Helvetica,sans-serif;">
+              <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:${brand.soft};">Mensagem</p>
+              <div style="padding:16px 18px;border-radius:14px;border:1px solid ${brand.line};border-left:3px solid ${brand.accent};background:${brand.surface};font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:${brand.ink};">
+                ${safeMsg}
+              </div>
             </td>
           </tr>
+
           <tr>
-            <td style="padding:0 32px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${brand.muted};font-size:12px;">
-              Enviado automaticamente em ${now}. © ${year} ${escapeHtml(brand.name)}.
+            <td style="padding:18px 28px 28px;font-family:Arial,Helvetica,sans-serif;">
+              <a href="mailto:${safeEmail}?subject=${encodeURIComponent(`Re: ${subject || 'Contato'}`)}"
+                 style="display:inline-block;padding:12px 20px;border-radius:999px;background:#ffffff;color:#111111;font-size:14px;font-weight:700;text-decoration:none;">
+                Responder
+              </a>
+              <p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:${brand.soft};">
+                Enviado automaticamente em ${now}.<br>
+                © ${year} ${brandName}
+              </p>
             </td>
           </tr>
         </table>
@@ -160,6 +212,21 @@ async function sendWhatsAppNotification({ phone, message }) {
 
 export default defineEventHandler(async (event) => {
   try {
+    const ip = getClientIp(event)
+    const rate = checkContactRateLimit(ip)
+
+    setResponseHeader(event, 'X-RateLimit-Limit', String(rate.limit))
+    setResponseHeader(event, 'X-RateLimit-Remaining', String(rate.remaining))
+    setResponseHeader(event, 'X-RateLimit-Reset', String(Math.floor(rate.resetAt / 1000)))
+
+    if (!rate.allowed) {
+      setResponseHeader(event, 'Retry-After', String(rate.retryAfterSec))
+      throw createError({
+        statusCode: 429,
+        statusMessage: 'Muitas mensagens deste IP. Tente novamente mais tarde.'
+      })
+    }
+
     const body = await readBody(event)
     const { name, email, phone, subject, message } = body || {}
 
@@ -175,7 +242,7 @@ export default defineEventHandler(async (event) => {
     const emailResult = await sendEmailNotification({
       to: emailTo,
       subject: `Contato do site - ${String(subject || 'Sem assunto').slice(0, 120)}`,
-      html: buildEmailHtml({ name, email, phone, subject, message }),
+      html: buildEmailHtml({ name, email, phone, subject, message, ip }),
       replyTo: email
     })
 
@@ -189,6 +256,7 @@ export default defineEventHandler(async (event) => {
         `Email: ${email}`,
         phone ? `Telefone: ${phone}` : null,
         `Assunto: ${subject || '—'}`,
+        `IP: ${ip}`,
         '',
         'Mensagem:',
         message

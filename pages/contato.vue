@@ -219,8 +219,17 @@ const submitForm = async () => {
       throw new Error(t('contact.form.feedback.sendFail'))
     }
   } catch (error) {
-    console.error('Erro ao enviar formulário:', error)
-    alert(t('contact.form.feedback.sendError'))
+    const status = error?.statusCode || error?.response?.status
+    const apiMessage =
+      error?.statusMessage ||
+      error?.data?.statusMessage ||
+      error?.data?.message
+
+    if (status === 429) {
+      alert(apiMessage || t('contact.form.feedback.rateLimited'))
+    } else {
+      alert(apiMessage || t('contact.form.feedback.sendError'))
+    }
   } finally {
     isSubmitting.value = false
   }
@@ -348,11 +357,12 @@ watch(() => form.value.countryCode, () => {
   max-width: 760px;
 }
 
-.hero-subtitle {
+.contact-hero .hero-subtitle {
   margin: 0;
   color: var(--apple-text-secondary);
   font-size: 1.05rem;
   line-height: 1.6;
+  max-width: 420px;
 }
 
 .contact-main {
@@ -607,6 +617,7 @@ watch(() => form.value.countryCode, () => {
   }
 
   .contact-hero .hero-subtitle {
+    max-width: none;
     margin-left: auto;
     margin-right: auto;
   }

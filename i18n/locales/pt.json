@@ -70,7 +70,8 @@
             },
             "feedback": {
                 "sendFail": "Falha no envio",
-                "sendError": "Erro ao enviar mensagem. Tente novamente."
+                "sendError": "Erro ao enviar mensagem. Tente novamente.",
+                "rateLimited": "Muitas mensagens deste IP. Aguarde um pouco e tente de novo."
             }
         },
         "social": {

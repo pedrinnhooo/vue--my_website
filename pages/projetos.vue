@@ -341,9 +341,10 @@ const openProjectModal = (project) => {
 }
 
 const closeProjectModal = () => {
-    selectedProject.value = null;
-    activeScreenshot.value = 0;
-};
+    selectedProject.value = null
+    activeScreenshot.value = 0
+    document.body.style.overflow = ''
+}
 
 const getFloatingStyle = (index) => {
     const positions = [

@@ -1,241 +1,148 @@
 <template>
-    <div class="apple-home">
-        <section class="hero-section parallax-container">
-            <div class="hero-orbs" aria-hidden="true">
-                <span class="orb orb-a"></span>
-                <span class="orb orb-b"></span>
-                <span class="orb orb-c"></span>
+  <div class="apple-home">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-veil" aria-hidden="true"></div>
+
+      <div class="container-apple hero-shell">
+        <div class="hero-copy scroll-animate">
+          <p class="hero-kicker">Flutter · Nuxt · UI/UX</p>
+
+          <h1 class="hero-title">
+            <span class="hero-title-sizer" aria-hidden="true">{{ typewriterText }}|</span>
+            <span class="hero-title-live">
+              <span class="hero-title-line">{{ displayText }}</span>
+              <span class="hero-caret" :class="{ blink: !isTypewriterComplete }">|</span>
+            </span>
+          </h1>
+
+          <p class="hero-lead">
+            {{ t('home.hero.subtitle') }}
+          </p>
+
+          <div class="hero-actions">
+            <NuxtLink to="/projetos" class="home-btn home-btn--solid">
+              {{ t('home.hero.buttons.viewProjects') }}
+            </NuxtLink>
+            <NuxtLink to="/contato" class="home-btn home-btn--ghost">
+              {{ t('home.hero.buttons.talkToMe') }}
+            </NuxtLink>
+          </div>
+
+          <div class="hero-metrics">
+            <div v-for="stat in stats" :key="stat.key" class="hero-metric">
+              <strong>{{ stat.displayValue.value }}+</strong>
+              <span>{{ stat.label }}</span>
             </div>
-
-            <div class="hero-content">
-                <div class="hero-text scroll-animate">
-                    <p class="kicker">Flutter · Nuxt · UI/UX</p>
-                    <h1 class="text-large-title gradient-text mb-lg">
-                        {{ displayText }}
-                        <span class="cursor" :class="{ 'blink': !isTypewriterComplete }">|</span>
-                    </h1>
-                    <p class="hero-subtitle mb-xl">
-                        {{ t('home.hero.subtitle') }}
-                    </p>
-                    <div class="hero-buttons">
-                        <NuxtLink to="/projetos" class="btn-apple btn-apple-primary">
-                            {{ t('home.hero.buttons.viewProjects') }}
-                        </NuxtLink>
-                        <NuxtLink to="/contato" class="btn-apple btn-apple-secondary">
-                            {{ t('home.hero.buttons.talkToMe') }}
-                        </NuxtLink>
-                    </div>
-                </div>
-
-                <div class="hero-portrait scroll-animate">
-                    <div class="portrait-ring">
-                        <img :src="mePhoto" alt="Pedro Ruffo" />
-                    </div>
-                    <div class="portrait-chip">
-                        <span class="chip-dot"></span>
-                        São Paulo, SP, Brasil · available
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="stats-section section-padding">
-            <div class="container-apple">
-                <div class="stats-grid grid-apple grid-3">
-                    <div class="stat-card glass-card scroll-animate" v-for="stat in stats" :key="stat.key">
-                        <div class="stat-number text-title-1 gradient-text">{{ stat.displayValue.value }}+</div>
-                        <div class="stat-label text-callout">{{ stat.label }}</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="projects-section section-padding">
-            <div class="container-apple">
-                <div class="section-header text-center mb-2xl scroll-animate">
-                    <p class="kicker" style="justify-content: center;">Portfolio</p>
-                    <h2 class="text-title-1 mb-md">{{ t('home.projects.title') }}</h2>
-                    <p class="text-body" style="color: var(--apple-text-secondary);">
-                        {{ t('home.projects.subtitle') }}
-                    </p>
-                </div>
-
-                <div class="projects-grid">
-                    <div v-for="(project, index) in featuredProjects" :key="`featured-${project.id}`"
-                        class="project-card glass-card scroll-animate" :style="{ animationDelay: `${index * 0.1}s` }"
-                        @click="openProjectModal(project)">
-                        <div class="project-image">
-                            <img :src="project.thumbnail" :alt="project.name" />
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a v-if="project.appleLink" :href="project.appleLink" target="_blank" @click.stop>
-                                        <i class="bi bi-apple"></i>
-                                    </a>
-                                    <a v-if="project.googleLink" :href="project.googleLink" target="_blank" @click.stop>
-                                        <i class="bi bi-google-play"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3 class="text-headline mb-sm">{{ project.name }}</h3>
-                                <span class="project-category">{{ project.category }}</span>
-                            </div>
-                            <p class="text-subhead mb-md" style="color: var(--apple-text-secondary);">
-                                {{ project.shortDescription }}
-                            </p>
-                            <div class="project-tech">
-                                <span v-for="tech in project.technologies.split(', ').slice(0, 3)" :key="tech"
-                                    class="tech-tag">
-                                    {{ tech }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-xl">
-                    <NuxtLink to="/projetos" class="btn-apple btn-apple-secondary">
-                        {{ t('home.projects.viewAll') }}
-                    </NuxtLink>
-                </div>
-            </div>
-        </section>
-
-<section class="services-section section-padding">
-    <div class="container-apple">
-
-        <div class="services-layout">
-
-            <!-- Lado esquerdo -->
-            <div class="services-intro scroll-animate">
-
-                <div class="services-badge">
-                    <span class="services-badge-dot"></span>
-                    Services
-                </div>
-
-                <h2 class="text-title-1 services-title">
-                    {{ t('home.services.title') }}
-                    <span class="gradient-text">
-                        {{ t('home.services.titleHighlight') }}
-                    </span>
-                    {{ t('home.services.titleEnd') }}
-                </h2>
-
-                <p class="text-body services-description">
-                    {{ t('home.services.description') }}
-                </p>
-
-                <div class="services-decoration">
-                    <div class="decoration-line"></div>
-                    <span>01 — 05</span>
-                </div>
-
-            </div>
-
-            <!-- Lado direito -->
-            <div class="services-grid">
-
-                <div
-                    v-for="(service, index) in services"
-                    :key="service.key"
-                    class="service-card scroll-animate"
-                    :style="{ animationDelay: `${index * 0.08}s` }"
-                >
-
-                    <div class="service-card-top">
-                        <span class="service-number">
-                            {{ String(index + 1).padStart(2, '0') }}
-                        </span>
-
-                        <div class="service-arrow">
-                            <i class="bi bi-arrow-up-right"></i>
-                        </div>
-                    </div>
-
-                    <div class="service-icon">
-                        <i :class="service.icon"></i>
-                    </div>
-
-                    <div class="service-card-content">
-                        <h3 class="text-callout">
-                            {{ service.title }}
-                        </h3>
-
-                        <p class="text-subhead">
-                            {{ service.description }}
-                        </p>
-                    </div>
-
-                    <div class="service-card-line"></div>
-
-                </div>
-
-            </div>
-
+          </div>
         </div>
 
-    </div>
-</section>
+        <aside class="hero-aside scroll-animate">
+          <div class="portrait">
+            <img :src="mePhoto" alt="Pedro Ruffo" />
+          </div>
+          <div class="portrait-meta">
+            <span class="status-dot"></span>
+            <span>São Paulo · available</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <!-- PROJECTS -->
+    <section class="band projects-band">
+      <div class="container-apple">
+        <header class="band-head scroll-animate">
+          <div>
+            <p class="hero-kicker">Portfolio</p>
+            <h2 class="band-title">{{ t('home.projects.title') }}</h2>
+            <p class="band-sub">{{ t('home.projects.subtitle') }}</p>
+          </div>
+          <NuxtLink to="/projetos" class="band-link">
+            {{ t('home.projects.viewAll') }}
+            <i class="bi bi-arrow-up-right"></i>
+          </NuxtLink>
+        </header>
 
-        <section class="cta-section section-padding">
-            <div class="container-apple">
-                <div class="cta-content glass-card text-center scroll-animate">
-                    <h2 class="text-title-1 mb-lg">
-                        {{ t('home.cta.title') }} <span class="gradient-text">{{ t('home.cta.titleHighlight')
-                        }}</span>{{ t('home.cta.titleEnd') }}
-                    </h2>
-                    <p class="text-body mb-xl" style="color: var(--apple-text-secondary);">
-                        {{ t('home.cta.subtitle') }}
-                    </p>
-                    <NuxtLink to="/contato" class="btn-apple btn-apple-primary">
-                        {{ t('home.cta.button') }}
-                    </NuxtLink>
-                </div>
+        <div class="projects-grid">
+          <ProjectCard
+            v-for="(project, index) in featuredProjects"
+            :key="`featured-${project.id}`"
+            class="scroll-animate"
+            :style="{ animationDelay: `${index * 0.06}s` }"
+            :project="project"
+            :tech-limit="3"
+            :open-label="projectViewLabel"
+            @open="openProjectModal"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="band services-band">
+      <div class="container-apple services-shell">
+        <header class="band-head scroll-animate">
+          <div>
+            <p class="hero-kicker">Services</p>
+            <h2 class="band-title">
+              {{ t('home.services.title') }}
+              <em>{{ t('home.services.titleHighlight') }}</em>{{ t('home.services.titleEnd') }}
+            </h2>
+            <p class="band-sub">{{ t('home.services.description') }}</p>
+          </div>
+        </header>
+
+        <div class="services-grid">
+          <article
+            v-for="(service, index) in services"
+            :key="service.key"
+            class="service-tile scroll-animate"
+            :style="{ animationDelay: `${index * 0.05}s` }"
+          >
+            <div class="service-tile-top">
+              <span class="service-idx">{{ String(index + 1).padStart(2, '0') }}</span>
+              <i :class="service.icon"></i>
             </div>
-        </section>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        <transition name="modal">
-            <div v-if="selectedProject" class="modal-overlay" @click="closeProjectModal">
-                <div class="modal-content glass-card" @click.stop>
-                    <button class="modal-close" @click="closeProjectModal">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                    <div class="modal-header">
-                        <img :src="selectedProject.thumbnail" :alt="selectedProject.name" class="modal-image">
-                        <div class="modal-info">
-                            <h3 class="text-title-2 mb-sm">{{ selectedProject.name }}</h3>
-                            <span class="modal-category">{{ selectedProject.category }}</span>
-                            <p class="text-body mt-md" style="color: var(--apple-text-secondary);">
-                                {{ selectedProject.longDescription }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <h4 class="text-headline mb-md">{{ t('home.modal.techTitle') }}</h4>
-                        <div class="modal-tech">
-                            <span v-for="tech in selectedProject.technologies.split(', ')" :key="tech" class="tech-tag">
-                                {{ tech }}
-                            </span>
-                        </div>
-                        <div class="modal-links mt-lg" v-if="selectedProject.appleLink || selectedProject.googleLink">
-                            <a v-if="selectedProject.appleLink" :href="selectedProject.appleLink" target="_blank"
-                                class="btn-apple btn-apple-secondary">
-                                <i class="bi bi-apple"></i> {{ t('home.modal.appStore') }}
-                            </a>
-                            <a v-if="selectedProject.googleLink" :href="selectedProject.googleLink" target="_blank"
-                                class="btn-apple btn-apple-secondary">
-                                <i class="bi bi-google-play"></i> {{ t('home.modal.googlePlay') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- CTA -->
+    <section class="band cta-band">
+      <div class="container-apple">
+        <div class="cta-shell scroll-animate">
+          <div class="cta-block">
+            <p class="cta-eyebrow">Next chapter</p>
+            <h2 class="cta-title">
+              {{ t('home.cta.title') }}
+              <span>{{ t('home.cta.titleHighlight') }}</span>{{ t('home.cta.titleEnd') }}
+            </h2>
+            <p class="cta-sub">{{ t('home.cta.subtitle') }}</p>
+            <div class="cta-row">
+              <NuxtLink to="/contato" class="home-btn home-btn--solid cta-btn">
+                {{ t('home.cta.button') }}
+                <i class="bi bi-arrow-up-right"></i>
+              </NuxtLink>
+              <span class="cta-note">Usually replies within 24h</span>
             </div>
-        </transition>
-    </div>
+          </div>
+
+          <div class="cta-visual">
+            <CtaAvatar />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ProjectStoreDrawer
+      :project="selectedProject"
+      @close="closeProjectModal"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -245,880 +152,677 @@ import mePhoto from '~/assets/img/me.png'
 
 useScrollAnimation()
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const typewriterText = computed(() => t('home.typewriter'))
 const { displayText, isComplete: isTypewriterComplete, startTypewriter, cleanup } = useTypewriter(
-    typewriterText,
-    100
+  typewriterText,
+  100
 )
 
 const statsData = [
-    { key: 'yearsExperience', value: 7, displayValue: ref(0) },
-    { key: 'projectsDone', value: 80, displayValue: ref(0) },
-    { key: 'happyClients', value: 700, displayValue: ref(0) }
+  { key: 'yearsExperience', value: 7, displayValue: ref(0) },
+  { key: 'projectsDone', value: 80, displayValue: ref(0) },
+  { key: 'happyClients', value: 700, displayValue: ref(0) }
 ]
 
 const stats = computed(() =>
-    statsData.map(stat => ({
-        ...stat,
-        label: t(`home.stats.${stat.key}`)
-    }))
+  statsData.map((stat) => ({
+    ...stat,
+    label: t(`home.stats.${stat.key}`)
+  }))
 )
 
 const servicesData = [
-    { key: 'mobile', icon: 'bi bi-phone' },
-    { key: 'web', icon: 'bi bi-laptop' },
-    { key: 'architecture', icon: 'bi bi-diagram-3' },
-    { key: 'backend', icon: 'bi bi-server' },
-    { key: 'design', icon: 'bi bi-palette' },
-    { key: 'devops', icon: 'bi bi-cloud-arrow-up' }
+  { key: 'mobile', icon: 'bi bi-phone' },
+  { key: 'web', icon: 'bi bi-laptop' },
+  { key: 'architecture', icon: 'bi bi-diagram-3' },
+  { key: 'backend', icon: 'bi bi-server' },
+  { key: 'design', icon: 'bi bi-palette' },
+  { key: 'devops', icon: 'bi bi-cloud-arrow-up' }
 ]
 
-const services = computed(() => {
-    return servicesData.map(service => ({
-        ...service,
-        title: t(`home.services.items.${service.key}.title`),
-        description: t(`home.services.items.${service.key}.description`)
-    }))
-})
+const services = computed(() =>
+  servicesData.map((service) => ({
+    ...service,
+    title: t(`home.services.items.${service.key}.title`),
+    description: t(`home.services.items.${service.key}.description`)
+  }))
+)
 
 const { featuredProjects } = useProjects()
 const selectedProject = ref(null)
+const projectViewLabel = computed(() => (locale.value === 'pt' ? 'Ver' : 'View'))
 
 const openProjectModal = (project) => {
-    selectedProject.value = project
-    document.body.style.overflow = 'hidden'
+  selectedProject.value = project
 }
 
 const closeProjectModal = () => {
-    selectedProject.value = null
-    document.body.style.overflow = ''
+  selectedProject.value = null
 }
 
 watch(typewriterText, (newText) => {
-    if (newText) {
-        setTimeout(() => {
-            startTypewriter()
-        }, 100)
-    }
+  if (newText) {
+    setTimeout(() => startTypewriter(), 100)
+  }
 }, { immediate: false })
 
 onMounted(() => {
-    setTimeout(() => {
-        startTypewriter()
-    }, 500)
+  setTimeout(() => startTypewriter(), 500)
 
-    setTimeout(() => {
-        statsData.forEach((stat, index) => {
-            const { current, startCountUp } = useCountUp(stat.value, 2000)
-            setTimeout(() => {
-                startCountUp()
-                const updateStat = () => {
-                    stat.displayValue.value = current.value
-                    if (current.value < stat.value) {
-                        requestAnimationFrame(updateStat)
-                    }
-                }
-                updateStat()
-            }, index * 200)
-        })
-    }, 1000)
+  setTimeout(() => {
+    statsData.forEach((stat, index) => {
+      const { current, startCountUp } = useCountUp(stat.value, 2000)
+      setTimeout(() => {
+        startCountUp()
+        const updateStat = () => {
+          stat.displayValue.value = current.value
+          if (current.value < stat.value) requestAnimationFrame(updateStat)
+        }
+        updateStat()
+      }, index * 200)
+    })
+  }, 1000)
 })
 
 onUnmounted(() => {
-    cleanup()
+  cleanup()
 })
 </script>
 
 <style scoped>
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 120px 24px 64px;
+/* Home palette: refined mist + soft amethyst — complements About purple without neon scream */
+.apple-home {
+  --home-ink: #f4f1f8;
+  --home-mute: rgba(232, 226, 240, 0.72);
+  --home-soft: rgba(196, 181, 253, 0.88);
+  --home-line: rgba(226, 220, 235, 0.14);
+  --home-glass: rgba(18, 14, 28, 0.42);
+  --home-glass-strong: rgba(16, 12, 26, 0.55);
+  --home-accent: #b7a3e3;
+  --home-accent-deep: #8b6fc0;
+  background: transparent;
+  color: var(--home-ink);
 }
 
-.hero-orbs {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+.hero {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  padding: 48px 0 72px;
+  overflow: hidden;
 }
 
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(50px);
-    opacity: 0.55;
-    animation: float 10s ease-in-out infinite;
+.hero-veil {
+  position: absolute;
+  inset: auto 8% 8% auto;
+  width: min(42vw, 520px);
+  height: min(42vw, 520px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 111, 192, 0.18), transparent 68%);
+  filter: blur(8px);
+  pointer-events: none;
+  animation: homeFloat 12s ease-in-out infinite;
 }
 
-.orb-a {
-    width: 280px;
-    height: 280px;
-    background: #7c3aed;
-    top: 8%;
-    right: 12%;
+.hero-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  align-items: center;
 }
 
-.orb-b {
-    width: 220px;
-    height: 220px;
-    background: #22d3ee;
-    bottom: 12%;
-    left: 8%;
-    animation-delay: 1.4s;
-    opacity: 0.28;
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--home-soft);
 }
 
-.orb-c {
-    width: 160px;
-    height: 160px;
-    background: #e879f9;
-    top: 42%;
-    left: 42%;
-    animation-delay: 2s;
-    opacity: 0.22;
+.hero-kicker::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--home-accent);
+  opacity: 0.85;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 48px;
-    align-items: center;
+.hero-title {
+  position: relative;
+  margin: 0 0 22px;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.8rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  color: var(--home-ink);
+  max-width: 14ch;
 }
 
-.hero-subtitle {
-    color: var(--apple-text-secondary);
-    font-size: 1.15rem;
-    max-width: 560px;
+.hero-title-sizer {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: pre-wrap;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
+.hero-title-live {
+  position: absolute;
+  inset: 0;
+  display: block;
 }
 
-.hero-portrait {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
+.hero-title-line {
+  background: linear-gradient(120deg, #f7f4fb 0%, #e8dff7 45%, #c9b8ea 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.portrait-ring {
-    width: min(360px, 100%);
-    aspect-ratio: 1;
-    padding: 6px;
-    border-radius: 32% 68% 40% 60% / 42% 30% 70% 58%;
-    background: linear-gradient(135deg, #67e8f9, #a855f7, #e879f9);
-    box-shadow: 0 0 60px rgba(168, 85, 247, 0.45), 0 20px 50px rgba(0, 0, 0, 0.4);
-    animation: morph 8s ease-in-out infinite;
+.hero-caret {
+  margin-left: 2px;
+  color: var(--home-accent);
+  font-weight: 400;
+  -webkit-text-fill-color: var(--home-accent);
 }
 
-.portrait-ring img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 12%;
-    border-radius: inherit;
-    display: block;
-    background: #05030b;
+.hero-caret.blink {
+  animation: caretBlink 1s steps(1) infinite;
 }
 
-.portrait-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(16, 8, 26, 0.8);
-    border: 1px solid rgba(103, 232, 249, 0.3);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--neon-cyan);
+.hero-lead {
+  margin: 0 0 28px;
+  max-width: 34rem;
+  color: var(--home-mute);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-weight: 400;
 }
 
-.chip-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 10px #34d399;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 36px;
 }
 
-@keyframes morph {
-    0%, 100% { border-radius: 32% 68% 40% 60% / 42% 30% 70% 58%; }
-    50% { border-radius: 60% 40% 58% 42% / 30% 62% 38% 70%; }
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-family: var(--font-system);
+  font-size: 0.9rem;
+  font-weight: 560;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.cursor { opacity: 1; }
-.cursor.blink { animation: blink 1s infinite; }
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+.home-btn--solid {
+  color: #111;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  font-weight: 700;
 }
 
-.stat-card {
-    text-align: center;
-    padding: var(--spacing-xl);
+.home-btn--solid:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
-.stat-label { color: rgba(255, 255, 255, 0.7); }
+.home-btn--ghost {
+  color: var(--home-ink);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--home-line);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.home-btn--ghost:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 163, 227, 0.45);
+  background: rgba(183, 163, 227, 0.08);
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 460px;
+  padding-top: 8px;
+  border-top: 1px solid var(--home-line);
+}
+
+.hero-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-metric strong {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  color: var(--home-ink);
+}
+
+.hero-metric span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--home-mute);
+}
+
+.hero-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.portrait {
+  width: min(340px, 78%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid #3a3a3f;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  background: #0a0810;
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+}
+
+.portrait-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--home-line);
+  background: var(--home-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--home-mute);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #86efac;
+  box-shadow: 0 0 10px rgba(134, 239, 172, 0.55);
+}
+
+.band {
+  padding: 72px 0;
+}
+
+.band-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.band-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  color: var(--home-ink);
+}
+
+.band-title em {
+  font-style: normal;
+  color: var(--home-accent);
+}
+
+.band-sub {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--home-mute);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.band-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: var(--home-soft);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.band-link:hover {
+  color: #fff;
+}
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.project-card {
-    cursor: pointer;
-    overflow: hidden;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
+.services-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-
-.project-image {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-md);
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.project-card:hover .project-image img { transform: scale(1.06); }
-
-.project-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(7, 4, 15, 0.62);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
-
-.project-card:hover .project-overlay { opacity: 1; }
-
-.project-links {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.project-links a {
-    width: 48px;
-    height: 48px;
-    background: rgba(168, 85, 247, 0.35);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.25rem;
-    text-decoration: none;
-}
-
-.project-content {
-    padding: var(--spacing-md);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-}
-
-.project-category,
-.modal-category {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(103, 232, 249, 0.1);
-    border: 1px solid rgba(103, 232, 249, 0.3);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    color: var(--neon-cyan);
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.project-tech,
-.modal-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
-}
-
-.tech-tag {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(168, 85, 247, 0.12);
-    border-radius: 20px;
-    font-size: 0.75rem;
-    color: var(--neon-purple);
-    border: 1px solid rgba(168, 85, 247, 0.3);
-}
-
-
-/* =========================================
-   SERVICES
-========================================= */
-
-.services-section {
-    position: relative;
-    overflow: hidden;
-}
-
-.services-section::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    right: -250px;
-    top: 20%;
-    border-radius: 50%;
-    background: rgba(124, 58, 237, 0.12);
-    filter: blur(100px);
-    pointer-events: none;
-}
-
-.services-layout {
-    position: relative;
-    z-index: 1;
-
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 80px;
-
-    align-items: start;
-}
-
-
-/* =========================================
-   INTRO
-========================================= */
-
-.services-intro {
-    position: sticky;
-    top: 120px;
-}
-
-.services-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    margin-bottom: 24px;
-
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    background: rgba(103, 232, 249, 0.06);
-    border: 1px solid rgba(103, 232, 249, 0.2);
-
-    color: var(--neon-cyan);
-
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.services-badge-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #34d399;
-
-    box-shadow:
-        0 0 8px #34d399,
-        0 0 16px rgba(52, 211, 153, 0.5);
-}
-
-.services-title {
-    max-width: 600px;
-    line-height: 1.05;
-}
-
-.services-description {
-    max-width: 500px;
-
-    margin-top: 28px;
-
-    color: var(--apple-text-secondary);
-    line-height: 1.7;
-}
-
-.services-decoration {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    margin-top: 48px;
-
-    color: rgba(255, 255, 255, 0.35);
-
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-}
-
-.decoration-line {
-    width: 80px;
-    height: 1px;
-
-    background: linear-gradient(
-        90deg,
-        var(--neon-purple),
-        transparent
-    );
-}
-
-
-/* =========================================
-   GRID
-========================================= */
 
 .services-grid {
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
-
-/* =========================================
-   SERVICE CARD
-========================================= */
-
-.service-card {
-    position: relative;
-
-    min-height: 260px;
-
-    padding: 26px;
-
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden;
-
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.018)
-        );
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(24px);
-
-    transition:
-        transform 0.4s ease,
-        border-color 0.4s ease,
-        background 0.4s ease,
-        box-shadow 0.4s ease;
+.service-tile {
+  min-height: 210px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--home-line);
+  background: var(--home-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
-
-/* brilho interno */
-
-.service-card::before {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    top: -90px;
-    right: -90px;
-
-    border-radius: 50%;
-
-    background: rgba(168, 85, 247, 0.18);
-
-    filter: blur(40px);
-
-    opacity: 0;
-
-    transition: opacity 0.4s ease;
+.service-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(183, 163, 227, 0.35);
+  background: var(--home-glass-strong);
 }
 
-
-/* hover */
-
-.service-card:hover {
-    transform: translateY(-6px);
-
-    border-color: rgba(168, 85, 247, 0.38);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(168, 85, 247, 0.09),
-            rgba(255, 255, 255, 0.025)
-        );
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25),
-        0 0 40px rgba(168, 85, 247, 0.08);
+.service-tile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
 }
 
-.service-card:hover::before {
-    opacity: 1;
+.service-idx {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: rgba(232, 226, 240, 0.4);
 }
 
-
-/* =========================================
-   CARD HEADER
-========================================= */
-
-.service-card-top {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 30px;
+.service-tile-top i {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(183, 163, 227, 0.14);
+  border: 1px solid rgba(183, 163, 227, 0.22);
+  color: var(--home-accent);
+  font-size: 1rem;
 }
 
-.service-number {
-    color: rgba(255, 255, 255, 0.3);
-
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+.service-tile h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+  font-weight: 650;
+  color: var(--home-ink);
 }
 
-.service-arrow {
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    color: rgba(255, 255, 255, 0.45);
-
-    background: rgba(255, 255, 255, 0.04);
-
-    border: 1px solid rgba(255, 255, 255, 0.07);
-
-    transition:
-        transform 0.3s ease,
-        color 0.3s ease,
-        background 0.3s ease;
+.service-tile p {
+  margin: 0;
+  color: var(--home-mute);
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
-.service-card:hover .service-arrow {
-    transform: translate(3px, -3px);
-
-    color: white;
-
-    background: rgba(168, 85, 247, 0.25);
+.cta-band {
+  padding-bottom: 96px;
 }
 
-
-/* =========================================
-   ICON
-========================================= */
-
-.service-icon {
-    position: relative;
-    z-index: 2;
-
-    width: 56px;
-    height: 56px;
-
-    margin-bottom: 22px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 17px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.9),
-            rgba(34, 211, 238, 0.7)
-        );
-
-    color: white;
-
-    font-size: 1.35rem;
-
-    box-shadow:
-        0 10px 30px rgba(124, 58, 237, 0.2);
-
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
+.cta-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.85fr);
+  gap: 28px 40px;
+  align-items: center;
 }
 
-.service-card:hover .service-icon {
-    transform: scale(1.08) rotate(-3deg);
-
-    box-shadow:
-        0 12px 35px rgba(124, 58, 237, 0.35);
+.cta-block {
+  max-width: 40rem;
+  padding: 8px 0 0;
+  border-left: 1px solid rgba(183, 163, 227, 0.35);
+  padding-left: 22px;
 }
 
-
-/* =========================================
-   CONTENT
-========================================= */
-
-.service-card-content {
-    position: relative;
-    z-index: 2;
-
-    margin-top: auto;
+.cta-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 240px;
 }
 
-.service-card-content h3 {
-    margin-bottom: 9px;
-
-    color: white;
+.cta-eyebrow {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--home-soft);
 }
 
-.service-card-content p {
-    margin: 0;
-
-    color: var(--apple-text-secondary);
-
-    line-height: 1.55;
+.cta-title {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--home-ink);
 }
 
-
-/* =========================================
-   BOTTOM LINE
-========================================= */
-
-.service-card-line {
-    position: absolute;
-
-    left: 26px;
-    right: 26px;
-    bottom: 0;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(168, 85, 247, 0.6),
-            transparent
-        );
-
-    transform: scaleX(0);
-
-    transform-origin: center;
-
-    transition: transform 0.4s ease;
+.cta-title span {
+  color: var(--home-accent);
 }
 
-.service-card:hover .service-card-line {
-    transform: scaleX(1);
+.cta-sub {
+  margin: 0 0 22px;
+  color: var(--home-mute);
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 1024px) {
-
-    .services-layout {
-        grid-template-columns: 1fr;
-
-        gap: 48px;
-    }
-
-    .services-intro {
-        position: relative;
-        top: auto;
-    }
-
-    .services-title {
-        max-width: 700px;
-    }
-
-    .services-description {
-        max-width: 650px;
-    }
-
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
 }
 
-
-@media (max-width: 640px) {
-
-    .services-layout {
-        gap: 36px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .service-card {
-        min-height: 230px;
-
-        padding: 22px;
-
-        border-radius: 20px;
-    }
-
-    .service-card-top {
-        margin-bottom: 24px;
-    }
-
-    .service-icon {
-        width: 50px;
-        height: 50px;
-
-        margin-bottom: 18px;
-    }
-
-    .services-decoration {
-        margin-top: 32px;
-    }
-
+.cta-btn {
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 22px;
 }
 
-
-.service-icon {
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, #7c3aed, #22d3ee);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.4rem;
-    flex-shrink: 0;
+.cta-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: rgba(232, 226, 240, 0.45);
 }
 
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-3xl);
+@keyframes caretBlink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(5, 3, 11, 0.86);
-    backdrop-filter: blur(22px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: var(--spacing-lg);
-}
-
-.modal-content {
-    max-width: 700px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.modal-close {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
-.modal-header {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
-}
-
-.modal-image {
-    width: 140px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    flex-shrink: 0;
-}
-
-.modal-links {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
-.modal-enter-active,
-.modal-leave-active { transition: all var(--transition-normal); }
-
-.modal-enter-from,
-.modal-leave-to {
-    opacity: 0;
-    transform: scale(0.94);
+@keyframes homeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
 }
 
 @media (max-width: 1024px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-shell {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-aside {
+    order: -1;
+  }
+
+  .portrait {
+    width: min(260px, 70%);
+  }
+
+  .projects-grid,
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
+  .hero {
+    padding: var(--page-top-mobile) 0 56px;
+  }
+}
 
-    .hero-subtitle { margin-inline: auto; }
-    .hero-buttons { justify-content: center; }
-    .kicker { justify-content: center; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .modal-header { flex-direction: column; }
-    .modal-image { width: 100%; height: 200px; }
+@media (max-width: 720px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-copy {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-kicker {
+    justify-content: center;
+  }
+
+  .hero-title {
+    max-width: 16ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-title-live {
+    text-align: center;
+  }
+
+  .hero-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-metric {
+    align-items: center;
+  }
+
+  .portrait-meta {
+    justify-content: center;
+  }
+
+  .band-head {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .band-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .band-link {
+    justify-content: center;
+  }
+
+  .projects-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-tile {
+    text-align: center;
+  }
+
+  .service-tile-top {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .cta-shell {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    text-align: center;
+  }
+
+  .cta-block {
+    padding-left: 0;
+    border-left: none;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-eyebrow {
+    justify-content: center;
+  }
+
+  .cta-row {
+    justify-content: center;
+  }
+
+  .cta-visual {
+    order: -1;
+    min-height: 0;
+    max-width: 260px;
+    margin: 0 auto;
+  }
 }
 </style>

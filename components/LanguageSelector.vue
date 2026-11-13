@@ -133,10 +133,10 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        #67e8f9,
-        #c084fc, 
+    background: linear-gradient(90deg,
+        transparent,
+        #a855f7,
+        #e879f9,
         transparent);
 }
 

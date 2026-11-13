@@ -1,745 +1,175 @@
 <template>
-    <div class="apple-projects">
-        <!-- Hero Section -->
-        <section class="projects-hero page-hero">
-            <div class="container-apple">
-                <div class="hero-content text-center scroll-animate">
-                    <p class="kicker" style="justify-content: center;">Work</p>
-                    <h1 class="text-large-title gradient-text mb-lg">{{ t('projects.hero.title') }}</h1>
-                    <p class="text-title-3"
-                        style="color: var(--apple-text-secondary); max-width: 600px; margin: 0 auto;">
-                        {{ t('projects.hero.subtitle') }}
-                    </p>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- Projects Grid -->
-        <section class="projects-section section-padding">
-            <div class="container-apple">
-                <div class="projects-grid">
-                    <div v-for="(project, index) in projects" :key="`project-${project.id}`"
-                        class="project-card glass-card scroll-animate" :style="{ animationDelay: `${index * 0.1}s` }"
-                        @click="openProjectModal(project)">
-                        <div class="project-image">
-                            <img :src="project.thumbnail" :alt="project.name" />
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a v-if="project.appleLink" :href="project.appleLink" target="_blank" @click.stop>
-                                        <i class="bi bi-apple"></i>
-                                    </a>
-                                    <a v-if="project.googleLink" :href="project.googleLink" target="_blank" @click.stop>
-                                        <i class="bi bi-google-play"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3 class="text-headline mb-sm">{{ project.name }}</h3>
-                                <span class="project-category">{{ project.category }}</span>
-                            </div>
-                            <p class="text-subhead mb-md" style="color: var(--apple-text-secondary);">
-                                {{ project.shortDescription }}
-                            </p>
-                            <div class="project-tech">
-                                <span v-for="tech in project.technologies.split(', ').slice(0, 4)" :key="tech"
-                                    class="tech-tag">
-                                    {{ tech }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-<!-- Project Modal -->
-<transition name="modal">
-    <div
-        v-if="selectedProject"
-        class="modal-overlay"
-        @click="closeProjectModal"
-    >
-
-        <div
-            class="project-modal glass-card"
-            @click.stop
-        >
-
-            <!-- Close -->
-            <button
-                class="modal-close"
-                @click="closeProjectModal"
-                aria-label="Close project"
-            >
-                <i class="bi bi-x-lg"></i>
-            </button>
-
-
-            <!-- HERO -->
-            <section class="project-modal-hero">
-
-                <!-- App Icon -->
-                <div class="project-app-icon-wrapper">
-
-                    <img
-                        :src="selectedProject.thumbnail"
-                        :alt="selectedProject.name"
-                        class="project-app-icon"
-                    >
-
-                </div>
-
-
-                <!-- Project Info -->
-                <div class="project-modal-info">
-
-                    <span class="project-modal-eyebrow">
-                        {{ selectedProject.category }}
-                    </span>
-
-                    <h3 class="project-modal-title">
-                        {{ selectedProject.name }}
-                    </h3>
-
-                    <p class="project-modal-description">
-                        {{ selectedProject.longDescription }}
-                    </p>
-
-
-                    <!-- Store Buttons -->
-                    <div
-                        v-if="selectedProject.appleLink || selectedProject.googleLink"
-                        class="project-store-links"
-                    >
-
-                        <a
-                            v-if="selectedProject.appleLink"
-                            :href="selectedProject.appleLink"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="store-button"
-                        >
-                            <i class="bi bi-apple"></i>
-
-                            <span>
-                                {{ t('projects.modal.appStore') }}
-                            </span>
-
-                            <i class="bi bi-arrow-up-right"></i>
-                        </a>
-
-
-                        <a
-                            v-if="selectedProject.googleLink"
-                            :href="selectedProject.googleLink"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="store-button"
-                        >
-                            <i class="bi bi-google-play"></i>
-
-                            <span>
-                                {{ t('projects.modal.googlePlay') }}
-                            </span>
-
-                            <i class="bi bi-arrow-up-right"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- SCREENSHOTS -->
-            <section
-                v-if="selectedProject.screenshots?.length"
-                class="project-screenshots"
-            >
-
-                <div class="section-heading">
-
-                    <div>
-                        <span class="section-kicker">
-                            APP EXPERIENCE
-                        </span>
-
-                        <h4>
-                            {{ t('projects.modal.screenshotsTitle') || 'Application' }}
-                        </h4>
-                    </div>
-
-                    <span class="screenshot-counter">
-                        {{ activeScreenshot + 1 }}
-                        /
-                        {{ selectedProject.screenshots.length }}
-                    </span>
-
-                </div>
-
-
-                <!-- Main Screenshot -->
-                <div class="screenshot-viewer">
-
-                    <button
-                        v-if="selectedProject.screenshots.length > 1"
-                        class="screenshot-arrow screenshot-arrow-left"
-                        @click="previousScreenshot"
-                        aria-label="Previous screenshot"
-                    >
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-
-
-                    <div class="iphone-frame">
-
-                        <div class="iphone-dynamic-island"></div>
-
-                        <img
-                            :src="currentScreenshot.image || currentScreenshot"
-                            :alt="currentScreenshot.title || selectedProject.name"
-                            class="iphone-screen"
-                        >
-
-                        </div>
-
-
-                    <button
-                        v-if="selectedProject.screenshots.length > 1"
-                        class="screenshot-arrow screenshot-arrow-right"
-                        @click="nextScreenshot"
-                        aria-label="Next screenshot"
-                    >
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-
-                </div>
-
-
-                <!-- Screenshot Thumbnails -->
-                <div class="screenshot-thumbnails">
-
-                    <button
-                        v-for="(screenshot, index) in selectedProject.screenshots"
-                        :key="index"
-                        class="screenshot-thumbnail"
-                        :class="{
-                            active: activeScreenshot === index
-                        }"
-                        @click="activeScreenshot = index"
-                    >
-
-                        <img
-                            :src="screenshot.image || screenshot"
-                            :alt="screenshot.title || `Screenshot ${index + 1}`"
-                        >
-
-                    </button>
-
-                </div>
-
-
-                <!-- Screenshot Description -->
-                <transition name="fade">
-                    <div
-                        v-if="currentScreenshot.title"
-                        class="screenshot-caption"
-                    >
-                        <span>
-                            {{ currentScreenshot.title }}
-                        </span>
-                    </div>
-                </transition>
-
-            </section>
-
-
-            <!-- TECHNOLOGIES -->
-            <section class="project-technologies">
-
-                <div class="section-heading">
-
-                    <div>
-                        <span class="section-kicker">
-                            STACK
-                        </span>
-
-                        <h4>
-                            {{ t('projects.modal.techTitle') }}
-                        </h4>
-                    </div>
-
-                </div>
-
-
-                <div class="modal-tech">
-
-                    <span
-                        v-for="tech in selectedProject.technologies.split(', ')"
-                        :key="tech"
-                        class="tech-tag"
-                    >
-                        {{ tech }}
-                    </span>
-
-                </div>
-
-            </section>
-
+  <div class="apple-projects">
+    <section class="projects-hero page-hero">
+      <div class="container-apple">
+        <div class="hero-row scroll-animate">
+          <div class="hero-copy">
+            <p class="kicker">Work</p>
+            <h1 class="text-large-title gradient-text mb-lg">{{ t('projects.hero.title') }}</h1>
+            <p class="hero-subtitle">
+              {{ t('projects.hero.subtitle') }}
+            </p>
+          </div>
+          <div class="hero-stat" aria-hidden="true">
+            <strong>{{ projects.length }}</strong>
+            <span>apps & products</span>
+          </div>
         </div>
+      </div>
+    </section>
 
-    </div>
-</transition>
+    <section class="projects-section section-padding">
+      <div class="container-apple">
+        <div class="projects-grid">
+          <ProjectCard
+            v-for="(project, index) in projects"
+            :key="`project-${project.id}`"
+            class="scroll-animate"
+            :style="{ animationDelay: `${index * 0.06}s` }"
+            :project="project"
+            :open-label="viewLabel"
+            @open="openProjectModal"
+          />
+        </div>
+      </div>
+    </section>
 
-
-<transition name="modal">
-  <div
-    v-if="selectedScreenshot"
-    class="image-lightbox"
-    @click="selectedScreenshot = null"
-  >
-
-    <button
-      class="lightbox-close"
-      @click="selectedScreenshot = null"
-    >
-      <i class="bi bi-x-lg"></i>
-    </button>
-
-    <img
-      :src="selectedScreenshot"
-      alt="Screenshot do projeto"
-      @click.stop
+    <ProjectStoreDrawer
+      :project="selectedProject"
+      @close="closeProjectModal"
     />
-
   </div>
-</transition>
-    </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useScrollAnimation } from '~/composables/useAnimations'
 
-const { t } = useI18n()
-
-// Initialize scroll animations
+const { t, locale } = useI18n()
 useScrollAnimation()
 
 const selectedProject = ref(null)
-
 const { projects } = useProjects()
 
+const viewLabel = computed(() => (locale.value === 'pt' ? 'Ver' : 'View'))
+
 const openProjectModal = (project) => {
-    selectedProject.value = project
-    document.body.style.overflow = 'hidden'
+  selectedProject.value = project
 }
 
 const closeProjectModal = () => {
-    selectedProject.value = null
-    activeScreenshot.value = 0
-    document.body.style.overflow = ''
+  selectedProject.value = null
 }
-
-const getFloatingStyle = (index) => {
-    const positions = [
-        { top: '20%', left: '10%', animationDelay: '0s' },
-        { top: '60%', left: '80%', animationDelay: '1s' },
-        { top: '30%', left: '70%', animationDelay: '2s' },
-        { top: '80%', left: '20%', animationDelay: '0.5s' },
-        { top: '10%', left: '60%', animationDelay: '1.5s' },
-        { top: '70%', left: '50%', animationDelay: '2.5s' }
-    ]
-    return positions[index - 1] || {}
-}
-
-
-const activeScreenshot = ref(0);
-
-const currentScreenshot = computed(() => {
-    if (!selectedProject.value?.screenshots?.length) {
-        return {};
-    }
-
-    return selectedProject.value.screenshots[activeScreenshot.value];
-});
-
-const nextScreenshot = () => {
-    if (!selectedProject.value?.screenshots?.length) return;
-
-    activeScreenshot.value =
-        (activeScreenshot.value + 1) %
-        selectedProject.value.screenshots.length;
-};
-
-
-const previousScreenshot = () => {
-    if (!selectedProject.value?.screenshots?.length) return;
-
-    activeScreenshot.value =
-        (activeScreenshot.value - 1 +
-            selectedProject.value.screenshots.length) %
-        selectedProject.value.screenshots.length;
-};
-
-const selectedScreenshot = ref(null)
 </script>
 
 <style scoped>
 .apple-projects {
-    background: transparent;
+  background: transparent;
 }
 
 .projects-hero {
-    position: relative;
+  position: relative;
+  padding-bottom: 12px;
 }
 
-@keyframes float {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg);
-    }
-    25% { 
-        transform: translateY(-20px) rotate(5deg);
-    }
-    50% { 
-        transform: translateY(-10px) rotate(10deg);
-    }
-    75% { 
-        transform: translateY(-30px) rotate(-5deg);
-    }
+.hero-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
 }
 
-@keyframes holographicSpin {
-    0% { 
-        transform: rotate(0deg) scale(1);
-        filter: blur(60px) hue-rotate(0deg);
-    }
-    25% { 
-        transform: rotate(90deg) scale(1.1);
-        filter: blur(50px) hue-rotate(90deg);
-    }
-    50% { 
-        transform: rotate(180deg) scale(1);
-        filter: blur(60px) hue-rotate(180deg);
-    }
-    75% { 
-        transform: rotate(270deg) scale(1.1);
-        filter: blur(50px) hue-rotate(270deg);
-    }
-    100% { 
-        transform: rotate(360deg) scale(1);
-        filter: blur(60px) hue-rotate(360deg);
-    }
+.hero-copy {
+  max-width: 720px;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
+.hero-subtitle {
+  margin: 0;
+  color: var(--apple-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 560px;
 }
 
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  min-width: 120px;
+}
 
+.hero-stat strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
 
-
+.hero-stat span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--apple-text-tertiary);
+}
 
 .projects-section {
-    background: transparent;
+  background: transparent;
+  padding-top: 28px;
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.project-card {
-    cursor: pointer;
-    overflow: hidden;
-    transition: all var(--transition-normal);
-    min-height: 450px;
-    display: flex;
-    flex-direction: column;
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(168, 85, 247, 0.2),
-        0 0 0 1px rgba(168, 85, 247, 0.35);
-}
-
-.project-image {
-    position: relative;
-    width: 100%;
-    height: 240px;
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-md);
-    flex-shrink: 0;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.05);
-}
-
-.project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
-
-.project-card:hover .project-overlay {
-    opacity: 1;
-}
-
-.project-links {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.project-links a {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.25rem;
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    backdrop-filter: blur(10px);
-}
-
-.project-links a:hover {
-    background: var(--apple-blue);
-    transform: scale(1.1);
-}
-
-.project-content {
-    padding: var(--spacing-md);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: var(--spacing-sm);
-    gap: var(--spacing-sm);
-}
-
-.project-category {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(103, 232, 249, 0.1);
-    border: 1px solid rgba(103, 232, 249, 0.3);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    color: var(--neon-cyan);
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    margin-top: auto;
-}
-
-.tech-tag {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    color: var(--apple-text-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: var(--spacing-lg);
-}
-
-.modal-content {
-    max-width: 700px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.modal-close {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 50%;
-    color: var(--apple-text-primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-normal);
-    z-index: 1;
-}
-
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.modal-header {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
-}
-
-.modal-image {
-    width: 140px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    flex-shrink: 0;
-}
-
-.modal-info {
-    flex: 1;
-}
-
-.modal-category {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(103, 232, 249, 0.1);
-    border: 1px solid rgba(103, 232, 249, 0.3);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    color: var(--neon-cyan);
-    font-weight: 500;
-    display: inline-block;
-}
-
-.modal-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-}
-
-.modal-links {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
-.modal-links .btn-apple {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-/* Modal Transitions */
-.modal-enter-active,
-.modal-leave-active {
-    transition: all var(--transition-normal);
-}
-
-.modal-enter-from,
-.modal-leave-to {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-/* Responsive Design */
 @media (max-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-lg);
-    }
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-    }
+  .projects-hero.page-hero {
+    padding-top: calc(var(--page-top-mobile) + 18px);
+  }
 
-    .project-card {
-        min-height: 400px;
-    }
+  .hero-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-    .project-image {
-        height: 200px;
-    }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .filter-tabs {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: var(--spacing-sm);
-    }
+  .projects-hero .kicker {
+    justify-content: center;
+  }
 
-    .filter-tab {
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .modal-header {
-        flex-direction: column;
-    }
+  .hero-stat {
+    align-items: center;
+  }
 
-    .modal-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .modal-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-overlay {
-        padding: var(--spacing-md);
-    }
-
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 </style>

@@ -482,27 +482,29 @@ onUnmounted(() => {
 <style scoped>
 
 /* =========================================================
-   HEADER
+   HEADER — desktop: no fluxo, transparente (sem flutuante)
    ========================================================= */
 
 .apple-header {
 
-    position: fixed !important;
+    position: relative;
 
-    top: 10px !important;
+    top: 0;
 
-    left: 0 !important;
-    right: 0 !important;
+    left: 0;
+    right: 0;
 
     width: 100%;
 
-    z-index: 1000 !important;
+    z-index: 1000;
 
     display: flex;
 
     justify-content: center;
 
-    background: transparent;
+    padding: 10px 0 0;
+
+    background: transparent !important;
 
     pointer-events: none;
 
@@ -510,109 +512,63 @@ onUnmounted(() => {
 
 
 /* =========================================================
-   NAV BAR
+   NAV BAR — desktop: estático, sem flutuação
    ========================================================= */
 
 .header-nav {
 
     position: relative;
 
-    width:
-        min(
-            1214px,
-            calc(100% - 40px)
-        );
+    width: 100%;
 
-    padding: 8px;
+    max-width: none;
+
+    margin: 0;
+
+    padding: 8px 0;
 
     pointer-events: auto;
 
-    background: #0b0713;
+    background: transparent !important;
 
-    border:
-        1px solid
-        rgba(192,132,252,.18);
+    border: none !important;
 
-    border-radius: 18px;
+    border-radius: 0 !important;
 
-    box-shadow:
+    backdrop-filter: none !important;
 
-        0 10px 30px
-        rgba(0,0,0,.32),
+    -webkit-backdrop-filter: none !important;
 
-        0 2px 0
-        rgba(255,255,255,.035)
-        inset,
-
-        0 0 0 1px
-        rgba(255,255,255,.015);
-
-    transition:
-
-        background .3s ease,
-
-        border-color .3s ease,
-
-        box-shadow .3s ease;
+    box-shadow: none !important;
 
 }
 
-
-/* linha superior */
 
 .header-nav::before {
 
-    content: '';
-
-    position: absolute;
-
-    top: 0;
-
-    left: 20px;
-    right: 20px;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(103,232,249,.35),
-            rgba(192,132,252,.45),
-            transparent
-        );
-
-    opacity: .65;
-
-    pointer-events: none;
+    content: none !important;
 
 }
 
 
-/* =========================================================
-   SCROLLED
-   IMPORTANTE:
-   NÃO ALTERA TAMANHO
-   ========================================================= */
-
 .apple-header.scrolled .header-nav {
 
-    background: #0a0611;
+    background: transparent !important;
 
-    border-color:
-        rgba(192,132,252,.24);
+    border: none !important;
 
-    box-shadow:
+    box-shadow: none !important;
 
-        0 16px 42px
-        rgba(0,0,0,.46),
+}
 
-        0 2px 0
-        rgba(255,255,255,.035)
-        inset,
 
-        0 0 30px
-        rgba(168,85,247,.035);
+.desktop-nav {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
 
 }
 
@@ -620,21 +576,6 @@ onUnmounted(() => {
 /* =========================================================
    CONTAINER
    ========================================================= */
-
-.header-nav .container-apple {
-
-    width: 100%;
-
-    max-width: none;
-
-    padding: 0;
-
-    margin: 0;
-
-    zoom: 1;
-
-}
-
 
 /* =========================================================
    NAV CONTENT
@@ -753,9 +694,11 @@ onUnmounted(() => {
 
     padding: 0 14px;
 
-    border-radius: 10px;
+    border-radius: 0;
 
-    border: 1px solid transparent;
+    border: none;
+
+    background: transparent;
 
     color:
         var(--apple-text-secondary);
@@ -769,15 +712,7 @@ onUnmounted(() => {
 
     font-weight: 500;
 
-    transition:
-
-        color .25s ease,
-
-        background .25s ease,
-
-        border-color .25s ease,
-
-        transform .25s ease;
+    transition: color .25s ease;
 
 }
 
@@ -801,8 +736,8 @@ onUnmounted(() => {
     background:
         linear-gradient(
             90deg,
-            var(--neon-cyan),
-            var(--neon-purple)
+            var(--neon-purple),
+            var(--neon-magenta)
         );
 
     transform:
@@ -813,24 +748,14 @@ onUnmounted(() => {
 
     box-shadow:
         0 0 8px
-        rgba(103,232,249,.45);
+        rgba(192,132,252,.45);
 
 }
 
 
 .nav-link:hover {
 
-    color:
-        var(--apple-text-primary);
-
-    background:
-        rgba(192,132,252,.07);
-
-    border-color:
-        rgba(192,132,252,.13);
-
-    transform:
-        translateY(-1px);
+    color: var(--apple-text-primary);
 
 }
 
@@ -842,29 +767,26 @@ onUnmounted(() => {
 }
 
 
-.nav-link.active {
+.nav-link.active,
+.nav-link.router-link-active,
+.nav-link.router-link-exact-active {
 
     color: #fff;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(168,85,247,.16),
-            rgba(103,232,249,.055)
-        );
+    background: transparent !important;
 
-    border-color:
-        rgba(192,132,252,.22);
+    background-image: none !important;
 
-    box-shadow:
-        inset
-        0 1px 0
-        rgba(255,255,255,.045);
+    border: none !important;
+
+    box-shadow: none !important;
 
 }
 
 
-.nav-link.active::after {
+.nav-link.active::after,
+.nav-link.router-link-active::after,
+.nav-link.router-link-exact-active::after {
 
     width: 20px;
 
@@ -1095,8 +1017,8 @@ onUnmounted(() => {
     background:
         radial-gradient(
             circle,
-            rgba(103,232,249,.10),
-            rgba(103,232,249,.025) 40%,
+            rgba(192,132,252,.10),
+            rgba(192,132,252,.025) 40%,
             transparent 70%
         );
 
@@ -1120,7 +1042,7 @@ onUnmounted(() => {
         linear-gradient(
             90deg,
             transparent,
-            rgba(103,232,249,.25),
+            rgba(192,132,252,.25),
             rgba(192,132,252,.45),
             transparent
         );
@@ -1248,7 +1170,7 @@ onUnmounted(() => {
         linear-gradient(
             135deg,
             rgba(168,85,247,.14),
-            rgba(103,232,249,.025)
+            rgba(192,132,252,.025)
         );
 
     color: #fff;
@@ -1286,7 +1208,7 @@ onUnmounted(() => {
         linear-gradient(
             135deg,
             rgba(168,85,247,.24),
-            rgba(103,232,249,.06)
+            rgba(192,132,252,.06)
         );
 
     border-color:
@@ -1484,7 +1406,7 @@ onUnmounted(() => {
         linear-gradient(
             90deg,
             rgba(168,85,247,.13),
-            rgba(103,232,249,.025)
+            rgba(192,132,252,.025)
         );
 
 }
@@ -1676,7 +1598,7 @@ onUnmounted(() => {
         linear-gradient(
             135deg,
             rgba(168,85,247,.16),
-            rgba(103,232,249,.04)
+            rgba(192,132,252,.04)
         );
 
 }
@@ -1821,20 +1743,117 @@ onUnmounted(() => {
 
     .apple-header {
 
+        position: fixed !important;
+
         top: 12px !important;
+
+        left: 0 !important;
+        right: 0 !important;
+
+        padding: 0;
+
+        pointer-events: none;
 
     }
 
 
-    .header-nav,
-    .apple-header.scrolled .header-nav {
+    .header-nav {
 
-        width:
-            calc(100% - 24px);
+        width: calc(100% - 24px);
 
         padding: 6px;
 
-        border-radius: 15px;
+        border-radius: 15px !important;
+
+        background: rgba(14, 8, 24, 0.55) !important;
+
+        border: 1px solid rgba(192, 132, 252, 0.18) !important;
+
+        backdrop-filter: blur(18px) saturate(1.2) !important;
+
+        -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
+
+        box-shadow:
+            0 10px 30px rgba(0,0,0,.28),
+            0 2px 0 rgba(255,255,255,.035) inset,
+            0 0 0 1px rgba(255,255,255,.015) !important;
+
+    }
+
+
+    .header-nav::before {
+
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+
+        left: 20px;
+        right: 20px;
+
+        height: 1px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                rgba(192,132,252,.35),
+                rgba(192,132,252,.45),
+                transparent
+            );
+
+        opacity: .65;
+
+        pointer-events: none;
+
+    }
+
+
+    .apple-header.scrolled .header-nav {
+
+        background: rgba(14, 8, 24, 0.68) !important;
+
+        border-color: rgba(192, 132, 252, 0.24) !important;
+
+        backdrop-filter: blur(20px) saturate(1.25) !important;
+
+        -webkit-backdrop-filter: blur(20px) saturate(1.25) !important;
+
+        box-shadow:
+            0 16px 42px rgba(0,0,0,.4),
+            0 2px 0 rgba(255,255,255,.035) inset,
+            0 0 30px rgba(168,85,247,.035) !important;
+
+    }
+
+    .nav-link {
+
+        border: 1px solid transparent;
+
+        border-radius: 10px;
+
+    }
+
+    .nav-link:hover {
+
+        background: rgba(192,132,252,.07) !important;
+
+        border-color: rgba(192,132,252,.13) !important;
+
+    }
+
+    .nav-link.active,
+    .nav-link.router-link-active,
+    .nav-link.router-link-exact-active {
+
+        background: linear-gradient(
+            135deg,
+            rgba(168,85,247,.16),
+            rgba(192,132,252,.055)
+        ) !important;
+
+        border-color: rgba(192,132,252,.22) !important;
 
     }
 

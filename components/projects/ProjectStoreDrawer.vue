@@ -473,7 +473,8 @@ onBeforeUnmount(() => {
 .store-cover {
   position: relative;
   padding-top: 56px;
-  margin-bottom: 4px;
+  margin: 0;
+  overflow: hidden;
 }
 
 .store-topbar-actions {
@@ -505,7 +506,7 @@ onBeforeUnmount(() => {
 .store-drawer-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 8px 0 40px;
+  padding: 0 0 40px;
   scrollbar-width: thin;
   scrollbar-color: rgba(192, 132, 252, 0.3) transparent;
 }

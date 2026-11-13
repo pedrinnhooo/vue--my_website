@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt'
   ],
 
+  components: [
+    { path: '~/components', pathPrefix: false }
+  ],
+
   css: [
     '@/assets/styles/apple-design.css',
     '/node_modules/bootstrap-icons/font/bootstrap-icons.min.css'

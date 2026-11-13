@@ -4,7 +4,8 @@ import { computed, ref, watch } from 'vue'
  * Escala adicionando um item em `baseProjects` + traduções em
  * `home.projectsData.<key>` (name, shortDescription, longDescription, subtitle?).
  *
- * Imagens: public/images/projects/<key>/icon.* + 1..4 previews.
+ * Imagens em public/images/projects/<key>/:
+ *   thumb.* (card), icon.* (store), 1..4 (previews).
  * Prudential (backoffice) fica sem screenshots de propósito.
  */
 export const useProjects = () => {
@@ -14,7 +15,7 @@ export const useProjects = () => {
     {
       id: 1,
       key: 'bnb',
-      thumbnail: '/images/bnb-thumb.jpg',
+      thumbnail: '/images/projects/bnb/thumb.jpg',
       icon: '/images/projects/bnb/icon.webp',
       cover: null,
       coverColor: '#C8102E',
@@ -45,7 +46,7 @@ export const useProjects = () => {
     {
       id: 2,
       key: 'banpara',
-      thumbnail: '/images/banpara-thumb.jpg',
+      thumbnail: '/images/projects/banpara/thumb.jpg',
       icon: '/images/projects/banpara/icon.webp',
       cover: null,
       coverColor: '#0B3D91',
@@ -108,7 +109,7 @@ export const useProjects = () => {
     {
       id: 4,
       key: 'heiclub',
-      thumbnail: '/images/heineken-thumb.jpg',
+      thumbnail: '/images/projects/heiclub/thumb.jpg',
       icon: '/images/projects/heiclub/icon.webp',
       cover: null,
       coverColor: '#047857',
@@ -139,8 +140,8 @@ export const useProjects = () => {
     {
       id: 5,
       key: 'prudential',
-      thumbnail: '/images/prudential-thumb.jpeg',
-      icon: '/images/prudential-thumb.jpeg',
+      thumbnail: '/images/projects/prudential/thumb.jpeg',
+      icon: '/images/projects/prudential/thumb.jpeg',
       cover: null,
       coverColor: '#1D4ED8',
       technologies: ['Flutter Web', 'Firebase', 'Docker', 'XLSX'],
@@ -165,7 +166,7 @@ export const useProjects = () => {
     {
       id: 6,
       key: 'afinz',
-      thumbnail: '/images/afinz-thumb.png',
+      thumbnail: '/images/projects/afinz/thumb.png',
       icon: '/images/projects/afinz/icon.webp',
       cover: null,
       coverColor: '#7C3AED',
@@ -196,7 +197,7 @@ export const useProjects = () => {
     {
       id: 7,
       key: 'h2club',
-      thumbnail: '/images/h2club-thumb.png',
+      thumbnail: '/images/projects/h2club/thumb.png',
       icon: '/images/projects/h2club/icon.webp',
       cover: null,
       coverColor: '#3B0764',
@@ -227,7 +228,7 @@ export const useProjects = () => {
     {
       id: 8,
       key: 'bluec',
-      thumbnail: '/images/bluec-thumb.avif',
+      thumbnail: '/images/projects/bluec/thumb.avif',
       icon: '/images/projects/bluec/icon.webp',
       cover: null,
       coverColor: '#2563EB',
@@ -258,7 +259,7 @@ export const useProjects = () => {
     {
       id: 9,
       key: 'komus',
-      thumbnail: '/images/komus-thumb.jpeg',
+      thumbnail: '/images/projects/komus/thumb.jpeg',
       icon: '/images/projects/komus/icon.jpeg',
       cover: null,
       coverColor: '#0F766E',
@@ -289,7 +290,7 @@ export const useProjects = () => {
     {
       id: 10,
       key: 'neopdv',
-      thumbnail: '/images/neopdv-thumb.jpg',
+      thumbnail: '/images/projects/neopdv/thumb.jpg',
       icon: '/images/projects/neopdv/icon.jpeg',
       cover: null,
       coverColor: '#7C3AED',

@@ -21,8 +21,8 @@
 import { Analytics } from '@vercel/analytics/nuxt';
 import { SpeedInsights } from '@vercel/speed-insights/nuxt';
 
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
+import Header from '~/components/layout/Header.vue'
+import Footer from '~/components/layout/Footer.vue'
 </script>
 
 <style>
@@ -49,7 +49,7 @@ import Footer from '~/components/footer.vue'
   background-color: #05030b;
   background-image:
     linear-gradient(180deg, rgba(5, 3, 11, 0.22) 0%, rgba(5, 3, 11, 0.4) 42%, rgba(5, 3, 11, 0.62) 100%),
-    url('/images/earth-milky-way-galaxy-night.jpg');
+    url('/images/site/earth-milky-way-galaxy-night.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

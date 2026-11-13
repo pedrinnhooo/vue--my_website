@@ -662,6 +662,7 @@ watch(() => form.value.countryCode, () => {
     gap: 20px 14px;
     width: 100%;
     max-width: none;
+    margin-top: 36px;
   }
 
   .contact-item {

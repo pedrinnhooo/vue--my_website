@@ -357,12 +357,18 @@ watch(() => form.value.countryCode, () => {
   max-width: 760px;
 }
 
+.contact-hero .hero-copy {
+  max-width: 560px;
+}
+
 .contact-hero .hero-subtitle {
+  display: block;
   margin: 0;
   color: var(--apple-text-secondary);
   font-size: 1.05rem;
   line-height: 1.6;
-  max-width: 420px;
+  width: 420px;
+  max-width: 100%;
 }
 
 .contact-main {
@@ -372,7 +378,7 @@ watch(() => form.value.countryCode, () => {
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.2fr);
-  gap: 22px;
+  gap: 48px;
   align-items: start;
 }
 
@@ -616,7 +622,12 @@ watch(() => form.value.countryCode, () => {
     justify-content: center;
   }
 
+  .contact-hero .hero-copy {
+    max-width: none;
+  }
+
   .contact-hero .hero-subtitle {
+    width: auto;
     max-width: none;
     margin-left: auto;
     margin-right: auto;
@@ -624,6 +635,7 @@ watch(() => form.value.countryCode, () => {
 
   .contact-layout {
     grid-template-columns: 1fr;
+    gap: 22px;
   }
 
   .contact-form-wrap {

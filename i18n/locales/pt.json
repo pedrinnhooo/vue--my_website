@@ -193,15 +193,22 @@
                 "longDescription": "Aplicativo para membros do H2 Club, exibindo calendário de torneios, resultados, reservas e integração de notificações push segmentadas. Implementa reconhecimento facial/documental para cadastro e compliance com LGPD."
             },
             "bluec": {
-                "name": "BlueC - Banco BlueC",
-                "shortDescription": "Aplicativo do Banco BlueC, integrando carteiras digitais para pagamento imediato.",
-                "longDescription": "Integração de carteiras digitais (Apple Pay, Google Pay, Samsung Pay) ao app BlueC, facilitando pagamentos sem contato e gerenciamento de transações em tempo real."
+                "name": "Blue C → CSU Cartões",
+                "subtitle": "Do Blue C ao Cartão CSU",
+                "shortDescription": "App do Banco BlueC com carteiras digitais. A operação passou a ser o Cartão CSU, da CSU Digital.",
+                "longDescription": "Aplicativo do Banco BlueC com integração de carteiras digitais (Apple Pay, Google Pay e Samsung Pay), pagamento por aproximação e gestão de transações. Depois, a operação passou a integrar o Cartão CSU, da CSU Digital: solicitação do cartão, faturas, parcelamento, bloqueio e cartão adicional."
             },
             "afinz": {
                 "name": "Afinz",
                 "subtitle": "Cartão e banco digital",
                 "shortDescription": "Banco Afinz com recursos de banco digital, controle de cartão e interface intuitiva.",
                 "longDescription": "Criação do aplicativo para o Banco Afinz, focado em funcionalidades de um banco digital completo: abertura de conta, cartões de crédito, pagamentos de boletos e recarga de serviços. Forte ênfase em UI/UX."
+            },
+            "bb": {
+                "name": "BB Banco do Brasil",
+                "subtitle": "Tokenização de cartões",
+                "shortDescription": "UI/UX da jornada de cartões do Banco do Brasil, com tokenização, cartão virtual e controle de faturas.",
+                "longDescription": "Interface da área de cartões do app BB, com tokenização, cartão virtual, limites e acompanhamento de faturas. O aplicativo oficial do Banco do Brasil reúne conta, Pix, cartões e crédito."
             },
             "komus": {
                 "name": "Komus → Pitzi",
@@ -222,8 +229,9 @@
             },
             "neopdv": {
                 "name": "NeoPDV - Dashboard",
-                "shortDescription": "Dashboard de controle de vendas e PDV móvel para lojas, com métricas em tempo real.",
-                "longDescription": "Solução voltada para o controle de vendas, permitindo que vendedores realizem atendimentos fora do caixa (PDV móvel) e acompanhem metas e métricas através de um dashboard web intuitivo."
+                "subtitle": "PDV rápido, estoque e caixa",
+                "shortDescription": "PDV no celular com estoque automático, vendas e controle de caixa para lojas.",
+                "longDescription": "NeoPDV Digital é o PDV no celular para vender rápido, baixar o estoque a cada venda e organizar o caixa. O mesmo app da Play Store reúne frente de caixa, controle de produtos e o acompanhamento do dia a dia da loja."
             }
         }
     },
@@ -231,6 +239,13 @@
         "hero": {
             "title": "Meus Projetos",
             "subtitle": "Uma coleção dos principais projetos que desenvolvi ao longo da minha carreira, desde aplicativos bancários até soluções empresariais complexas."
+        },
+        "filters": {
+            "all": "Todos",
+            "mobile": "Mobile",
+            "web": "Web",
+            "system": "Sistema",
+            "empty": "Nenhum app nessa categoria."
         },
         "modal": {
             "screenshotsTitle": "Pré-visualizações",
@@ -244,16 +259,19 @@
             "website": "Site",
             "ratings": "Avaliações e notas",
             "ratingsCount": "notas",
+            "reviewsTitle": "Comentários",
             "about": "Sobre o app"
         },
         "store": {
             "labels": {
                 "ratings": "Notas",
-                "age": "Idade",
+                "age": "Classificação",
                 "charts": "Charts",
                 "developer": "Desenvolvedor",
                 "language": "Idioma",
-                "size": "Tamanho"
+                "size": "Tamanho",
+                "installs": "Downloads",
+                "users": "Usuários"
             },
             "categories": {
                 "finance": "Finanças",
@@ -266,6 +284,10 @@
                 "iphone": "Desenvolvido para iPhone",
                 "android": "Desenvolvido para Android",
                 "web": "Desenvolvido para Web"
+            },
+            "notes": {
+                "losango": "Última nota publicada na Play Store do app Losango, hoje do Bradesco Financiamentos. A listagem saiu da loja.",
+                "komus": "Última nota do app Pitzi na Play Store, removido em abril de 2024. Cerca de 140 mil instalações."
             }
         }
     },

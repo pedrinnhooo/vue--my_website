@@ -64,15 +64,13 @@
           </NuxtLink>
         </header>
 
-        <div class="projects-grid">
-          <ProjectCard
-            v-for="(project, index) in featuredProjects"
+        <div class="store-shelf">
+          <ProjectStoreRow
+            v-for="project in featuredProjects"
             :key="`featured-${project.id}`"
-            class="scroll-animate"
-            :style="{ animationDelay: `${index * 0.06}s` }"
             :project="project"
-            :tech-limit="3"
-            :open-label="projectViewLabel"
+            :get-label="t('projects.modal.get')"
+            :view-label="projectViewLabel"
             @open="openProjectModal"
           />
         </div>
@@ -530,10 +528,10 @@ onUnmounted(() => {
   color: #fff;
 }
 
-.projects-grid {
+.store-shelf {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  column-gap: 36px;
 }
 
 .services-shell {
@@ -704,9 +702,13 @@ onUnmounted(() => {
     width: min(260px, 70%);
   }
 
-  .projects-grid,
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .store-shelf {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 28px;
   }
 }
 
@@ -783,8 +785,8 @@ onUnmounted(() => {
     justify-content: center;
   }
 
-  .projects-grid,
-  .services-grid {
+  .services-grid,
+  .store-shelf {
     grid-template-columns: 1fr;
   }
 

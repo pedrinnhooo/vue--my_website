@@ -10,27 +10,41 @@
               {{ t('projects.hero.subtitle') }}
             </p>
           </div>
-          <div class="hero-stat" aria-hidden="true">
-            <strong>{{ projects.length }}</strong>
-            <span>apps & products</span>
-          </div>
         </div>
       </div>
     </section>
 
     <section class="projects-section section-padding">
       <div class="container-apple">
-        <div class="projects-grid">
-          <ProjectCard
-            v-for="(project, index) in projects"
+        <div class="shelf-toolbar" role="tablist" :aria-label="t('projects.hero.title')">
+          <button
+            v-for="filter in filters"
+            :key="filter.id"
+            type="button"
+            role="tab"
+            class="filter-badge"
+            :class="{ 'filter-badge--active': activeSurface === filter.id }"
+            :aria-selected="activeSurface === filter.id"
+            @click="activeSurface = filter.id"
+          >
+            <i :class="filter.icon" aria-hidden="true"></i>
+            {{ filter.label }}
+            <span class="filter-count">{{ filter.count }}</span>
+          </button>
+        </div>
+
+        <div v-if="visibleProjects.length" class="store-shelf">
+          <ProjectStoreRow
+            v-for="project in visibleProjects"
             :key="`project-${project.id}`"
-            class="scroll-animate"
-            :style="{ animationDelay: `${index * 0.06}s` }"
             :project="project"
-            :open-label="viewLabel"
+            :get-label="t('projects.modal.get')"
+            :view-label="viewLabel"
             @open="openProjectModal"
           />
         </div>
+
+        <p v-else class="shelf-empty">{{ t('projects.filters.empty') }}</p>
       </div>
     </section>
 
@@ -49,9 +63,25 @@ const { t, locale } = useI18n()
 useScrollAnimation()
 
 const selectedProject = ref(null)
+const activeSurface = ref('all')
 const { projects, getProjectById } = useProjects()
 
 const viewLabel = computed(() => (locale.value === 'pt' ? 'Ver' : 'View'))
+
+const countSurface = (surface) =>
+  projects.value.filter((project) => project.surface === surface).length
+
+const filters = computed(() => [
+  { id: 'all', label: t('projects.filters.all'), icon: 'bi bi-grid', count: projects.value.length },
+  { id: 'mobile', label: t('projects.filters.mobile'), icon: 'bi bi-phone', count: countSurface('mobile') },
+  { id: 'web', label: t('projects.filters.web'), icon: 'bi bi-globe2', count: countSurface('web') },
+  { id: 'system', label: t('projects.filters.system'), icon: 'bi bi-hdd-stack', count: countSurface('system') }
+])
+
+const visibleProjects = computed(() => {
+  if (activeSurface.value === 'all') return projects.value
+  return projects.value.filter((project) => project.surface === activeSurface.value)
+})
 
 const openProjectModal = (project) => {
   selectedProject.value = getProjectById(project.id) || project
@@ -91,49 +121,89 @@ const closeProjectModal = () => {
   max-width: 560px;
 }
 
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  min-width: 120px;
-}
-
-.hero-stat strong {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.hero-stat span {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--apple-text-tertiary);
-}
-
 .projects-section {
   background: transparent;
-  padding-top: 28px;
+  padding-top: 12px;
 }
 
-.projects-grid {
+.shelf-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--apple-text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-badge i {
+  font-size: 0.9rem;
+}
+
+.filter-count {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--apple-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+}
+
+.filter-badge:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-badge--active,
+.filter-badge--active:hover,
+.filter-badge--active:focus,
+.filter-badge--active:focus-visible,
+.filter-badge--active:active {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}
+
+.filter-badge--active .filter-count {
+  background: rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+.store-shelf {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  column-gap: 36px;
 }
 
-@media (max-width: 1024px) {
-  .projects-grid {
+.shelf-empty {
+  margin: 28px 0 0;
+  color: var(--apple-text-tertiary);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .store-shelf {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 28px;
   }
 }
 
@@ -163,13 +233,13 @@ const closeProjectModal = () => {
     margin-right: auto;
   }
 
-  .hero-stat {
-    align-items: center;
+  .shelf-toolbar {
+    justify-content: center;
   }
 
-  .projects-grid {
+  .store-shelf {
     grid-template-columns: 1fr;
-    gap: 16px;
+    column-gap: 0;
   }
 }
 </style>

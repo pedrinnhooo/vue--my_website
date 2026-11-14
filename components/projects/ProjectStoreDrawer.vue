@@ -160,12 +160,12 @@
             </section>
 
             <!-- Ratings -->
-            <section v-if="project.store?.rating" class="store-section">
+            <section v-if="project.store?.rating || reviewList.length" class="store-section">
               <div class="store-section-heading">
                 <h3>{{ t('projects.modal.ratings') }}</h3>
               </div>
 
-              <div class="store-ratings">
+              <div v-if="project.store?.rating" class="store-ratings">
                 <div class="store-ratings-score">
                   <span class="store-ratings-number">{{ formatRating(project.store.rating) }}</span>
                   <div class="store-ratings-stars" aria-hidden="true">
@@ -196,6 +196,43 @@
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div v-if="platformScores.length" class="store-score-row">
+                <div
+                  v-for="score in platformScores"
+                  :key="score.key"
+                  class="store-score-pill"
+                >
+                  <i :class="score.icon" aria-hidden="true"></i>
+                  <strong>{{ formatRating(score.rating) }}</strong>
+                  <span>{{ score.label }} · {{ score.count }}</span>
+                </div>
+              </div>
+
+              <p v-if="project.store?.note" class="store-rating-note">{{ project.store.note }}</p>
+
+              <div v-if="reviewList.length" class="store-review-list">
+                <h4>{{ t('projects.modal.reviewsTitle') }}</h4>
+                <article
+                  v-for="(review, index) in reviewList"
+                  :key="`${review.author}-${index}`"
+                  class="store-review"
+                >
+                  <header>
+                    <div v-if="review.rating" class="store-review-stars" aria-hidden="true">
+                      <i
+                        v-for="n in 5"
+                        :key="n"
+                        class="bi"
+                        :class="starClass(n, review.rating)"
+                      ></i>
+                    </div>
+                    <span class="store-review-source">{{ review.sourceLabel }}</span>
+                  </header>
+                  <p>{{ review.text }}</p>
+                  <span class="store-review-author">{{ review.author }}</span>
+                </article>
               </div>
             </section>
 
@@ -345,7 +382,23 @@ const statItems = computed(() => {
     })
   }
 
-  return items.slice(0, 6)
+  if (store.installs) {
+    items.push({
+      type: 'installs',
+      value: store.installs,
+      label: t('projects.store.labels.installs')
+    })
+  }
+
+  if (store.users) {
+    items.push({
+      type: 'users',
+      value: store.users,
+      label: t('projects.store.labels.users')
+    })
+  }
+
+  return items.slice(0, 8)
 })
 
 const coverStyle = computed(() => {
@@ -365,8 +418,54 @@ const coverStyle = computed(() => {
   }
 })
 
-/** Barras de distribuição visual (estilo App Store), derivadas da nota */
+const platformScores = computed(() => {
+  const store = props.project?.store
+  if (!store) return []
+
+  const items = []
+  if (store.apple?.rating != null) {
+    items.push({
+      key: 'apple',
+      icon: 'bi bi-apple',
+      label: t('projects.modal.appStore'),
+      rating: store.apple.rating,
+      count: store.apple.count
+    })
+  }
+  if (store.play?.rating != null) {
+    items.push({
+      key: 'play',
+      icon: 'bi bi-google-play',
+      label: t('projects.modal.googlePlay'),
+      rating: store.play.rating,
+      count: store.play.count
+    })
+  }
+  return items
+})
+
+const reviewList = computed(() => {
+  const reviews = props.project?.store?.reviews
+  if (!Array.isArray(reviews)) return []
+  return reviews.slice(0, 3).map((review) => ({
+    ...review,
+    sourceLabel: review.source === 'play'
+      ? t('projects.modal.googlePlay')
+      : t('projects.modal.appStore')
+  }))
+})
+
+/** Barras reais quando há histograma (5★ → 1★); senão, distribuição visual pela nota */
 const ratingBars = computed(() => {
+  const histogram = props.project?.store?.ratingHistogram
+  if (Array.isArray(histogram) && histogram.length === 5) {
+    const total = histogram.reduce((sum, count) => sum + Number(count || 0), 0) || 1
+    return [5, 4, 3, 2, 1].map((stars, index) => ({
+      stars,
+      percent: Math.round((Number(histogram[index] || 0) / total) * 100)
+    }))
+  }
+
   const rating = Number(props.project?.store?.rating) || 0
   const weights = [5, 4, 3, 2, 1].map((stars) => {
     const distance = Math.abs(stars - Math.round(rating))
@@ -661,11 +760,12 @@ onBeforeUnmount(() => {
   justify-content: center;
   min-width: 36px;
   height: 22px;
-  padding: 0 8px;
+  padding: 0 7px;
   border-radius: 6px;
   border: 1.5px solid rgba(255, 255, 255, 0.35);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .store-stat-label,
@@ -812,6 +912,86 @@ onBeforeUnmount(() => {
   height: 100%;
   border-radius: inherit;
   background: var(--apple-text-secondary);
+}
+
+.store-score-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.store-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--apple-text-secondary);
+  font-size: 0.78rem;
+}
+
+.store-score-pill strong {
+  color: var(--apple-text-primary);
+  font-size: 0.92rem;
+}
+
+.store-rating-note {
+  margin: 12px 0 0;
+  color: var(--apple-text-tertiary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.store-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.store-review-list h4 {
+  margin: 0 0 2px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.store-review {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.store-review header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.store-review-stars {
+  display: flex;
+  gap: 2px;
+  color: #fbbf24;
+  font-size: 0.72rem;
+}
+
+.store-review-source,
+.store-review-author {
+  color: var(--apple-text-tertiary);
+  font-size: 0.72rem;
+}
+
+.store-review p {
+  margin: 0 0 8px;
+  color: var(--apple-text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .store-description {

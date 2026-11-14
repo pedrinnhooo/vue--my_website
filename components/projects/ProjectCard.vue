@@ -44,9 +44,15 @@
     <div class="pcard-body">
       <div class="pcard-meta">
         <span class="pcard-cat">{{ project.category }}</span>
-        <span v-if="project.store?.rating" class="pcard-rating">
-          <i class="bi bi-star-fill"></i>
-          {{ project.store.rating }}
+        <span class="pcard-meta-end">
+          <span v-if="project.store?.installs" class="pcard-installs">
+            <i class="bi bi-download" aria-hidden="true"></i>
+            {{ project.store.installs }}
+          </span>
+          <span v-if="project.store?.rating" class="pcard-rating">
+            <i class="bi bi-star-fill"></i>
+            {{ project.store.rating }}
+          </span>
         </span>
       </div>
 
@@ -184,15 +190,41 @@ defineEmits(['open'])
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pcard-meta-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.pcard-installs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--apple-text-tertiary);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.pcard-installs i {
+  font-size: 0.62rem;
+  opacity: 0.75;
 }
 
 .pcard-cat {
+  min-width: 0;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--neon-cyan);
+  white-space: nowrap;
 }
 
 .pcard-rating {
@@ -212,6 +244,9 @@ defineEmits(['open'])
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--apple-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pcard-desc {

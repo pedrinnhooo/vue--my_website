@@ -193,15 +193,22 @@
                 "longDescription": "App for H2 Club members, displaying tournament calendar, results, reservations and segmented push notification integration. Implements facial/document recognition for registration and LGPD compliance."
             },
             "bluec": {
-                "name": "BlueC - Banco BlueC",
-                "shortDescription": "BlueC Bank app, integrating digital wallets for immediate payment.",
-                "longDescription": "Digital wallet integration (Apple Pay, Google Pay, Samsung Pay) into BlueC app, facilitating contactless payments and real-time transaction management."
+                "name": "Blue C → CSU Cards",
+                "subtitle": "From Blue C to Cartão CSU",
+                "shortDescription": "BlueC Bank app with digital wallets. The product later became Cartão CSU, by CSU Digital.",
+                "longDescription": "BlueC Bank app with digital wallet integration (Apple Pay, Google Pay and Samsung Pay), contactless payments and transaction management. The operation later became Cartão CSU, by CSU Digital: card requests, statements, installments, card lock and additional cards."
             },
             "afinz": {
                 "name": "Afinz",
                 "subtitle": "Card and digital banking",
                 "shortDescription": "Afinz Bank with digital banking features, card control and intuitive interface.",
                 "longDescription": "Creation of the Afinz Bank app, focused on complete digital banking features: account opening, credit cards, bill payments and service top-ups. Strong emphasis on UI/UX."
+            },
+            "bb": {
+                "name": "BB Banco do Brasil",
+                "subtitle": "Card tokenization",
+                "shortDescription": "UI/UX for Banco do Brasil’s card journey, with tokenization, virtual card and statement control.",
+                "longDescription": "Card area interface for the BB app, covering tokenization, virtual card, limits and statement tracking. The official Banco do Brasil app brings together account, Pix, cards and credit."
             },
             "komus": {
                 "name": "Komus → Pitzi",
@@ -222,8 +229,9 @@
             },
             "neopdv": {
                 "name": "NeoPDV - Dashboard",
-                "shortDescription": "Sales control dashboard and mobile POS for stores, with real-time metrics.",
-                "longDescription": "Solution focused on sales control, allowing salespeople to serve customers away from the cashier (mobile POS) and track goals and metrics through an intuitive web dashboard."
+                "subtitle": "Fast POS, stock and cash register",
+                "shortDescription": "Mobile POS with automatic stock, sales and cash control for stores.",
+                "longDescription": "NeoPDV Digital is the phone POS for fast checkout, automatic stock updates and cash control. The same Google Play app covers the register, product control and the store’s daily operation."
             }
         }
     },
@@ -231,6 +239,13 @@
         "hero": {
             "title": "My Projects",
             "subtitle": "A collection of the main projects I’ve developed over my career, from banking apps to complex enterprise solutions."
+        },
+        "filters": {
+            "all": "All",
+            "mobile": "Mobile",
+            "web": "Web",
+            "system": "System",
+            "empty": "No apps in this category."
         },
         "modal": {
             "screenshotsTitle": "Previews",
@@ -244,16 +259,19 @@
             "website": "Website",
             "ratings": "Ratings & Reviews",
             "ratingsCount": "Ratings",
+            "reviewsTitle": "Reviews",
             "about": "About"
         },
         "store": {
             "labels": {
                 "ratings": "Ratings",
-                "age": "Age",
+                "age": "Rating",
                 "charts": "Charts",
                 "developer": "Developer",
                 "language": "Language",
-                "size": "Size"
+                "size": "Size",
+                "installs": "Downloads",
+                "users": "Users"
             },
             "categories": {
                 "finance": "Finance",
@@ -266,6 +284,10 @@
                 "iphone": "Designed for iPhone",
                 "android": "Designed for Android",
                 "web": "Designed for Web"
+            },
+            "notes": {
+                "losango": "Last Google Play rating for the Losango app, now owned by Bradesco Financiamentos. The listing is no longer in the store.",
+                "komus": "Last Google Play rating for the Pitzi app, removed in April 2024. About 140 thousand installs."
             }
         }
     },

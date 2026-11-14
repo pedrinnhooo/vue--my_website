@@ -190,21 +190,20 @@ const closeProjectModal = () => {
 
 .store-shelf {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 36px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 48px;
+}
+
+.store-shelf :deep(.shelf-name) {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
 }
 
 .shelf-empty {
   margin: 28px 0 0;
   color: var(--apple-text-tertiary);
   font-size: 0.95rem;
-}
-
-@media (max-width: 1100px) {
-  .store-shelf {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 28px;
-  }
 }
 
 @media (max-width: 768px) {

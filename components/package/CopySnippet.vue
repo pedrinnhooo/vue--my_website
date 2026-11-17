@@ -12,7 +12,9 @@
         <span class="copy-btn-text">{{ copied ? copiedLabel : copyLabel }}</span>
       </button>
     </div>
+    <p v-if="lead" class="copy-box-lead">{{ lead }}</p>
     <pre class="copy-box-code" :class="{ 'is-middle': middle }"><code>{{ code }}</code></pre>
+    <p v-if="note" class="copy-box-note">{{ note }}</p>
   </div>
 </template>
 
@@ -24,6 +26,8 @@ const props = defineProps({
   code: { type: String, required: true },
   copyLabel: { type: String, default: 'Copy' },
   copiedLabel: { type: String, default: 'Copied' },
+  lead: { type: String, default: '' },
+  note: { type: String, default: '' },
   middle: { type: Boolean, default: false }
 })
 
@@ -138,6 +142,18 @@ onUnmounted(() => {
   max-width: 7rem;
   margin-left: 6px;
   opacity: 1;
+}
+
+.copy-box-lead,
+.copy-box-note {
+  margin: 0 2px 10px;
+  color: rgba(224, 242, 254, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.copy-box-note {
+  margin: 10px 2px 0;
 }
 
 .copy-box-code {

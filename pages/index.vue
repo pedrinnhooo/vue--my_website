@@ -135,7 +135,26 @@
             </div>
           </div>
 
-          <aside class="still-panel" aria-label="still install">
+          <aside class="still-panel" aria-label="still">
+            <div class="still-guides">
+              <CopySnippet
+                class="still-guide"
+                :label="t('home.package.guides.wrap.label')"
+                :lead="t('home.package.guides.wrap.lead')"
+                :note="t('home.package.guides.wrap.note')"
+                :code="wrapSnippet"
+                :copy-label="t('home.package.copy')"
+                :copied-label="t('home.package.copied')"
+              />
+              <CopySnippet
+                class="still-guide"
+                :label="t('home.package.guides.preference.label')"
+                :lead="t('home.package.guides.preference.lead')"
+                :code="preferenceSnippet"
+                :copy-label="t('home.package.copy')"
+                :copied-label="t('home.package.copied')"
+              />
+            </div>
             <div class="still-snippets">
               <CopySnippet
                 :label="t('home.package.pubspecLabel')"
@@ -291,6 +310,21 @@ const packageParagraphs = computed(() =>
 
 const pubspecSnippet = 'dependencies:\n  still: ^0.1.5'
 const cliSnippet = 'flutter pub add still'
+const wrapSnippet = `void main() {
+  runApp(
+    const MotionScope(
+      child: MaterialApp(
+        home: HomePage(),
+      ),
+    ),
+  );
+}`
+const preferenceSnippet = `const MotionScope(
+  preference: MotionPreference.reduced,
+  child: MaterialApp(
+    home: HomePage(),
+  ),
+)`
 
 const { featuredProjects, getProjectById } = useProjects()
 const selectedProject = ref(null)
@@ -642,7 +676,7 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
   gap: 36px;
-  align-items: center;
+  align-items: stretch;
   padding: 32px;
   border-radius: 28px;
   border: 1px solid rgba(1, 117, 194, 0.28);
@@ -785,6 +819,12 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 14px;
   min-width: 0;
+}
+
+.still-guides {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .still-snippets {
@@ -973,6 +1013,20 @@ onUnmounted(() => {
 @keyframes homeFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-18px); }
+}
+
+@media (min-width: 1025px) {
+  .still-panel {
+    height: 100%;
+  }
+
+  .still-guides {
+    flex: 1;
+  }
+
+  .still-guide {
+    flex: 1;
+  }
 }
 
 @media (max-width: 1024px) {

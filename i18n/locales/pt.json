@@ -133,6 +133,17 @@
             "github": "Código no GitHub",
             "pubspecLabel": "pubspec.yaml",
             "cliLabel": "Terminal",
+            "guides": {
+                "wrap": {
+                    "label": "Envolva o app",
+                    "lead": "No main.dart, o MotionScope é o pai do MaterialApp.",
+                    "note": "O WidgetsApp usa o mesmo pai. O pacote não importa o Material, então um design system próprio pode usar do jeito que está."
+                },
+                "preference": {
+                    "label": "Preferência",
+                    "lead": "Deixe a preferência quieta e o celular decide. Passe uma quando quiser ver um modo na sua máquina."
+                }
+            },
             "copy": "Copiar",
             "copied": "Copiado",
             "platforms": "Android · iOS · Web · macOS · Windows · Linux",

@@ -128,11 +128,22 @@
             "title": "Open source",
             "subtitle": "Package published on pub.dev",
             "tagline": "Motion that knows when to stop.",
-            "description": "Flutter already knows when someone turns on Reduce Motion or Remove Animations. It stores that choice, and stops there.\n\nAnimationController ignores Reduce Motion on purpose. The framework’s idea is to swap the slide for a fade, but that decision is left to each widget. In practice, almost nobody does it, so the card still slides in from the bottom for people who asked for motion to stop.\n\nI published still to solve this in one place. A MotionScope around your app decides: slide, fade, or cut. StillSwitcher, StillEntrance, StillStagger, and StillPageRoute follow that decision. Wherever you don’t use one of these widgets, nothing moves.\n\nThe package doesn’t import Material, so the same code works in a custom design system and will keep working when Material leaves the SDK.",
+            "description": "Flutter already knows when someone turns on “Reduce Motion” or “Remove Animations”. It stores that choice, and stops there.\n\nAnimationController ignores “Reduce Motion” on purpose. The framework’s idea is to swap the slide for a fade, but that decision is left to each widget. In practice, almost nobody does it, so the card still slides in from the bottom for people who asked for motion to stop.\n\nI published still to solve this in one place. A MotionScope around your app decides: slide, fade, or cut. StillSwitcher, StillEntrance, StillStagger, and StillPageRoute follow that decision. Wherever you don’t use one of these widgets, nothing moves.\n\nThe package doesn’t import Material, so the same code works in a custom design system and will keep working when Material leaves the SDK.",
             "pubdev": "View on pub.dev",
             "github": "Source on GitHub",
             "pubspecLabel": "pubspec.yaml",
             "cliLabel": "Terminal",
+            "guides": {
+                "wrap": {
+                    "label": "Wrap the app",
+                    "lead": "In main.dart, MotionScope is the parent of MaterialApp.",
+                    "note": "WidgetsApp takes the same parent. The package never imports Material, so a custom design system can use it as-is."
+                },
+                "preference": {
+                    "label": "Preference",
+                    "lead": "Leave preference alone and the phone decides. Pass one when you want to preview a mode on your machine."
+                }
+            },
             "copy": "Copy",
             "copied": "Copied",
             "platforms": "Android · iOS · Web · macOS · Windows · Linux",
@@ -339,7 +350,7 @@
             "title": "Open source",
             "subtitle": "Package published on pub.dev",
             "tagline": "Motion that knows when to stop.",
-            "description": "Flutter already knows when someone turns on Reduce Motion or Remove Animations. It stores that choice, and stops there.\n\nAnimationController ignores Reduce Motion on purpose. The framework’s idea is to swap the slide for a fade, but that decision is left to each widget. In practice, almost nobody does it, so the card still slides in from the bottom for people who asked for motion to stop.\n\nI published still to solve this in one place. A MotionScope around your app decides: slide, fade, or cut. StillSwitcher, StillEntrance, StillStagger, and StillPageRoute follow that decision. Wherever you don’t use one of these widgets, nothing moves.\n\nThe package doesn’t import Material, so the same code works in a custom design system and will keep working when Material leaves the SDK.",
+            "description": "Flutter already knows when someone turns on “Reduce Motion” or “Remove Animations”. It stores that choice, and stops there.\n\nAnimationController ignores “Reduce Motion” on purpose. The framework’s idea is to swap the slide for a fade, but that decision is left to each widget. In practice, almost nobody does it, so the card still slides in from the bottom for people who asked for motion to stop.\n\nI published still to solve this in one place. A MotionScope around your app decides: slide, fade, or cut. StillSwitcher, StillEntrance, StillStagger, and StillPageRoute follow that decision. Wherever you don’t use one of these widgets, nothing moves.\n\nThe package doesn’t import Material, so the same code works in a custom design system and will keep working when Material leaves the SDK.",
             "pubdev": "pub.dev",
             "github": "GitHub",
             "license": "BSD-3-Clause",

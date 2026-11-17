@@ -1,33 +1,54 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
+let standardObserver = null
+let observerGeneration = 0
+
+const revealOnIntersect = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return
+    entry.target.classList.add('in-view')
+    observer.unobserve(entry.target)
+  })
+}
+
+// Threshold is 0 so a tall card (experience) starts with the same fade as a
+// short one (still) when its top enters. A 10% threshold waited for hundreds
+// of pixels of the experience block and made that card feel late.
+export const initScrollAnimations = () => {
+  if (typeof window === 'undefined') return () => {}
+
+  const generation = ++observerGeneration
+  standardObserver?.disconnect()
+
+  standardObserver = new IntersectionObserver(revealOnIntersect, {
+    threshold: 0,
+    rootMargin: '0px 0px -32px 0px'
+  })
+
+  document.querySelectorAll('.scroll-animate').forEach((el) => {
+    if (el.classList.contains('in-view')) return
+    standardObserver.observe(el)
+  })
+
+  return () => {
+    if (generation !== observerGeneration) return
+    standardObserver?.disconnect()
+  }
+}
+
 export const useScrollAnimation = () => {
   const elements = ref([])
-  
-  const observeElements = () => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view')
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    )
-    
-    elements.value = document.querySelectorAll('.scroll-animate')
-    elements.value.forEach((el) => observer.observe(el))
-    
-    return observer
-  }
-  
+  let stop = () => {}
+
   onMounted(() => {
-    observeElements()
+    elements.value = document.querySelectorAll('.scroll-animate')
+    stop = initScrollAnimations()
   })
-  
+
+  onUnmounted(() => {
+    stop()
+  })
+
   return {
     elements
   }

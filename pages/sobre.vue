@@ -64,6 +64,69 @@
           </div>
         </section>
 
+        <!-- PUB.DEV PACKAGE -->
+        <section class="pkg-card scroll-animate">
+          <div class="pkg-head">
+            <div>
+              <p class="pkg-kicker">pub.dev · flutter</p>
+              <h2 class="li-title">{{ t('about.package.title') }}</h2>
+              <p class="li-subtitle">{{ t('about.package.subtitle') }}</p>
+            </div>
+            <div class="pkg-links">
+              <a
+                href="https://pub.dev/packages/still"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-apple btn-apple-primary profile-btn"
+              >
+                <i class="bi bi-box-seam"></i>
+                {{ t('about.package.pubdev') }}
+              </a>
+              <a
+                href="https://github.com/pedrinnhooo/still-pubdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-apple btn-apple-secondary profile-btn"
+              >
+                <i class="bi bi-github"></i>
+                {{ t('about.package.github') }}
+              </a>
+            </div>
+          </div>
+
+          <div class="pkg-body">
+            <div>
+              <div class="pkg-name-row">
+                <h3>still</h3>
+                <span class="pkg-version">0.1.5</span>
+                <span class="pkg-license">{{ t('about.package.license') }}</span>
+              </div>
+              <p class="pkg-tagline">{{ t('about.package.tagline') }}</p>
+              <p class="pkg-desc">{{ t('about.package.description') }}</p>
+              <div class="exp-tags pkg-tags">
+                <span v-for="topic in packageTopics" :key="topic" class="chip">{{ topic }}</span>
+              </div>
+              <p class="pkg-platforms">{{ t('about.package.platforms') }}</p>
+            </div>
+
+            <div class="pkg-snippets">
+              <CopySnippet
+                :label="t('about.package.pubspecLabel')"
+                :code="pubspecSnippet"
+                :copy-label="t('about.package.copy')"
+                :copied-label="t('about.package.copied')"
+              />
+              <CopySnippet
+                :label="t('about.package.cliLabel')"
+                :code="cliSnippet"
+                :copy-label="t('about.package.copy')"
+                :copied-label="t('about.package.copied')"
+                middle
+              />
+            </div>
+          </div>
+        </section>
+
         <!-- EXPERIENCE -->
         <section class="li-card scroll-animate">
           <h2 class="li-title">{{ t('about.experience.title') }}</h2>
@@ -341,6 +404,11 @@ const socialLinks = computed(() => [
     href: 'https://www.secfocus.com.br',
     icon: 'bi bi-bug',
     label: t('about.links.secfocus')
+  },
+  {
+    href: 'https://pub.dev/packages/still',
+    icon: 'bi bi-box-seam',
+    label: t('about.links.pubdev')
   }
 ])
 
@@ -384,6 +452,14 @@ const skillCategories = computed(() => {
     tags: value.tags
   }))
 })
+
+const packageTopics = computed(() => {
+  const topics = t('about.package.topics')
+  return Array.isArray(topics) ? topics : []
+})
+
+const pubspecSnippet = 'dependencies:\n  still: ^0.1.5'
+const cliSnippet = 'flutter pub add still'
 
 const cyberMetrics = computed(() => {
   const metrics = t('about.cyber.metrics')
@@ -764,13 +840,136 @@ const cyberMetrics = computed(() => {
   font-weight: 600;
 }
 
+.pkg-card {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border-radius: 22px;
+  border: 1px solid rgba(1, 117, 194, 0.28);
+  background:
+    radial-gradient(ellipse 55% 70% at 100% 0%, rgba(19, 185, 253, 0.14), transparent 62%),
+    var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.pkg-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.pkg-kicker {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+}
+
+.pkg-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pkg-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pkg-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pkg-name-row h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+}
+
+.pkg-version,
+.pkg-license {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.pkg-version {
+  border: 1px solid rgba(19, 185, 253, 0.35);
+  background: rgba(19, 185, 253, 0.1);
+  color: #7dd3fc;
+}
+
+.pkg-license {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--apple-text-tertiary);
+}
+
+.pkg-tagline {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.pkg-desc {
+  margin: 0;
+  color: var(--apple-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.pkg-tags {
+  margin-top: 16px;
+}
+
+.pkg-platforms {
+  margin: 12px 0 0;
+  color: var(--apple-text-tertiary);
+  font-size: 0.8rem;
+}
+
+.pkg-snippets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-width: 0;
+}
+
 .cyber-terminal {
   position: relative;
   overflow: hidden;
   padding: 26px;
   border-radius: 22px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
+  border: 1px solid transparent;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 0% 0%, rgba(52, 211, 153, 0.2), transparent 62%),
+    linear-gradient(var(--glass-bg), var(--glass-bg)),
+    linear-gradient(
+      100deg,
+      rgba(52, 211, 153, 0.14) 0%,
+      rgba(52, 211, 153, 0.05) 28%,
+      rgba(52, 211, 153, 0.012) 68%,
+      rgba(52, 211, 153, 0.012) 100%
+    );
+  background-origin: padding-box, padding-box, border-box;
+  background-clip: padding-box, padding-box, border-box;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
@@ -785,7 +984,7 @@ const cyberMetrics = computed(() => {
   height: 90%;
   background: radial-gradient(
     ellipse 55% 50% at 18% 22%,
-    rgba(52, 211, 153, 0.2),
+    rgba(52, 211, 153, 0.28),
     transparent 68%
   );
   opacity: 0.95;
@@ -1043,11 +1242,11 @@ const cyberMetrics = computed(() => {
   }
 
   .profile-banner {
-    height: 72px;
+    height: 0;
   }
 
   .profile-shell {
-    margin-top: -28px;
+    margin-top: 0;
   }
 
   .profile-avatar {
@@ -1065,6 +1264,10 @@ const cyberMetrics = computed(() => {
   .profile-top {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .profile-actions {
+    margin-top: 10px;
   }
 
   .profile-card {
@@ -1091,6 +1294,28 @@ const cyberMetrics = computed(() => {
       rgba(52, 211, 153, 0.18),
       transparent 70%
     );
+  }
+
+  .pkg-card {
+    padding: 18px;
+  }
+
+  .pkg-head {
+    flex-direction: column;
+    margin-bottom: 28px;
+  }
+
+  .pkg-links {
+    width: 100%;
+  }
+
+  .pkg-links .profile-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .pkg-snippets {
+    grid-template-columns: 1fr;
   }
 
   .cyber-head {

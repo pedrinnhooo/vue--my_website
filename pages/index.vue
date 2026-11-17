@@ -77,6 +77,84 @@
       </div>
     </section>
 
+    <!-- PUB.DEV PACKAGE -->
+    <section class="band still-band">
+      <div class="container-apple">
+        <header class="band-head scroll-animate">
+          <div>
+            <p class="hero-kicker">{{ t('home.package.kicker') }}</p>
+            <h2 class="band-title">{{ t('home.package.title') }}</h2>
+            <p class="band-sub">{{ t('home.package.subtitle') }}</p>
+          </div>
+        </header>
+
+        <article class="still-card scroll-animate">
+          <div class="still-copy">
+            <div class="still-title-row">
+              <h3 class="band-title still-name">still</h3>
+              <span class="still-version">0.1.5</span>
+            </div>
+            <p class="still-tagline">{{ t('home.package.tagline') }}</p>
+            <p class="band-sub">{{ t('home.package.description') }}</p>
+
+            <ul class="still-points">
+              <li v-for="(point, index) in packagePoints" :key="point.title">
+                <span class="still-point-idx">{{ String(index + 1).padStart(2, '0') }}</span>
+                <div>
+                  <strong>{{ point.title }}</strong>
+                  <span>{{ point.text }}</span>
+                </div>
+              </li>
+            </ul>
+
+            <div class="still-actions">
+              <a
+                href="https://pub.dev/packages/still"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-btn home-btn--solid"
+              >
+                {{ t('home.package.pubdev') }}
+                <i class="bi bi-arrow-up-right"></i>
+              </a>
+              <a
+                href="https://github.com/pedrinnhooo/still-pubdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="home-btn home-btn--ghost"
+              >
+                <i class="bi bi-github"></i>
+                {{ t('home.package.github') }}
+              </a>
+            </div>
+          </div>
+
+          <aside class="still-panel" aria-label="still install">
+            <div class="still-snippets">
+              <CopySnippet
+                :label="t('home.package.pubspecLabel')"
+                :code="pubspecSnippet"
+                :copy-label="t('home.package.copy')"
+                :copied-label="t('home.package.copied')"
+              />
+              <CopySnippet
+                :label="t('home.package.cliLabel')"
+                :code="cliSnippet"
+                :copy-label="t('home.package.copy')"
+                :copied-label="t('home.package.copied')"
+              />
+            </div>
+            <p class="still-platforms">{{ t('home.package.platforms') }}</p>
+            <div class="still-meta">
+              <span>Flutter</span>
+              <span>BSD-3</span>
+              <span>SDK</span>
+            </div>
+          </aside>
+        </article>
+      </div>
+    </section>
+
     <!-- SERVICES -->
     <section class="band services-band">
       <div class="container-apple services-shell">
@@ -187,6 +265,14 @@ const services = computed(() =>
     description: t(`home.services.items.${service.key}.description`)
   }))
 )
+
+const packagePoints = computed(() => {
+  const points = t('home.package.points')
+  return Array.isArray(points) ? points : []
+})
+
+const pubspecSnippet = 'dependencies:\n  still: ^0.1.5'
+const cliSnippet = 'flutter pub add still'
 
 const { featuredProjects, getProjectById } = useProjects()
 const selectedProject = ref(null)
@@ -534,6 +620,148 @@ onUnmounted(() => {
   column-gap: 36px;
 }
 
+.still-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: 36px;
+  align-items: center;
+  padding: 32px;
+  border-radius: 28px;
+  border: 1px solid rgba(1, 117, 194, 0.28);
+  background:
+    radial-gradient(ellipse 50% 80% at 100% 0%, rgba(19, 185, 253, 0.12), transparent 60%),
+    var(--home-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.still-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.still-name {
+  margin: 0;
+  font-size: 1.7rem;
+  letter-spacing: -0.05em;
+}
+
+.still-version {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(19, 185, 253, 0.35);
+  background: rgba(19, 185, 253, 0.1);
+  color: #7dd3fc;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.still-tagline {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  color: var(--home-ink);
+}
+
+.still-points {
+  list-style: none;
+  margin: 22px 0 26px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.still-points li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.still-point-idx {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #7dd3fc;
+  padding-top: 3px;
+}
+
+.still-points strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: var(--home-ink);
+}
+
+.still-points span {
+  display: block;
+  color: var(--home-mute);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.still-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.still-actions .home-btn {
+  gap: 8px;
+}
+
+.still-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.still-snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.still-platforms {
+  margin: 0;
+  color: rgba(186, 230, 253, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.still-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.still-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 240, 0.7);
+}
+
 .services-shell {
   display: flex;
   flex-direction: column;
@@ -702,6 +930,12 @@ onUnmounted(() => {
     width: min(260px, 70%);
   }
 
+  .still-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -768,6 +1002,19 @@ onUnmounted(() => {
 
   .portrait-meta {
     justify-content: center;
+  }
+
+  .still-card {
+    text-align: left;
+  }
+
+  .still-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .still-actions .home-btn {
+    width: 100%;
   }
 
   .band-head {

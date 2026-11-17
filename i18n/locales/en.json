@@ -123,6 +123,34 @@
             "subtitle": "Some of the key projects I've built throughout my career",
             "viewAll": "View All Projects"
         },
+        "package": {
+            "kicker": "pub.dev · flutter",
+            "title": "Open source",
+            "subtitle": "Package published on pub.dev",
+            "tagline": "Motion that knows when to stop.",
+            "description": "A Flutter package on pub.dev. Reduce Motion turns a slide into a fade. Turning animations off puts the next state on screen already. Set the rule once — every animation you opt into follows it.",
+            "pubdev": "View on pub.dev",
+            "github": "Source on GitHub",
+            "pubspecLabel": "pubspec.yaml",
+            "cliLabel": "Terminal",
+            "copy": "Copy",
+            "copied": "Copied",
+            "platforms": "Android · iOS · Web · macOS · Windows · Linux",
+            "points": [
+                {
+                    "title": "Reduce Motion",
+                    "text": "A cross-fade replaces the slide when the platform asks for less motion."
+                },
+                {
+                    "title": "Style-neutral",
+                    "text": "No Material import. Custom design systems keep working as Material leaves the SDK."
+                },
+                {
+                    "title": "One rule",
+                    "text": "MotionScope reads the device and decides: slide, fade, or cut."
+                }
+            ]
+        },
         "services": {
             "title": "Why choose my",
             "titleHighlight": "services",
@@ -301,6 +329,25 @@
         "summary": {
             "title": "About",
             "content": "I'm a Mobile Flutter Engineer with extensive experience leading the technical vision and architecture of high-performance, secure, and scalable mobile applications. Throughout my career, I have successfully driven strategic initiatives, including LGPD compliance projects, complex integrations, and the development of user-centric apps and websites across diverse industries.\n\nMy expertise spans Flutter, Clean Architecture, web technologies (Vue.js, Nuxt.js, HTML, CSS, JavaScript, TypeScript), and UI/UX design with Figma. I am passionate about delivering clean, intuitive interfaces and seamless user experiences, always collaborating closely with product, UX, and backend teams.\n\nCommitted to continuous learning and team growth, I mentor developers, enforce coding standards, and promote best practices to build innovative and reliable solutions that exceed user expectations."
+        },
+        "package": {
+            "title": "Open source",
+            "subtitle": "Package published on pub.dev",
+            "tagline": "Motion that knows when to stop.",
+            "description": "still turns a slide into a fade when the platform asks for Reduce Motion, and cuts the animation when the system turns motion off. Style-neutral: it never imports Material, so custom design systems keep working. MotionScope sits once above the app and decides for the whole tree — slide, fade, or cut.",
+            "pubdev": "pub.dev",
+            "github": "GitHub",
+            "license": "BSD-3-Clause",
+            "topics": [
+                "Flutter",
+                "Accessibility",
+                "Animation"
+            ],
+            "platforms": "Android · iOS · Web · macOS · Windows · Linux",
+            "pubspecLabel": "pubspec.yaml",
+            "cliLabel": "Terminal",
+            "copy": "Copy",
+            "copied": "Copied"
         },
         "education": {
             "title": "Education",
@@ -803,7 +850,8 @@
             "github": "GitHub",
             "website": "Website",
             "tryhackme": "TryHackMe",
-            "secfocus": "SecFocus"
+            "secfocus": "SecFocus",
+            "pubdev": "still · pub.dev"
         },
         "contactCta": {
             "title": "Let's talk?",

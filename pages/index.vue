@@ -95,7 +95,13 @@
               <span class="still-version">0.1.5</span>
             </div>
             <p class="still-tagline">{{ t('home.package.tagline') }}</p>
-            <p class="band-sub">{{ t('home.package.description') }}</p>
+            <div class="still-prose">
+              <p v-for="(para, i) in packageParagraphs" :key="i" class="band-sub">{{ para }}</p>
+            </div>
+
+            <div class="still-topics">
+              <span v-for="topic in packageTopics" :key="topic" class="still-topic">{{ topic }}</span>
+            </div>
 
             <ul class="still-points">
               <li v-for="(point, index) in packagePoints" :key="point.title">
@@ -270,6 +276,18 @@ const packagePoints = computed(() => {
   const points = t('home.package.points')
   return Array.isArray(points) ? points : []
 })
+
+const packageTopics = computed(() => {
+  const topics = t('home.package.topics')
+  return Array.isArray(topics) ? topics : []
+})
+
+const packageParagraphs = computed(() =>
+  String(t('home.package.description'))
+    .split(/\n\n+/)
+    .map((para) => para.trim())
+    .filter(Boolean)
+)
 
 const pubspecSnippet = 'dependencies:\n  still: ^0.1.5'
 const cliSnippet = 'flutter pub add still'
@@ -670,6 +688,47 @@ onUnmounted(() => {
   font-weight: 560;
   letter-spacing: -0.02em;
   color: var(--home-ink);
+}
+
+.still-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.still-prose .band-sub {
+  max-width: none;
+}
+
+.still-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.still-topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--home-mute);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+}
+
+.still-topic::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.28);
+  flex-shrink: 0;
 }
 
 .still-points {

@@ -102,7 +102,9 @@
                 <span class="pkg-license">{{ t('about.package.license') }}</span>
               </div>
               <p class="pkg-tagline">{{ t('about.package.tagline') }}</p>
-              <p class="pkg-desc">{{ t('about.package.description') }}</p>
+              <div class="pkg-prose">
+                <p v-for="(para, i) in packageParagraphs" :key="i" class="pkg-desc">{{ para }}</p>
+              </div>
               <div class="exp-tags pkg-tags">
                 <span v-for="topic in packageTopics" :key="topic" class="chip">{{ topic }}</span>
               </div>
@@ -457,6 +459,13 @@ const packageTopics = computed(() => {
   const topics = t('about.package.topics')
   return Array.isArray(topics) ? topics : []
 })
+
+const packageParagraphs = computed(() =>
+  String(t('about.package.description'))
+    .split(/\n\n+/)
+    .map((para) => para.trim())
+    .filter(Boolean)
+)
 
 const pubspecSnippet = 'dependencies:\n  still: ^0.1.5'
 const cliSnippet = 'flutter pub add still'
@@ -928,6 +937,12 @@ const cyberMetrics = computed(() => {
   font-weight: 600;
 }
 
+.pkg-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .pkg-desc {
   margin: 0;
   color: var(--apple-text-secondary);
@@ -937,6 +952,20 @@ const cyberMetrics = computed(() => {
 
 .pkg-tags {
   margin-top: 16px;
+}
+
+.pkg-tags .chip {
+  gap: 7px;
+}
+
+.pkg-tags .chip::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.28);
+  flex-shrink: 0;
 }
 
 .pkg-platforms {

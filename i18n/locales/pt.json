@@ -128,7 +128,7 @@
             "title": "Open source",
             "subtitle": "Pacote publicado no pub.dev",
             "tagline": "Motion que sabe quando parar.",
-            "description": "Pacote Flutter no pub.dev. Quando o sistema pede Reduce Motion, o slide vira fade. Quando as animações são desligadas, o próximo estado já está na tela. A regra entra uma vez — toda animação que você opta segue.",
+            "description": "O Flutter já sabe quando alguém ativa “Reduzir movimento” ou “Remover animações”. Ele guarda essa escolha e para por aí.\n\nO AnimationController ignora “Reduzir movimento” de propósito. A ideia do framework é trocar o slide por um fade, mas essa decisão fica a cargo de cada widget. Na prática, quase ninguém faz, e o card continua entrando de baixo para quem pediu para o movimento parar.\n\nPubliquei o still para resolver isso em um lugar só. Um MotionScope em volta do app decide: slide, fade ou corte. StillSwitcher, StillEntrance, StillStagger e StillPageRoute seguem essa decisão. Onde você não usa um desses widgets, nada se mexe.\n\nO pacote não importa o Material. O mesmo código funciona em um design system próprio e continua valendo quando o Material sair do SDK.",
             "pubdev": "Ver no pub.dev",
             "github": "Código no GitHub",
             "pubspecLabel": "pubspec.yaml",
@@ -136,6 +136,11 @@
             "copy": "Copiar",
             "copied": "Copiado",
             "platforms": "Android · iOS · Web · macOS · Windows · Linux",
+            "topics": [
+                "Flutter",
+                "Acessibilidade",
+                "Animação"
+            ],
             "points": [
                 {
                     "title": "Reduce Motion",
@@ -334,7 +339,7 @@
             "title": "Open source",
             "subtitle": "Pacote publicado no pub.dev",
             "tagline": "Motion que sabe quando parar.",
-            "description": "still troca o slide por um fade quando a plataforma pede Reduce Motion, e corta a animação quando o sistema desliga o movimento. Neutro de estilo: não importa Material, então design systems customizados seguem funcionando. MotionScope entra uma vez acima do app e decide por toda a árvore — slide, fade ou corte.",
+            "description": "O Flutter já sabe quando alguém ativa “Reduzir movimento” ou “Remover animações”. Ele guarda essa escolha e para por aí.\n\nO AnimationController ignora “Reduzir movimento” de propósito. A ideia do framework é trocar o slide por um fade, mas essa decisão fica a cargo de cada widget. Na prática, quase ninguém faz, e o card continua entrando de baixo para quem pediu para o movimento parar.\n\nPubliquei o still para resolver isso em um lugar só. Um MotionScope em volta do app decide: slide, fade ou corte. StillSwitcher, StillEntrance, StillStagger e StillPageRoute seguem essa decisão. Onde você não usa um desses widgets, nada se mexe.\n\nO pacote não importa o Material. O mesmo código funciona em um design system próprio e continua valendo quando o Material sair do SDK.",
             "pubdev": "pub.dev",
             "github": "GitHub",
             "license": "BSD-3-Clause",

@@ -14,16 +14,10 @@ Site pessoal e portfólio de **Pedro Ruffo**, Engenheiro de Software focado em m
 
 ## Sobre o projeto
 
-Portfólio com apresentação profissional, projetos publicados, o pacote open source [`still`](https://pub.dev/packages/still) e um formulário de contato. O conteúdo está em português.
+Portfólio com apresentação profissional, projetos publicados, o pacote open source [`still`](https://pub.dev/packages/still) e um formulário de contato. 
 
-### Páginas
+Conteúdo {pt-BR | en-US}.
 
-| Rota | Conteúdo |
-| --- | --- |
-| `/` | Apresentação, projetos em destaque, open source e serviços |
-| `/sobre` | Trajetória, experiência e tecnologias |
-| `/projetos` | Lista completa de projetos (apps de fintech, loyalty, backoffice e mais) |
-| `/contato` | Formulário de contato |
 
 ### Destaques
 

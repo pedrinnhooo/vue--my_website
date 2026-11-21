@@ -143,6 +143,11 @@
             "copy": "Copy",
             "copied": "Copied",
             "platforms": "Android · iOS · Web · macOS · Windows · Linux",
+            "kit": {
+                "label": "Widgets that follow the rule",
+                "modesLead": "Device decides",
+                "note": "Use these where motion should exist. Everywhere else stays still."
+            },
             "topics": [
                 "Flutter",
                 "Accessibility",

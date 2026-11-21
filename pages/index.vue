@@ -104,6 +104,25 @@
               <span v-for="topic in packageTopics" :key="topic" class="still-topic">{{ topic }}</span>
             </div>
 
+            <div class="still-kit">
+              <p class="still-kit-label">{{ t('home.package.kit.label') }}</p>
+              <div class="still-kit-widgets">
+                <code v-for="widget in packageWidgets" :key="widget">{{ widget }}</code>
+              </div>
+              <div class="still-kit-modes" aria-label="Motion modes">
+                <span class="still-kit-modes-lead">{{ t('home.package.kit.modesLead') }}</span>
+                <span
+                  v-for="(mode, index) in packageModes"
+                  :key="mode"
+                  class="still-kit-mode"
+                >
+                  <span v-if="index > 0" class="still-kit-mode-sep" aria-hidden="true">/</span>
+                  {{ mode }}
+                </span>
+              </div>
+              <p class="still-kit-note">{{ t('home.package.kit.note') }}</p>
+            </div>
+
             <ul class="still-points">
               <li v-for="(point, index) in packagePoints" :key="point.title">
                 <span class="still-point-idx">{{ String(index + 1).padStart(2, '0') }}</span>
@@ -290,6 +309,9 @@ const packageTopics = computed(() => {
   const topics = t('home.package.topics')
   return Array.isArray(topics) ? topics : []
 })
+
+const packageWidgets = ['StillSwitcher', 'StillEntrance', 'StillStagger', 'StillPageRoute']
+const packageModes = ['slide', 'fade', 'cut']
 
 const packageParagraphs = computed(() =>
   String(t('home.package.description'))
@@ -764,10 +786,84 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
+.still-kit {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(19, 185, 253, 0.18);
+  background:
+    linear-gradient(160deg, rgba(19, 185, 253, 0.08), transparent 55%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.still-kit-label {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(186, 230, 253, 0.72);
+}
+
+.still-kit-widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.still-kit-widgets code {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  color: #e0f2fe;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: -0.01em;
+}
+
+.still-kit-modes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.still-kit-modes-lead {
+  margin-right: 4px;
+  color: var(--home-mute);
+  font-size: 0.8rem;
+}
+
+.still-kit-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #7dd3fc;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.still-kit-mode-sep {
+  color: rgba(186, 230, 253, 0.35);
+}
+
+.still-kit-note {
+  margin: 12px 0 0;
+  color: var(--home-mute);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
 .still-points {
   list-style: none;
-  margin: auto 0 26px;
-  padding: 48px 0 0;
+  margin: 22px 0 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -778,6 +874,10 @@ onUnmounted(() => {
   grid-template-columns: 28px 1fr;
   gap: 12px;
   align-items: start;
+}
+
+.still-points li:last-child {
+  margin-bottom: 22px;
 }
 
 .still-point-idx {
@@ -1034,9 +1134,16 @@ onUnmounted(() => {
     padding: 24px;
   }
 
+  .still-kit {
+    margin-top: 18px;
+  }
+
   .still-points {
-    margin-top: 22px;
-    padding-top: 0;
+    margin-top: 18px;
+  }
+
+  .still-points li:last-child {
+    margin-bottom: 18px;
   }
 
   .services-grid {

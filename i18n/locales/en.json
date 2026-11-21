@@ -136,12 +136,8 @@
             "guides": {
                 "wrap": {
                     "label": "Wrap the app",
-                    "lead": "In main.dart, MotionScope is the parent of MaterialApp.",
+                    "lead": "In main.dart, MotionScope is the parent of MaterialApp. Leave preference alone and the phone decides; pass one to preview a mode.",
                     "note": "WidgetsApp takes the same parent. The package never imports Material, so a custom design system can use it as-is."
-                },
-                "preference": {
-                    "label": "Preference",
-                    "lead": "Leave preference alone and the phone decides. Pass one when you want to preview a mode on your machine."
                 }
             },
             "copy": "Copy",

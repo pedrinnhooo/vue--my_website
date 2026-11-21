@@ -89,11 +89,12 @@
         </header>
 
         <article class="still-card scroll-animate">
+          <div class="still-title-row">
+            <h3 class="band-title still-name">still</h3>
+            <span class="still-version">0.1.5</span>
+          </div>
+
           <div class="still-copy">
-            <div class="still-title-row">
-              <h3 class="band-title still-name">still</h3>
-              <span class="still-version">0.1.5</span>
-            </div>
             <p class="still-tagline">{{ t('home.package.tagline') }}</p>
             <div class="still-prose">
               <p v-for="(para, i) in packageParagraphs" :key="i" class="band-sub">{{ para }}</p>
@@ -136,25 +137,14 @@
           </div>
 
           <aside class="still-panel" aria-label="still">
-            <div class="still-guides">
-              <CopySnippet
-                class="still-guide"
-                :label="t('home.package.guides.wrap.label')"
-                :lead="t('home.package.guides.wrap.lead')"
-                :note="t('home.package.guides.wrap.note')"
-                :code="wrapSnippet"
-                :copy-label="t('home.package.copy')"
-                :copied-label="t('home.package.copied')"
-              />
-              <CopySnippet
-                class="still-guide"
-                :label="t('home.package.guides.preference.label')"
-                :lead="t('home.package.guides.preference.lead')"
-                :code="preferenceSnippet"
-                :copy-label="t('home.package.copy')"
-                :copied-label="t('home.package.copied')"
-              />
-            </div>
+            <CopySnippet
+              :label="t('home.package.guides.wrap.label')"
+              :lead="t('home.package.guides.wrap.lead')"
+              :note="t('home.package.guides.wrap.note')"
+              :code="wrapSnippet"
+              :copy-label="t('home.package.copy')"
+              :copied-label="t('home.package.copied')"
+            />
             <div class="still-snippets">
               <CopySnippet
                 :label="t('home.package.pubspecLabel')"
@@ -313,18 +303,14 @@ const cliSnippet = 'flutter pub add still'
 const wrapSnippet = `void main() {
   runApp(
     const MotionScope(
+      // optional — omit and the phone decides
+      preference: MotionPreference.reduced,
       child: MaterialApp(
         home: HomePage(),
       ),
     ),
   );
 }`
-const preferenceSnippet = `const MotionScope(
-  preference: MotionPreference.reduced,
-  child: MaterialApp(
-    home: HomePage(),
-  ),
-)`
 
 const { featuredProjects, getProjectById } = useProjects()
 const selectedProject = ref(null)
@@ -675,7 +661,11 @@ onUnmounted(() => {
 .still-card {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
-  gap: 36px;
+  grid-template-areas:
+    "title title"
+    "copy panel";
+  column-gap: 36px;
+  row-gap: 8px;
   align-items: stretch;
   padding: 32px;
   border-radius: 28px;
@@ -689,10 +679,19 @@ onUnmounted(() => {
 }
 
 .still-title-row {
+  grid-area: title;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
+}
+
+.still-copy {
+  grid-area: copy;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100%;
 }
 
 .still-name {
@@ -767,8 +766,8 @@ onUnmounted(() => {
 
 .still-points {
   list-style: none;
-  margin: 22px 0 26px;
-  padding: 0;
+  margin: auto 0 26px;
+  padding: 48px 0 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -815,16 +814,11 @@ onUnmounted(() => {
 }
 
 .still-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-.still-guides {
+  grid-area: panel;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .still-snippets {
@@ -1015,20 +1009,6 @@ onUnmounted(() => {
   50% { transform: translateY(-18px); }
 }
 
-@media (min-width: 1025px) {
-  .still-panel {
-    height: 100%;
-  }
-
-  .still-guides {
-    flex: 1;
-  }
-
-  .still-guide {
-    flex: 1;
-  }
-}
-
 @media (max-width: 1024px) {
   .hero-shell {
     grid-template-columns: 1fr;
@@ -1045,8 +1025,18 @@ onUnmounted(() => {
 
   .still-card {
     grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-areas:
+      "title"
+      "copy"
+      "panel";
+    column-gap: 0;
+    row-gap: 20px;
     padding: 24px;
+  }
+
+  .still-points {
+    margin-top: 22px;
+    padding-top: 0;
   }
 
   .services-grid {
@@ -1122,12 +1112,18 @@ onUnmounted(() => {
   }
 
   .still-actions {
-    flex-direction: column;
-    align-items: stretch;
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 8px;
   }
 
   .still-actions .home-btn {
-    width: 100%;
+    flex: 1 1 0;
+    justify-content: center;
+    min-width: 0;
+    width: auto;
+    padding-inline: 12px;
+    font-size: 0.86rem;
   }
 
   .band-head {

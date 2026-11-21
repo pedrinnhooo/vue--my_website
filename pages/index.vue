@@ -862,7 +862,7 @@ onUnmounted(() => {
 
 .still-points {
   list-style: none;
-  margin: 22px 0 0;
+  margin: 28px 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -874,10 +874,6 @@ onUnmounted(() => {
   grid-template-columns: 28px 1fr;
   gap: 12px;
   align-items: start;
-}
-
-.still-points li:last-child {
-  margin-bottom: 22px;
 }
 
 .still-point-idx {
@@ -1138,14 +1134,6 @@ onUnmounted(() => {
     margin-top: 18px;
   }
 
-  .still-points {
-    margin-top: 18px;
-  }
-
-  .still-points li:last-child {
-    margin-bottom: 18px;
-  }
-
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1216,6 +1204,11 @@ onUnmounted(() => {
 
   .still-card {
     text-align: left;
+  }
+
+  .still-points {
+    margin: 32px 0;
+    gap: 28px;
   }
 
   .still-actions {

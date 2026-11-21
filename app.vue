@@ -1,7 +1,4 @@
 <template>
-  <Analytics />
-  <SpeedInsights />
-
   <div class="site-shell">
     <div class="site-bg" aria-hidden="true"></div>
 
@@ -18,9 +15,6 @@
 </template>
 
 <script setup>
-import { Analytics } from '@vercel/analytics/nuxt';
-import { SpeedInsights } from '@vercel/speed-insights/nuxt';
-
 import Header from '~/components/layout/Header.vue'
 import Footer from '~/components/layout/Footer.vue'
 </script>

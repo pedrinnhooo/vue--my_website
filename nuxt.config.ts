@@ -3,7 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@vercel/analytics/nuxt',
+    '@vercel/speed-insights/nuxt'
   ],
 
   components: [
